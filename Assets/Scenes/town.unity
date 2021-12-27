@@ -12578,7 +12578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dba80fee34a83d45866ec4585bb6131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ballSimPrefab: {fileID: 5463064598891182746, guid: 9a18b6ba9eee2544cbbfc936a7897031, type: 3}
 --- !u!4 &546336330
 Transform:
   m_ObjectHideFlags: 0

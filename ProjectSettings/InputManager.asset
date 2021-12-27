@@ -294,11 +294,11 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: E-Q
+    m_Name: Ctrl-Shift_Right
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: q
-    positiveButton: e
+    negativeButton: right ctrl
+    positiveButton: right shift
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3

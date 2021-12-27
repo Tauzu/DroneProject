@@ -168,7 +168,7 @@ public class DroneMove : MonoBehaviour
 
         // if(Vector2.Dot(forwardXZ, targetXZ) > 0.0f)
         // {
-        targetSPD = (Input.GetKey(KeyCode.P)) ? 2 * speed * inputMagnitude : speed * inputMagnitude;
+        targetSPD = (Input.GetKey(KeyCode.Q)) ? 2 * speed * inputMagnitude : speed * inputMagnitude;
         targetSPD *= (isBacking) ? -1 : 1;
         difference = (Mathf.Abs(targetSPD) > 0.1f) ? (forwardSPD[1] - targetSPD) / speed : 0f;
         float variable = Mathf.Abs(difference);
@@ -193,7 +193,7 @@ public class DroneMove : MonoBehaviour
         }
 
 
-        if (Input.GetKeyDown(KeyCode.H))   //ホバリングスイッチ
+        if (Input.GetKeyDown(KeyCode.C))   //ホバリングスイッチ
         {
             heightHOV = height[1];
             isHovering = (isHovering) ? false : true;
@@ -265,16 +265,16 @@ public class DroneMove : MonoBehaviour
             rbody.velocity = Vector3.zero;
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             this.GetComponent<Renderer>().material = powerMaterial;
         }
-        else if (Input.GetKeyUp(KeyCode.P))
+        else if (Input.GetKeyUp(KeyCode.Q))
         {
             this.GetComponent<Renderer>().material = defaultMaterial;
         }
 
-        if (Input.GetKey(KeyCode.K)){
+        if (Input.GetKey(KeyCode.X)){
             Blade[0].power = -100f;
             Blade[1].power = 100f;
             Blade[2].power = 100f;

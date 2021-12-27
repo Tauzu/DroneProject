@@ -93,7 +93,7 @@ public class CameraMove : MonoBehaviour
             
         }
 
-        if(Input.GetKeyDown(KeyCode.X))
+        if(Input.GetKeyDown(KeyCode.K))
         {
             isFPS = (isFPS)? false : true;
             Vector3 lastRelation = this.transform.position - targetPosition;
@@ -108,11 +108,11 @@ public class CameraMove : MonoBehaviour
         }
 
         if(isFPS){
-            float view = cam.fieldOfView - 0.5f*Input.GetAxis("E-Q");
+            float view = cam.fieldOfView - 0.5f*Input.GetAxis("Ctrl-Shift_Right");
             cam.fieldOfView = Mathf.Clamp(value : view, min : 0.1f, max : 45f);
         }
         else{
-            cameraPCDN.r -= 0.5f*Input.GetAxis("E-Q");
+            cameraPCDN.r -= 0.5f*Input.GetAxis("Ctrl-Shift_Right");
             cameraPCDN.r = Mathf.Clamp(cameraPCDN.r, 0.5f, 100f);
         }
 

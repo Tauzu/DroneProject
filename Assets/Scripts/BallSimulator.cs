@@ -6,8 +6,8 @@ using UnityEngine;
  */
 public class BallSimulator : MonoBehaviour {
 
-    [SerializeField]
-    private GameObject _ballSimPrefab; // 何でもOK。予測位置を表示するオブジェクト
+    // [SerializeField]
+    // private GameObject _ballSimPrefab; // 何でもOK。予測位置を表示するオブジェクト
 
     private const int SIMULATE_COUNT = 25; // いくつ先までシュミレートするか
 
@@ -112,6 +112,10 @@ public class BallSimulator : MonoBehaviour {
 
         // 線を引く場所を指定する
         lineRenderer.SetPositions(simuratePointArray);
+
+        // float speed = initialVelocity.magnitude;
+        // lineRenderer.startWidth = speed * 0.01f;
+        // lineRenderer.endWidth = speed*speed * 0.0001f;
 
     }
 }

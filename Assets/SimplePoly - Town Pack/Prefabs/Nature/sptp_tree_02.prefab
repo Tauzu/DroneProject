@@ -110,6 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: bullet
-  Obj: {fileID: 383198475849578666, guid: 6579321eafe48d64190396320d7b3991, type: 3}
+  Obj: {fileID: 1493958779012120596, guid: b9de24523a11d714db3851b5f0f9d527, type: 3}
   numObj: 10
   range: 1

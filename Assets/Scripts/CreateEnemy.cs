@@ -6,6 +6,7 @@ public class CreateEnemy : MonoBehaviour
 {
     public GameObject EnemyPrefab;
     public float period = 10;
+    public float standbyWait = 60;
     public Vector3 offset = new Vector3(0f,20f,0f);
 
     // Start is called before the first frame update
@@ -24,7 +25,7 @@ public class CreateEnemy : MonoBehaviour
     private IEnumerator waitCoroutine()
     {
         //待機
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(standbyWait);
 
         StartCoroutine("mainCoroutine");
     }
@@ -32,12 +33,12 @@ public class CreateEnemy : MonoBehaviour
     private IEnumerator mainCoroutine()
     {
         while (true) {
-            //待機
-            yield return new WaitForSeconds(period);
             
             GameObject enemy = Instantiate(EnemyPrefab);
             enemy.transform.position = this.transform.position + offset;
-    
+
+                        //待機
+            yield return new WaitForSeconds(period);
             
         }
 

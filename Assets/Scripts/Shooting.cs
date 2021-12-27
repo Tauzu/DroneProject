@@ -52,7 +52,7 @@ public class Shooting : MonoBehaviour
             clone.GetComponent<Rigidbody>().velocity = shotVelocity;
 
             //反動
-            thisRbody.AddForce(-direction, ForceMode.Impulse);
+            thisRbody.AddForce(-shotVelocity/100f, ForceMode.Impulse);
  
             //発射されてから3秒後に銃弾のオブジェクトを破壊する.
             Destroy(clone, 5.0f);

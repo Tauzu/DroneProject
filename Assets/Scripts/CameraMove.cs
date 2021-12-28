@@ -22,6 +22,8 @@ public class CameraMove : MonoBehaviour
     private float signSide;
     private float signTop;
 
+    int doubleDownCount = 0;
+
     struct PolarCoordinates
     {
         public float r;
@@ -93,18 +95,10 @@ public class CameraMove : MonoBehaviour
             
         }
 
-        if(Input.GetKeyDown(KeyCode.K))
+        if(Input.GetKeyDown(KeyCode.RightShift))
         {
-            isFPS = (isFPS)? false : true;
-            Vector3 lastRelation = this.transform.position - targetPosition;
-            relation = (isFPS)? -lastRelation.normalized : -normalDistance*lastRelation;
-            if(isFPS) normalDistance = lastRelation.magnitude;//FPS切替時、切替前の距離を記憶しておく
-            cameraPCDN = Rect2Polar(relation);
-
-            cam.fieldOfView = defaultFOV;
-
-            AimObj.SetActive(isFPS);
-
+            doubleDownCount++;
+            Invoke("SwitchFPS",0.3f);
         }
 
         if(isFPS){
@@ -145,5 +139,22 @@ public class CameraMove : MonoBehaviour
         rectangular.z = polar.r * Mathf.Sin(polar.theta) * Mathf.Sin(polar.phi);
 
         return rectangular;
+    }
+
+    void SwitchFPS()
+    {
+        bool switchFlag = (doubleDownCount == 2)? true : false;
+        doubleDownCount = 0;
+        if(!switchFlag) { return; }
+
+        isFPS = (isFPS)? false : true;
+        Vector3 lastRelation = this.transform.position - targetPosition;
+        relation = (isFPS)? -lastRelation.normalized : -normalDistance*lastRelation;
+        if(isFPS) normalDistance = lastRelation.magnitude;//FPS切替時、切替前の距離を記憶しておく
+        cameraPCDN = Rect2Polar(relation);
+
+        cam.fieldOfView = defaultFOV;
+
+        AimObj.SetActive(isFPS);
     }
 }

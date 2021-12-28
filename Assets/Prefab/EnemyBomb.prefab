@@ -106,9 +106,9 @@ GameObject:
   - component: {fileID: 5721309306928813456}
   - component: {fileID: 5721309306928813471}
   - component: {fileID: 5721309306928813470}
-  - component: {fileID: 3449809075730503012}
   - component: {fileID: 175200416748209336}
   - component: {fileID: 626214432331277948}
+  - component: {fileID: 3449809075730503012}
   - component: {fileID: 6943087725623435252}
   m_Layer: 0
   m_Name: EnemyBomb
@@ -181,20 +181,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3449809075730503012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5721309306928813468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1ee79ea5d15f5c44a53943248dcd29f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BombPrefab: {fileID: 7249817713132274795, guid: 0154b6888920d7249b4f36a6fceb2587, type: 3}
-  speed: 5
 --- !u!54 &175200416748209336
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,6 +210,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3449809075730503012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721309306928813468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1ee79ea5d15f5c44a53943248dcd29f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BombPrefab: {fileID: 7249817713132274795, guid: 0154b6888920d7249b4f36a6fceb2587, type: 3}
+  speed: 3
 --- !u!114 &6943087725623435252
 MonoBehaviour:
   m_ObjectHideFlags: 0

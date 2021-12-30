@@ -93,7 +93,8 @@ public class DroneMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(this.transform.position);
+        Debug.Log(rbody.centerOfMass);
+
         height = this.transform.position.y;
         velocity = this.rbody.velocity;
         forward = this.transform.forward;

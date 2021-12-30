@@ -24,6 +24,10 @@ public class PopupScore : MonoBehaviour
         this.transform.rotation = Quaternion.LookRotation(direction);    //向きベクトルを与えて回転
         this.transform.localScale = Vector3.one * direction.magnitude / 20f;
         this.GetComponent<TextMesh>().text = score.ToString();
+
+        GameObject controlObj = GameObject.Find("GameController");
+        controlObj.GetComponent<ScoreManager>().score += score;
+
         Destroy(this.gameObject, 3f);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
     }
 }

@@ -10,8 +10,6 @@ public class Mission2 : MonoBehaviour
     public GameObject goalObj;
     ClearProcess CP;
 
-    Transform playerTf;
-
     // Start is called before the first frame update
     void Start()
     {

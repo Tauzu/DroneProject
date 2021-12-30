@@ -35,9 +35,9 @@ public class FPS_counter : MonoBehaviour
     }
 
     // 表示処理
-    private void OnGUI()
-    {
-        GUILayout.Label(fps.ToString());
-    }
+    // private void OnGUI()
+    // {
+    //     GUILayout.Label(fps.ToString());
+    // }
 
 }

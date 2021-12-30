@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement; //シーンマネージャー
 
 public class ReloadScene : MonoBehaviour
 {
-    public Transform target;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +14,7 @@ public class ReloadScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.F5))||(target.position.y < -7))
+        if (Input.GetKeyDown(KeyCode.F5))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

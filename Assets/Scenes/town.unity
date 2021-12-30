@@ -11315,7 +11315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &433713012
 Transform:
   m_ObjectHideFlags: 0
@@ -14223,9 +14223,9 @@ GameObject:
   m_Component:
   - component: {fileID: 587054576}
   - component: {fileID: 587054575}
-  - component: {fileID: 587054577}
   - component: {fileID: 587054578}
   - component: {fileID: 587054579}
+  - component: {fileID: 587054577}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -14268,11 +14268,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 587054574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3026cc59f40fa94c965c27af6747828, type: 3}
+  m_Script: {fileID: 11500000, guid: 735b485f46cf7b142984a7d5bce287ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObj: {fileID: 8245200960721926322}
-  firstObj: {fileID: 1669121163}
+  activationObj:
+  - {fileID: 8245200960721926322}
+  - {fileID: 1276375942}
 --- !u!114 &587054578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31876,7 +31877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1350639590
 BoxCollider:
   m_ObjectHideFlags: 0

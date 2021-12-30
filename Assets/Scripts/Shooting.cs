@@ -42,7 +42,7 @@ public class Shooting : MonoBehaviour
             _ballSimurator.Simulate(this.transform.position , shotVelocity);
         }
 
-        // キーが押された時
+        // キーから指を離した時
         if (Input.GetKeyUp(KeyCode.Z)){
             // 弾丸の複製
             GameObject clone = Instantiate(bullet) as GameObject;
@@ -52,7 +52,7 @@ public class Shooting : MonoBehaviour
             clone.GetComponent<Rigidbody>().velocity = shotVelocity;
 
             //反動
-            thisRbody.AddForce(-shotVelocity*0.01f, ForceMode.Impulse);
+            thisRbody.AddForce(-direction*targetSpeed*targetSpeed*0.0002f, ForceMode.Impulse);
  
             //発射されてから3秒後に銃弾のオブジェクトを破壊する.
             Destroy(clone, 5.0f);

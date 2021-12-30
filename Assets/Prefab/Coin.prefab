@@ -110,3 +110,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagName: Player
+  scorePrefab: {fileID: 1206199768160619886, guid: 6aecba5b6a106d941b97c216ade544c2, type: 3}
+  score: 100

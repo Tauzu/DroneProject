@@ -13,12 +13,11 @@ public class DestroyEnemy : MonoBehaviour
     public float range = 1f;
 
     public GameObject scorePrefab;
-    GameObject cameraObj;
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraObj = GameObject.Find("Main Camera");
+
     }
 
     // Update is called once per frame
@@ -58,20 +57,15 @@ public class DestroyEnemy : MonoBehaviour
 
     void popupScore()
     {
+        GameObject cameraObj = GameObject.Find("Main Camera");
         Vector3 direction = this.transform.position - cameraObj.transform.position;
         float distance = direction.magnitude;
-
-        GameObject clone = Instantiate(scorePrefab) as GameObject;
-
-        clone.transform.position = this.transform.position + Vector3.up;
-        clone.transform.rotation = Quaternion.LookRotation(direction);    //向きベクトルを与えて回転
-        clone.transform.localScale = Vector3.one * distance / 20f;
-
         int score = (int)(distance * distance / 1000f) * 100;
         score = Mathf.Clamp(score, 100, score);
-        clone.GetComponent<TextMesh>().text = score.ToString();
 
-        Destroy(clone, 3.0f);
+        GameObject clone = Instantiate(scorePrefab) as GameObject;
+        clone.GetComponent<PopupScore>().SetScore(score, this.transform.position + Vector3.up);
+
     }
 
 }

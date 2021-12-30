@@ -151,10 +151,10 @@ public class DroneMove : MonoBehaviour
 
         AttitudeControl();
 
-        for (int i = 0; i < BladeNum; i++)
-        {
-            Blade[i].power = Mathf.Clamp(Blade[i].power, -4f, 4f);
-        }
+        // for (int i = 0; i < BladeNum; i++)
+        // {
+        //     Blade[i].power = Mathf.Clamp(Blade[i].power, -4f, 4f);
+        // }
 
         PositionClamp();
 
@@ -238,7 +238,7 @@ public class DroneMove : MonoBehaviour
             hovering_text.SetActive(isHovering);
         }
 
-        if (isHovering && (this.transform.up.y > 0.1f))   //ホバリング処理
+        if (isHovering && (this.transform.up.y > 0f))   //ホバリング処理
         {
             for (int i = 0; i < BladeNum; i++)
             {

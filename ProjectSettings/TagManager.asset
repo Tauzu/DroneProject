@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Magnetic
+  - bullet
+  - Building
+  - item
+  - coin
   layers:
   - Default
   - TransparentFX

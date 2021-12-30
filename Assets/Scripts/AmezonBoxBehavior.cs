@@ -8,12 +8,16 @@ public class AmezonBoxBehavior : MonoBehaviour
 
     public GameObject targetEffect;
     private GameObject effectClone;
+    Transform playerTf;
+    public GameObject scorePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
         effectClone = Instantiate(targetEffect);
         // effectClone.transform.parent = this.transform;
+
+        playerTf = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
@@ -34,14 +38,23 @@ public class AmezonBoxBehavior : MonoBehaviour
 
         }
 
+        Vector3 direction = this.transform.position - playerTf.position;
+        if(direction.magnitude > 50f){
+            Destroy(this.gameObject);
+        }
+
     }
 
     void OnCollisionEnter(Collision other)//  他のオブジェクトに触れた時の処理
     {
         if (other.gameObject == targetObj)
         {
+            GameObject clone = Instantiate(scorePrefab) as GameObject;
+            clone.GetComponent<PopupScore>().SetScore(1000, this.transform.position + Vector3.up);
+
             Destroy(this.gameObject);
         }
+
     }
 
     void OnDestroy()

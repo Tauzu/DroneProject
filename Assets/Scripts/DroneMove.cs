@@ -46,7 +46,7 @@ public class DroneMove : MonoBehaviour
     private float targetFwdAngle;
     private float targetRgtAngle;
 
-    private GameObject hovering_text;
+    private GameObject hoveringTextObj;
 
     private GameObject cameraObj;
 
@@ -57,8 +57,6 @@ public class DroneMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = 60; //FPSを60に設定
-
         rbody = this.GetComponent<Rigidbody>();
 
         Blade[0].tf = this.transform.Find("blade1");
@@ -77,7 +75,7 @@ public class DroneMove : MonoBehaviour
         Blade[3].key = "i";
         Blade[3].sign = -1f;
 
-        hovering_text = this.transform.Find("hovering_text").gameObject;
+        hoveringTextObj = this.transform.Find("HoveringText").gameObject;
 
         height = this.transform.position.y;
         FwdY[0] = this.transform.forward.y;
@@ -85,7 +83,7 @@ public class DroneMove : MonoBehaviour
 
         cameraObj = GameObject.Find("Main Camera");
 
-        rend = this.GetComponent<Renderer>();
+        rend = this.transform.Find("Box").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
 
     }
@@ -93,7 +91,7 @@ public class DroneMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rbody.centerOfMass);
+        // Debug.Log(rbody.centerOfMass);
 
         height = this.transform.position.y;
         velocity = this.rbody.velocity;
@@ -128,7 +126,7 @@ public class DroneMove : MonoBehaviour
 
         }
 
-        isBoosting = Input.GetKey(KeyCode.E);
+        isBoosting = Input.GetKey(KeyCode.Q);   //加速フラグ
 
         float inputMagnitude = WASD_inputProcess(horizontalForwardSPD);
 
@@ -184,6 +182,8 @@ public class DroneMove : MonoBehaviour
         // 自身に乗じることで回転
         this.transform.rotation *= rot;
 
+        heightHOV += 0.01f*(height - heightHOV); //目標高さを、自分の高さに少し近づける（安定化のため）
+
     }
 
     float WASD_inputProcess(float forwardSPD)
@@ -230,21 +230,27 @@ public class DroneMove : MonoBehaviour
 
     }
 
+    // float maxPow = 0f;
     void HoveringProcess(float inputMagnitude, float forwardSPD, float rightSPD)
     {
         if (Input.GetKeyDown(KeyCode.C))   //ホバリングスイッチ
         {
             heightHOV = height;
             isHovering = (isHovering) ? false : true;
-            hovering_text.SetActive(isHovering);
+            hoveringTextObj.SetActive(isHovering);
         }
 
         if (isHovering && (this.transform.up.y > 0f))   //ホバリング処理
         {
+            float HovPower = Mathf.Clamp( - Kp * (height - heightHOV) - decay * velocity.y, -10f, 10f);
+            // if(Mathf.Abs(HovPower) > maxPow){
+            //     maxPow = Mathf.Abs(HovPower);
+            //     Debug.Log(HovPower);
+            // }
             for (int i = 0; i < BladeNum; i++)
             {
                 // Blade[i].power -= decay*(height[1] - height[0]);
-                Blade[i].power -= Kp * (height - heightHOV) + decay * velocity.y;
+                Blade[i].power += HovPower;
 
             }
 

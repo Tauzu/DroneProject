@@ -10,33 +10,42 @@ public class Mission3 : MonoBehaviour
     ClearProcess CP;
     public GameObject amezonPrefab;
     GameObject amezonClone;
-
+    ScoreManager ScoreMan;
     Transform playerTf;
 
     // Start is called before the first frame update
     void Start()
     {
         message = messageObj.GetComponent<Text>();
-        message.text = "[M]を押しすと磁力化。\n 宅配物を届けよう！";
+        message.text = "[E]を押すと磁力化。\n 宅配物を届けよう！\n目標SCORE:3000";
 
         CP = this.GetComponent<ClearProcess>();
 
         playerTf = GameObject.Find("Player").transform;
+
+        ScoreMan = GameObject.Find("GameController").GetComponent<ScoreManager>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(amezonClone == null){
-            amezonClone = Instantiate(amezonPrefab);
-            amezonClone.transform.position
-                = playerTf.position + 2f*playerTf.forward + 10f*Vector3.up;
 
-        }else if(amezonClone.transform.position.y < -1f){
-            Destroy(amezonClone);
+        if (ScoreMan.score >= 3000)
+        {
+            CP.ClearNotify();
         }
+        else
+        {
+            if(amezonClone == null){
+                amezonClone = Instantiate(amezonPrefab);
+                amezonClone.transform.position
+                    = playerTf.position + 2f*playerTf.forward + 5f*Vector3.up;
 
+            }else if(amezonClone.transform.position.y < -1f){
+                Destroy(amezonClone);
+            }
+        }
         // if(GameObject.FindGameObjectsWithTag("coin").Length == 0){
         //     CP.ClearNotify();
         // }

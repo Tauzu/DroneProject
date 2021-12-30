@@ -201,7 +201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969110130215856958}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -222,3 +222,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetEffect: {fileID: 4626654801573999342, guid: 8abd557d1ff211744bdc0ce9e84d36ea, type: 3}
+  scorePrefab: {fileID: 1206199768160619886, guid: 6aecba5b6a106d941b97c216ade544c2, type: 3}

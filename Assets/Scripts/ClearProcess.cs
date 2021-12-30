@@ -27,7 +27,7 @@ public class ClearProcess : MonoBehaviour
     public void ClearNotify()
     {
         if(!clearFlag){
-            StartCoroutine("CelebrateAndSetNextMission");
+            StartCoroutine(CelebrateAndSetNextMission());
             clearFlag = true;
         }
 

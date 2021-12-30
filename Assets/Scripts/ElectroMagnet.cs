@@ -4,45 +4,44 @@ using UnityEngine;
 
 public class ElectroMagnet : MonoBehaviour
 {
-    private GameObject[] magneticObjs = {};
-    Rigidbody[] magneticRbodys = {};
+    // private GameObject[] magneticObjs = {};
+    Rigidbody[] magneticRBodys = {};
     Rigidbody rbody;
     Vector3[] relation = {};
 
     public float coeff = 100;
 
     public bool magnetOn;
-
+    GameObject magnetLight;
     private int count = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         rbody = this.GetComponent<Rigidbody>();
+        magnetLight = this.transform.Find("Point Light").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < magneticObjs.Length; i++)
+        for (int i = 0; i < magneticRBodys.Length; i++)
         {
-            if(magneticObjs[i] != null)
+            if(magneticRBodys[i] != null)
             {
-                relation[i] = magneticObjs[i].transform.position - this.transform.position;
+                relation[i] = magneticRBodys[i].transform.position - this.transform.position;
             }
 
         }
         
-        if(Input.GetKeyDown(KeyCode.M))   //ONOFFスイッチ
+        if(Input.GetKeyDown(KeyCode.E))   //ONOFFスイッチ
         {
             magnetOn = (magnetOn)? false : true;
-
-            GameObject magnetLight = transform.Find("Point Light").gameObject;
             magnetLight.SetActive(magnetOn);
         }
 
         count += 1;
-        if(magnetOn && (count % 10 == 0))
+        if(magnetOn && (count % 20 == 0))
         {
             resetArray();
         }
@@ -53,13 +52,17 @@ public class ElectroMagnet : MonoBehaviour
     {
         if(magnetOn)
         {
-            for (int i = 0; i < magneticRbodys.Length; i++)
+            float power;
+            Vector3 force;
+            for (int i = 0; i < magneticRBodys.Length; i++)
             {
-                if(magneticObjs[i] != null)
+                if(magneticRBodys[i] != null)
                 {
-                    Vector3 power = relation[i].normalized * coeff / Mathf.Pow(relation[i].magnitude,2);
-                    magneticRbodys[i].AddForce(-power);
-                    rbody.AddForce(power);
+                    power = Mathf.Clamp(coeff / Mathf.Pow(relation[i].magnitude, 2), 0f, 50f);
+                    // if(power>100f) Debug.Log(power);
+                    force = relation[i].normalized * power;
+                    magneticRBodys[i].AddForce(-force);
+                    rbody.AddForce(force);
                 }
 
             }
@@ -68,12 +71,12 @@ public class ElectroMagnet : MonoBehaviour
 
     void resetArray()
     {
-        magneticObjs = GameObject.FindGameObjectsWithTag ("Magnetic");
-        magneticRbodys = new Rigidbody[magneticObjs.Length];
+        GameObject[] magneticObjs = GameObject.FindGameObjectsWithTag ("Magnetic");
+        magneticRBodys = new Rigidbody[magneticObjs.Length];
         relation = new Vector3[magneticObjs.Length];
         for (int i = 0; i < magneticObjs.Length; i++)
         {
-            magneticRbodys[i] = magneticObjs[i].GetComponent<Rigidbody>();
+            magneticRBodys[i] = magneticObjs[i].GetComponent<Rigidbody>();
             relation[i] = magneticObjs[i].transform.position - this.transform.position;
         }
     }

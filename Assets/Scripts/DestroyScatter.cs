@@ -29,7 +29,7 @@ public class DestroyScatter : MonoBehaviour
         if (other.gameObject.tag == targetTag)
         {
             Destroy(other.gameObject);
-            ScatterAnddestroy();
+            ScatterAndDestroy();
         }
     }
 
@@ -38,11 +38,11 @@ public class DestroyScatter : MonoBehaviour
         if (other.gameObject.tag == targetTag)
         {
             // Destroy(other.gameObject);
-            ScatterAnddestroy();
+            ScatterAndDestroy();
         }
     }
 
-    void ScatterAnddestroy()
+    void ScatterAndDestroy()
     {
         float delta = range / numObj;
         for(int i=0; i<numObj; i++)

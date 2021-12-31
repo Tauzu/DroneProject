@@ -53,6 +53,7 @@ public class DroneMove : MonoBehaviour
     private Color defaultColor;
     private Renderer rend;
 
+    GameObject barrierObj;
 
     // Start is called before the first frame update
     void Start()
@@ -86,6 +87,8 @@ public class DroneMove : MonoBehaviour
 
         rend = this.transform.Find("BoxBody").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
+
+        barrierObj = this.transform.Find("Barrier").gameObject;
 
     }
 
@@ -158,6 +161,12 @@ public class DroneMove : MonoBehaviour
 
         PositionClamp();
 
+        BarrierActivate();
+
+    }
+
+    void BarrierActivate()
+    {
         if (Input.GetKey(KeyCode.X)){
 
             for(int i=0; i<BladeNum; i++)
@@ -165,8 +174,13 @@ public class DroneMove : MonoBehaviour
                 Blade[i].power += 1000f*Blade[i].sign;
             }
 
-        }
+            barrierObj.SetActive(true);
 
+        }
+        else
+        {
+            barrierObj.SetActive(false);
+        }
     }
 
     void FixedUpdate()
@@ -200,17 +214,23 @@ public class DroneMove : MonoBehaviour
         Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
         Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
         Vector2 targetXZ = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
-        bool isBacking = (Vector2.Dot(forwardXZ, targetXZ) < -0.1f) ? true : false;
-        targetXZ *= (isBacking) ? -1 : 1;
-        yawDiff = inputMagnitude * Mathf.Abs(1f - Vector2.Dot(forwardXZ, targetXZ));
-        yawDiff *= (Vector2.Dot(rightXZ, targetXZ) > 0) ? 1 : -1;    //回転方向
 
-        float targetSPD = (isBoosting) ? 2f * baseSpeed * inputMagnitude : baseSpeed * inputMagnitude;
-        targetSPD *= (isBacking) ? -1 : 1;
-        float difference = (Mathf.Abs(targetSPD) > 0.1f) ? (forwardSPD - targetSPD) / baseSpeed : 0f;
-        float variable = Mathf.Abs(difference);
-        difference = difference / variable * Mathf.Sqrt(variable);
-        targetFwdAngle = 60f * Mathf.Deg2Rad * difference;
+        float inner = Vector2.Dot(forwardXZ, targetXZ); //現在の方向ベクトルと、目標方向ベクトルとの内積
+        bool isBacking = (inner < -0.1f) ? true : false;
+
+        //ヨー回転要求量
+        yawDiff = (isBacking)? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
+                             : inputMagnitude * Mathf.Abs(1f - inner) ;     //前進時
+        if(Vector2.Dot(rightXZ, targetXZ) < 0f) yawDiff *= -1f;    //回転方向
+        if(isBacking) yawDiff *= -1f;    //バック時は回転方向がさらに逆になる
+
+        float targetSPD = baseSpeed * inputMagnitude;
+        if(isBoosting) targetSPD *= 2f;
+        if(isBacking) targetSPD *= -1;
+        float difference = (targetSPD - forwardSPD) / baseSpeed;//目標速度までの差の指標
+        float targetFwdAngleDeg = Mathf.Clamp(60f * -difference * Mathf.Abs(inner), -60f, 60f);
+        targetFwdAngle = targetFwdAngleDeg*Mathf.Deg2Rad;
+        // Debug.Log(targetFwdAngle);
 
         if (isBoosting)    //加速時色変化
         {
@@ -219,12 +239,6 @@ public class DroneMove : MonoBehaviour
         else
         {
             rend.material.color = defaultColor;
-        }
-
-        if (inputMagnitude < 0.1f)  //入力がないときは水平姿勢を目指す
-        {
-            targetFwdAngle = 0f;
-            targetRgtAngle = 0f;
         }
 
         return inputMagnitude;
@@ -260,10 +274,19 @@ public class DroneMove : MonoBehaviour
                 targetFwdAngle = 45f * Mathf.Deg2Rad * forwardSPD / baseSpeed;
             }
 
-            targetRgtAngle = 45f * Mathf.Deg2Rad * rightSPD / baseSpeed;   //左右方向自動ブレーキ
-            targetRgtAngle *= (isBoosting) ? 0.5f : 1f; //加速時はブレーキ弱める
+            targetRgtAngle = 60f * Mathf.Deg2Rad * rightSPD / baseSpeed;   //左右方向自動ブレーキ
+            if(isBoosting) targetRgtAngle *= 0.5f; //加速時はブレーキ弱める
 
         }
+        else    //ホバリングOFF時
+        {
+            if (inputMagnitude < 0.1f)  //入力がないときは水平姿勢を目指す
+            {
+                targetFwdAngle = 0f;
+                targetRgtAngle = 0f;
+            }
+        }
+
     }
 
     void PositionClamp()

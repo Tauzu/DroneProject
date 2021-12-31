@@ -38597,7 +38597,7 @@ GameObject:
   - component: {fileID: 1660243744}
   - component: {fileID: 1660243743}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Barrier
   m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,7 +5,6 @@ using UnityEngine.UI; // <--忘れがち
 
 public class Mission3 : MonoBehaviour
 {
-    public GameObject messageObj;
     Text message;
     ClearProcess CP;
     public GameObject amezonPrefab;
@@ -16,7 +15,7 @@ public class Mission3 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        message = messageObj.GetComponent<Text>();
+        message = GameObject.Find("MessageText").GetComponent<Text>();
         message.text = "[E]を押すと磁力化。\n 宅配物を届けよう！\n目標SCORE:3000";
 
         CP = this.GetComponent<ClearProcess>();

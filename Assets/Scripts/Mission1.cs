@@ -5,7 +5,6 @@ using UnityEngine.UI; // <--忘れがち
 
 public class Mission1 : MonoBehaviour
 {
-    public GameObject messageObj;
     Text message;
     public GameObject coinPrefab;
     GameObject goalObj;
@@ -14,7 +13,7 @@ public class Mission1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        message = messageObj.GetComponent<Text>();
+        message = GameObject.Find("MessageText").GetComponent<Text>();
         message.text = "[Shit(左)]長押しで上昇せよ！";
 
         CP = this.GetComponent<ClearProcess>();

@@ -14,9 +14,14 @@ public class ReloadScene : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F5) || GameObject.FindGameObjectsWithTag ("Building").Length==0)
+        if (Input.GetKeyDown(KeyCode.F5))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            ReloadNowScene();
         }
+    }
+
+    public void ReloadNowScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

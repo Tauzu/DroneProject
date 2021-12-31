@@ -5,7 +5,6 @@ using UnityEngine.UI; // <--忘れがち
 
 public class Mission2 : MonoBehaviour
 {
-    public GameObject messageObj;
     Text message;
     public GameObject goalObj;
     ClearProcess CP;
@@ -13,7 +12,7 @@ public class Mission2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        message = messageObj.GetComponent<Text>();
+        message = GameObject.Find("MessageText").GetComponent<Text>();
         message.text = "空中で[C]を押し、ホバリング。\n [WASD]で移動してコインを集めよ！";
 
         CP = this.GetComponent<ClearProcess>();

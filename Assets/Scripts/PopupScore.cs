@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PopupScore : MonoBehaviour
 {
+    public Gradient grad;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,10 @@ public class PopupScore : MonoBehaviour
         Vector3 direction = position - cameraObj.transform.position;
         this.transform.rotation = Quaternion.LookRotation(direction);    //向きベクトルを与えて回転
         this.transform.localScale = Vector3.one * direction.magnitude / 20f;
-        this.GetComponent<TextMesh>().text = score.ToString();
+
+        TextMesh tMesh = this.GetComponent<TextMesh>();
+        tMesh.text = score.ToString();
+        tMesh.color = grad.Evaluate(Mathf.Min((Mathf.Log10((float)score/100f))/2f, 1f));
 
         GameObject controlObj = GameObject.Find("GameController");
         controlObj.GetComponent<ScoreManager>().score += score;

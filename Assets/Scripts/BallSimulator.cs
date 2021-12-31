@@ -16,6 +16,7 @@ public class BallSimulator : MonoBehaviour {
     Vector3[] simuratePointArray; // シュミレートするpoint_array
 
     LineRenderer lineRenderer;
+    public Gradient grad;
 
     void Start () {
         Init();
@@ -79,7 +80,7 @@ public class BallSimulator : MonoBehaviour {
      * 弾道を予測計算する。オブジェクトを再生成せず、位置だけ動かす。
      * targetにはRigidbodyが必須です
      **/
-    public void Simulate(Vector3 initialPosition , Vector3 initialVelocity)
+    public void Simulate(Vector3 initialPosition , Vector3 initialVelocity, float gradLocation)
     {
 
         //弾道予測の位置に点を移動
@@ -112,6 +113,10 @@ public class BallSimulator : MonoBehaviour {
 
         // 線を引く場所を指定する
         lineRenderer.SetPositions(simuratePointArray);
+
+        // lineRenderer.startColor = grad.Evaluate(gradLocation);
+        // lineRenderer.endColor = grad.Evaluate(gradLocation);
+        lineRenderer.material.color = grad.Evaluate(gradLocation);
 
         // float speed = initialVelocity.magnitude;
         // lineRenderer.startWidth = speed * 0.01f;

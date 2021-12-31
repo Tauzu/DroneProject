@@ -58,6 +58,7 @@ public class DroneMove : MonoBehaviour
     void Start()
     {
         rbody = this.GetComponent<Rigidbody>();
+        // rbody = this.transform.Find("BoxBody").gameObject.GetComponent<Rigidbody>();
 
         Blade[0].tf = this.transform.Find("blade1");
         Blade[0].key = "t";
@@ -83,7 +84,7 @@ public class DroneMove : MonoBehaviour
 
         cameraObj = GameObject.Find("Main Camera");
 
-        rend = this.transform.Find("Box").gameObject.GetComponent<Renderer>();
+        rend = this.transform.Find("BoxBody").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
 
     }
@@ -287,7 +288,7 @@ public class DroneMove : MonoBehaviour
 
         float targetFwd = Mathf.Sin(targetFwdAngle);    //ピッチ姿勢制御
 
-        controlPOW = Kp * (FwdY[1] - targetFwd) + 0.4f*decay * (FwdY[1] - FwdY[0])/Time.deltaTime;
+        controlPOW = Kp * (FwdY[1] - targetFwd) + 0.3f*decay * (FwdY[1] - FwdY[0])/Time.deltaTime;
         Blade[0].power -= controlPOW;
         Blade[1].power += controlPOW;
         Blade[2].power += controlPOW;
@@ -296,7 +297,7 @@ public class DroneMove : MonoBehaviour
         float targetRgt = Mathf.Sin(targetRgtAngle);    //ロール姿勢制御
 
         // Debug.Log("RgtY=" + RgtY[1]);
-        controlPOW = Kp * (RgtY[1] - targetRgt) + 0.4f*decay * (RgtY[1] - RgtY[0])/Time.deltaTime;
+        controlPOW = Kp * (RgtY[1] - targetRgt) + 0.3f*decay * (RgtY[1] - RgtY[0])/Time.deltaTime;
         Blade[0].power += controlPOW;
         Blade[1].power += controlPOW;
         Blade[2].power -= controlPOW;

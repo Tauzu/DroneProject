@@ -147,8 +147,8 @@ public class DroneMove : MonoBehaviour
 
         if (Input.GetKey(KeyCode.B))   //急ブレーキ
         {
-            targetFwdAngle = 60f * Mathf.Deg2Rad * horizontalForwardSPD / baseSpeed;
-            targetRgtAngle = 60f * Mathf.Deg2Rad * horizontalRightSPD / baseSpeed;
+            targetFwdAngle = 60f * horizontalForwardSPD / baseSpeed;
+            targetRgtAngle = 60f * horizontalRightSPD / baseSpeed;
 
         }
 
@@ -228,8 +228,7 @@ public class DroneMove : MonoBehaviour
         if(isBoosting) targetSPD *= 2f;
         if(isBacking) targetSPD *= -1;
         float difference = (targetSPD - forwardSPD) / baseSpeed;//目標速度までの差の指標
-        float targetFwdAngleDeg = Mathf.Clamp(60f * -difference * Mathf.Abs(inner), -60f, 60f);
-        targetFwdAngle = targetFwdAngleDeg*Mathf.Deg2Rad;
+        targetFwdAngle = 90f * -difference * Mathf.Abs(inner);
         // Debug.Log(targetFwdAngle);
 
         if (isBoosting)    //加速時色変化
@@ -271,10 +270,10 @@ public class DroneMove : MonoBehaviour
 
             if (inputMagnitude < 0.1f)   //前後方向自動ブレーキ
             {
-                targetFwdAngle = 45f * Mathf.Deg2Rad * forwardSPD / baseSpeed;
+                targetFwdAngle = 45f * forwardSPD / baseSpeed;
             }
 
-            targetRgtAngle = 60f * Mathf.Deg2Rad * rightSPD / baseSpeed;   //左右方向自動ブレーキ
+            targetRgtAngle = 60f * rightSPD / baseSpeed;   //左右方向自動ブレーキ
             if(isBoosting) targetRgtAngle *= 0.5f; //加速時はブレーキ弱める
 
         }
@@ -309,7 +308,8 @@ public class DroneMove : MonoBehaviour
         FwdY[1] = forward.y;
         RgtY[1] = right.y;
 
-        float targetFwd = Mathf.Sin(targetFwdAngle);    //ピッチ姿勢制御
+        targetFwdAngle = Mathf.Clamp(targetFwdAngle, -60f, 60f);
+        float targetFwd = Mathf.Sin(targetFwdAngle*Mathf.Deg2Rad);    //ピッチ姿勢制御
 
         controlPOW = Kp * (FwdY[1] - targetFwd) + 0.3f*decay * (FwdY[1] - FwdY[0])/Time.deltaTime;
         Blade[0].power -= controlPOW;
@@ -317,7 +317,8 @@ public class DroneMove : MonoBehaviour
         Blade[2].power += controlPOW;
         Blade[3].power -= controlPOW;
 
-        float targetRgt = Mathf.Sin(targetRgtAngle);    //ロール姿勢制御
+        targetRgtAngle = Mathf.Clamp(targetRgtAngle, -60f, 60f);
+        float targetRgt = Mathf.Sin(targetRgtAngle*Mathf.Deg2Rad);    //ロール姿勢制御
 
         // Debug.Log("RgtY=" + RgtY[1]);
         controlPOW = Kp * (RgtY[1] - targetRgt) + 0.3f*decay * (RgtY[1] - RgtY[0])/Time.deltaTime;

@@ -74,6 +74,7 @@ public class BallSimulator : MonoBehaviour {
         lineRenderer = this.GetComponent<LineRenderer>();
          // 点の数を指定する
         lineRenderer.positionCount = simuratePointArray.Length;
+        lineRenderer.SetPositions(simuratePointArray);
     }
 
     /**

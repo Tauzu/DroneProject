@@ -140,7 +140,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1840307
 MeshCollider:
@@ -212,12 +212,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840306}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 36, y: 0.09, z: -36}
   m_LocalScale: {x: 5, y: 1, z: 2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 174
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2331549
 PrefabInstance:
@@ -327,6 +327,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -706,6 +710,10 @@ PrefabInstance:
     - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 489306, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_RootOrder
@@ -1230,6 +1238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 95
@@ -1333,6 +1345,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -1650,6 +1666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 100
@@ -1750,7 +1770,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &62795944
 MeshCollider:
@@ -1822,12 +1842,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 62795943}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 78, y: 0.09, z: -7}
   m_LocalScale: {x: 3.6, y: 1, z: 9}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 177
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &63308655 stripped
 Transform:
@@ -2803,6 +2823,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_01 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 489306, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -2854,7 +2878,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &91358327
 MeshCollider:
@@ -2926,12 +2950,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91358326}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 80, y: 0.09, z: -34}
   m_LocalScale: {x: 3.8, y: 1, z: 2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 176
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &91528288
 PrefabInstance:
@@ -5146,6 +5170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 105
@@ -6111,6 +6139,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1110357236}
     m_Modifications:
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6236,7 +6268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 171
+  m_RootOrder: 170
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &214188009
 PrefabInstance:
@@ -6539,6 +6571,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 36
@@ -6762,6 +6798,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -7170,6 +7210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -7537,7 +7581,7 @@ Transform:
   - {fileID: 2118033301}
   - {fileID: 1297337635}
   m_Father: {fileID: 0}
-  m_RootOrder: 185
+  m_RootOrder: 173
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &274867431 stripped
 Transform:
@@ -7734,6 +7778,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -8331,6 +8379,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (61)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 67
@@ -8821,6 +8873,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (59)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 65
@@ -9094,6 +9150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -9308,6 +9368,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -9826,7 +9890,7 @@ Transform:
   - {fileID: 2045571648}
   - {fileID: 2120946306}
   m_Father: {fileID: 0}
-  m_RootOrder: 191
+  m_RootOrder: 179
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &385476466 stripped
 Transform:
@@ -9980,7 +10044,7 @@ Transform:
   - {fileID: 1895858397}
   - {fileID: 1427521332}
   m_Father: {fileID: 0}
-  m_RootOrder: 194
+  m_RootOrder: 182
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &392437562
 PrefabInstance:
@@ -10291,6 +10355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 43
@@ -10391,6 +10459,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 101
@@ -10435,6 +10507,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -10525,6 +10601,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -11339,7 +11419,7 @@ Transform:
   - {fileID: 1669121162}
   - {fileID: 1788252636}
   m_Father: {fileID: 0}
-  m_RootOrder: 195
+  m_RootOrder: 183
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &435155963 stripped
 Transform:
@@ -11811,6 +11891,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -12320,6 +12404,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -12423,6 +12511,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (81)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -13567,7 +13659,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 193
+  m_RootOrder: 181
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &546336331
 LineRenderer:
@@ -14062,6 +14154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 53
@@ -14337,7 +14433,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 186
+  m_RootOrder: 174
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &587054577
 MonoBehaviour:
@@ -14529,6 +14625,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -14804,6 +14904,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -15138,6 +15242,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -15623,6 +15731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 32
@@ -15672,6 +15784,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -16180,6 +16296,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (76)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -17136,6 +17256,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (69)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 75
@@ -17192,7 +17316,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &743677743
 MeshCollider:
@@ -17264,12 +17388,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743677742}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -7, y: 0.09, z: -36}
   m_LocalScale: {x: 5.35, y: 1, z: 2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 182
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &744218216
 PrefabInstance:
@@ -17281,6 +17405,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (73)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -17336,6 +17464,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -17535,7 +17667,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &749216579
 MeshCollider:
@@ -17607,12 +17739,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749216578}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 80, y: 0.09, z: 69}
   m_LocalScale: {x: 3.8, y: 1, z: 9.2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 183
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &749801315 stripped
 Transform:
@@ -18385,6 +18517,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (68)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -19653,6 +19789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 103
@@ -19697,6 +19837,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -19797,6 +19941,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -19846,6 +19994,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -20046,7 +20198,7 @@ Transform:
   - {fileID: 400726508}
   - {fileID: 1728810190}
   m_Father: {fileID: 0}
-  m_RootOrder: 192
+  m_RootOrder: 180
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &845762899
 PrefabInstance:
@@ -20058,6 +20210,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -20222,6 +20378,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -20985,6 +21145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 98
@@ -21662,6 +21826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -21795,6 +21963,10 @@ PrefabInstance:
     - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 489306, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_RootOrder
@@ -22152,6 +22324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (77)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 83
@@ -22345,6 +22521,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (79)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -22886,6 +23066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 97
@@ -23041,7 +23225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 452202, guid: a31d75f154921304794bf1d122281cac, type: 3}
       propertyPath: m_RootOrder
-      value: 172
+      value: 171
       objectReference: {fileID: 0}
     - target: {fileID: 452202, guid: a31d75f154921304794bf1d122281cac, type: 3}
       propertyPath: m_LocalScale.x
@@ -23651,6 +23835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 114
@@ -23695,6 +23883,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (54)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -24037,6 +24229,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -24268,6 +24464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (78)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 84
@@ -24372,6 +24572,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (50)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -24527,6 +24731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 55
@@ -24616,6 +24824,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (66)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -24902,6 +25114,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -25727,6 +25943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -25859,7 +26079,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1110357236
 Transform:
@@ -25989,7 +26209,7 @@ Transform:
   - {fileID: 514635096}
   - {fileID: 2077983422}
   m_Father: {fileID: 0}
-  m_RootOrder: 196
+  m_RootOrder: 184
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1110573638 stripped
 Transform:
@@ -26006,6 +26226,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -26051,6 +26275,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (55)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -27094,6 +27322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (75)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 81
@@ -27340,6 +27572,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -27939,6 +28175,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (71)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 77
@@ -28148,6 +28388,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 112
@@ -28353,6 +28597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -28550,6 +28798,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -28758,6 +29010,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -29313,7 +29569,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 189
+  m_RootOrder: 177
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1232105400
 PrefabInstance:
@@ -29690,6 +29946,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -30234,6 +30494,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -31178,6 +31442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 47
@@ -31707,6 +31975,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 49
@@ -31855,6 +32127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 489306, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -31899,6 +32175,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (65)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -32452,6 +32732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 46
@@ -32695,6 +32979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (70)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 76
@@ -32916,7 +33204,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1376828578
 MeshCollider:
@@ -32988,12 +33276,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376828577}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 34, y: 0.09, z: 69}
   m_LocalScale: {x: 3.6, y: 1, z: 5}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 178
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1377179102
 PrefabInstance:
@@ -33103,6 +33391,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (64)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -33534,6 +33826,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -33642,6 +33938,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (58)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -33903,6 +34203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -34115,6 +34419,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -34166,7 +34474,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1439637801
 MeshCollider:
@@ -34238,12 +34546,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1439637800}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 105, y: 0.09, z: 42}
   m_LocalScale: {x: 1.8, y: 1, z: 4.14}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 181
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1448301831
 PrefabInstance:
@@ -34300,6 +34608,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -34798,6 +35110,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 110
@@ -34854,7 +35170,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1472094033
 MeshCollider:
@@ -34926,12 +35242,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472094032}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 20, y: 0.09, z: -62}
   m_LocalScale: {x: 1.5, y: 1, z: 3.8}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 175
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1472573503 stripped
 Transform:
@@ -35501,6 +35817,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_01 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 489306, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -35645,6 +35965,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -36731,6 +37055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -36821,6 +37149,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -36870,6 +37202,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -37017,6 +37353,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (80)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -37276,6 +37616,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -37427,7 +37771,7 @@ RectTransform:
   - {fileID: 981515057}
   - {fileID: 1314725800}
   m_Father: {fileID: 0}
-  m_RootOrder: 188
+  m_RootOrder: 176
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -37642,6 +37986,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (52)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -38112,6 +38460,48 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 405406, guid: b596eb5af66e89444beac675eae2c3a2, type: 3}
   m_PrefabInstance: {fileID: 318356804}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1621390581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621390582}
+  m_Layer: 0
+  m_Name: StreetConcrete
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1621390582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621390581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1737608346}
+  - {fileID: 1918183202}
+  - {fileID: 1840310}
+  - {fileID: 1472094036}
+  - {fileID: 91358330}
+  - {fileID: 62795947}
+  - {fileID: 1376828581}
+  - {fileID: 2012523857}
+  - {fileID: 1731997388}
+  - {fileID: 1439637804}
+  - {fileID: 743677746}
+  - {fileID: 749216582}
+  m_Father: {fileID: 0}
+  m_RootOrder: 185
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1622434610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 467192, guid: 52e3c281ef0f0ea4985188d26644edcb, type: 3}
@@ -38187,6 +38577,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -38390,6 +38784,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -38882,7 +39280,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f02eb6bbff510ae48a7ed6eb2c7973e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -38921,7 +39319,7 @@ Transform:
   m_GameObject: {fileID: 1660243742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 8245200960721926329}
   m_RootOrder: 9
@@ -39357,6 +39755,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -40070,6 +40472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 104
@@ -40468,7 +40874,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1731997385
 MeshCollider:
@@ -40540,12 +40946,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731997384}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 106, y: 0.09, z: -8}
   m_LocalScale: {x: 2, y: 1, z: 5}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 180
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1732103513
 PrefabInstance:
@@ -40557,6 +40963,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -40734,7 +41144,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1737608343
 MeshCollider:
@@ -40806,12 +41216,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737608342}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 34, y: 0.09, z: -7}
   m_LocalScale: {x: 3.6, y: 1, z: 9}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 170
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1738261529 stripped
 Transform:
@@ -40938,6 +41348,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -41187,6 +41601,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 107906, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 489306, guid: 2cc5e9c8613078b47b47bdcf3dc32ae2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -41231,6 +41649,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (57)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -41382,6 +41804,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -41739,6 +42165,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (56)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -42518,6 +42948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (63)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 69
@@ -42702,6 +43136,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -42906,6 +43344,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (67)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -43347,7 +43789,7 @@ Transform:
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 184
+  m_RootOrder: 172
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1838342498 stripped
 Transform:
@@ -43374,6 +43816,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (60)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -43474,6 +43920,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -43707,7 +44157,7 @@ Transform:
   - {fileID: 274867431}
   - {fileID: 45628298}
   m_Father: {fileID: 0}
-  m_RootOrder: 190
+  m_RootOrder: 178
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1855621850 stripped
 Transform:
@@ -44282,6 +44732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (72)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 78
@@ -44485,6 +44939,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (44)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -45001,6 +45459,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (62)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 68
@@ -45101,7 +45563,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &1918183199
 MeshCollider:
@@ -45173,12 +45635,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1918183198}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -8, y: 0.09, z: -7}
   m_LocalScale: {x: 3.6, y: 1, z: 9}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 173
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1918318003
 PrefabInstance:
@@ -45841,6 +46303,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 108
@@ -45885,6 +46351,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -45989,6 +46459,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -46314,6 +46788,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
@@ -46867,7 +47345,7 @@ Transform:
   - {fileID: 2033025201}
   - {fileID: 171032981}
   m_Father: {fileID: 0}
-  m_RootOrder: 187
+  m_RootOrder: 175
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2010622241 stripped
 Transform:
@@ -46891,7 +47369,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!64 &2012523854
 MeshCollider:
@@ -46963,12 +47441,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2012523853}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -6, y: 0.09, z: 71}
   m_LocalScale: {x: 5.5, y: 1, z: 2}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 179
+  m_Father: {fileID: 1621390582}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2013198118
 PrefabInstance:
@@ -47326,6 +47804,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -48120,6 +48602,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (74)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 80
@@ -48281,6 +48767,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -48374,6 +48864,10 @@ PrefabInstance:
     - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_Name
       value: sptp_traffic_light_01 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
@@ -49438,6 +49932,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_street_light_02 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -50037,6 +50535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sptp_traffic_light_01 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 148458, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 444314, guid: 7f9ea44d759da6b4e995d9fa92373629, type: 3}
       propertyPath: m_RootOrder
       value: 106
@@ -50081,6 +50583,10 @@ PrefabInstance:
     - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_Name
       value: sptp_street_light_02 (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 140358, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 490890, guid: 0401a3f0164b9cf40bd8c14f152e69ab, type: 3}
       propertyPath: m_RootOrder

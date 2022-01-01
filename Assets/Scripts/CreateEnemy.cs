@@ -13,7 +13,7 @@ public class CreateEnemy : MonoBehaviour
     void Start()
     {
         // StartCoroutine("waitCoroutine");
-        StartCoroutine("waitCoroutine");
+        StartCoroutine(waitCoroutine());
     }
 
     // Update is called once per frame
@@ -22,19 +22,20 @@ public class CreateEnemy : MonoBehaviour
 
     }
 
-    private IEnumerator waitCoroutine()
+    IEnumerator waitCoroutine()
     {
         //待機
         yield return new WaitForSeconds(standbyWait);
 
-        StartCoroutine("mainCoroutine");
+        StartCoroutine(mainCoroutine());
     }
  
-    private IEnumerator mainCoroutine()
+    IEnumerator mainCoroutine()
     {
         while (true) {
             
             GameObject enemy = Instantiate(EnemyPrefab);
+            enemy.transform.parent = this.gameObject.transform;
             enemy.transform.position = this.transform.position + offset;
 
                         //待機

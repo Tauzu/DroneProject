@@ -14482,7 +14482,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587054574}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3708756ced801b479d7ba00083d6e41, type: 3}
   m_Name: 
@@ -16650,6 +16650,10 @@ PrefabInstance:
     - target: {fileID: 5255722807018501871, guid: fb64934996b606541bc2557bc4f51645, type: 3}
       propertyPath: m_Name
       value: DragonSoulEaterGreenHP
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255722807018501871, guid: fb64934996b606541bc2557bc4f51645, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6015536943543477956, guid: fb64934996b606541bc2557bc4f51645, type: 3}
       propertyPath: m_RootOrder

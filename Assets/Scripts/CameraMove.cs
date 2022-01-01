@@ -103,7 +103,7 @@ public class CameraMove : MonoBehaviour
 
         if(isFPS){
             float view = cam.fieldOfView - 0.5f*Input.GetAxis("Ctrl-Shift_Right");
-            cam.fieldOfView = Mathf.Clamp(value : view, min : 0.1f, max : 45f);
+            cam.fieldOfView = Mathf.Clamp(value : view, min : 1f, max : 90f);
         }
         else{
             cameraPCDN.r -= 0.5f*Input.GetAxis("Ctrl-Shift_Right");

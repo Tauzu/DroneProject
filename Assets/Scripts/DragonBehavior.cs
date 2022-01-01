@@ -46,9 +46,14 @@ public class DragonBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         Vector3 direction = jawTf.forward;
-        GameObject clone = Instantiate(bulletPrefab) as GameObject;
-        clone.transform.position = jawTf.position + direction;
-        clone.GetComponent<Rigidbody>().velocity = direction*20f;
-        Destroy(clone, 5f);
+        for (int i = 0; i < 100; i++)
+        {
+            GameObject clone = Instantiate(bulletPrefab) as GameObject;
+            clone.transform.position = jawTf.position + direction*(float)i*0.5f 
+                + new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),Random.Range(-1f,1f));
+            // clone.GetComponent<Rigidbody>().velocity = direction * 20f;
+            Destroy(clone, 5f);
+        }
+
     }
 }

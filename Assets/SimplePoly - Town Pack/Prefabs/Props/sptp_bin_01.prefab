@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2374450}
   - component: {fileID: 6414454}
   - component: {fileID: 1771415207}
+  - component: {fileID: 6723786846626554718}
   m_Layer: 0
   m_Name: sptp_bin_01
   m_TagString: Magnetic
@@ -113,3 +114,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6723786846626554718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4282beac10ef2564b862178daa22f96e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: bullet
+  Obj: {fileID: 942276187160590164, guid: a8354f026fd4b2f4e9d33938c972f555, type: 3}
+  numObj: 10
+  range: 1

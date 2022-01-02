@@ -22,6 +22,8 @@ public class Shooting : MonoBehaviour
     Color defaultColor;
     Gradient grad = new Gradient();
 
+    bool specialShot = false;
+
     // Use this for initialization
     void Start () {
 		cameraObj = GameObject.Find("Main Camera");
@@ -46,13 +48,15 @@ public class Shooting : MonoBehaviour
         alphaKey[1].alpha = 0f;
         alphaKey[1].time = 1f;
         grad.SetKeys(colorKey, alphaKey);
-	}
+
+        StartCoroutine(CheckSpecial());
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
         Vector3 direction = (CMscript.isFPS)? cameraObj.transform.forward : this.transform.forward;
-        Vector3 shotVelocity = direction * targetSpeed;
+        Vector3 shotVelocity = (specialShot)? direction * targetSpeed*2f : direction * targetSpeed;
         // if(CMscript.isFPS) _ballSimurator.Simulate(this.transform.position , shotVelocity);
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
 
@@ -85,4 +89,18 @@ public class Shooting : MonoBehaviour
         }
 		
 	}
+
+    IEnumerator CheckSpecial()
+    {
+        while (true) {
+
+            if(this.transform.Find("SpecialAmezonParticle") != null)  specialShot = true;
+            
+            //待機
+            yield return new WaitForSeconds(1f);
+
+        }
+
+        
+    }
 }

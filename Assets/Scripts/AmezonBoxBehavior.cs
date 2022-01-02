@@ -11,6 +11,8 @@ public class AmezonBoxBehavior : MonoBehaviour
     Transform playerTf;
     public GameObject scorePrefab;
 
+    public bool special = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +53,14 @@ public class AmezonBoxBehavior : MonoBehaviour
         {
             GameObject clone = Instantiate(scorePrefab) as GameObject;
             clone.GetComponent<PopupScore>().SetScore(1000, this.transform.position + Vector3.up);
+
+            if (special)
+            {
+                Transform playerTf = GameObject.Find("Player").transform;
+                Transform SAParticleTf = this.transform.Find("SpecialAmezonParticle");
+                SAParticleTf.parent = playerTf;
+                SAParticleTf.localPosition = Vector3.zero;
+            }
 
             Destroy(this.gameObject);
         }

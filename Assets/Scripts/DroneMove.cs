@@ -53,7 +53,7 @@ public class DroneMove : MonoBehaviour
     private Color defaultColor;
     private Renderer rend;
 
-    GameObject barrierObj;
+
 
     // Start is called before the first frame update
     void Start()
@@ -87,8 +87,6 @@ public class DroneMove : MonoBehaviour
 
         rend = this.transform.Find("BoxBody").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
-
-        barrierObj = this.transform.Find("Barrier").gameObject;
 
     }
 
@@ -161,26 +159,13 @@ public class DroneMove : MonoBehaviour
 
         PositionClamp();
 
-        BarrierActivate();
-
-    }
-
-    void BarrierActivate()
-    {
-        if (Input.GetKey(KeyCode.X)){
-
+        if(Input.GetKey(KeyCode.X)){
             for(int i=0; i<BladeNum; i++)
             {
-                Blade[i].power += 1000f*Blade[i].sign;
-            }
-
-            barrierObj.SetActive(true);
-
+                Blade[i].power += 100f*Blade[i].sign;
+            } 
         }
-        else
-        {
-            barrierObj.SetActive(false);
-        }
+
     }
 
     void FixedUpdate()

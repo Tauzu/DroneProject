@@ -4,80 +4,62 @@ using UnityEngine;
 
 public class ElectroMagnet : MonoBehaviour
 {
-    // private GameObject[] magneticObjs = {};
-    Rigidbody[] magneticRBodys = {};
     Rigidbody rbody;
-    Vector3[] relation = {};
-
+    List<Rigidbody> magneticList;
     public float coeff = 100;
 
-    public bool magnetOn;
-    GameObject magnetLight;
-    private int count = 0;
-
+    void OnEnable()
+    {
+        magneticList = new List<Rigidbody>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        rbody = this.GetComponent<Rigidbody>();
-        magnetLight = this.transform.Find("Point Light").gameObject;
+        rbody = this.transform.parent.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < magneticRBodys.Length; i++)
-        {
-            if(magneticRBodys[i] != null)
-            {
-                relation[i] = magneticRBodys[i].transform.position - this.transform.position;
-            }
 
-        }
-        
-        if(Input.GetKeyDown(KeyCode.E))   //ONOFFスイッチ
-        {
-            magnetOn = (magnetOn)? false : true;
-            magnetLight.SetActive(magnetOn);
-        }
+        // Debug.Log(magneticList.Count);
 
-        count += 1;
-        if(magnetOn && (count % 20 == 0))
-        {
-            resetArray();
-        }
-        
     }
 
     void FixedUpdate()
     {
-        if(magnetOn)
+        magneticList.RemoveAll(item => item == null);
+        float power;
+        float distance;
+        Vector3 direction;
+        Vector3 force;
+        foreach (Rigidbody magneticRbody in magneticList)
         {
-            float power;
-            Vector3 force;
-            for (int i = 0; i < magneticRBodys.Length; i++)
-            {
-                if(magneticRBodys[i] != null)
-                {
-                    power = Mathf.Clamp(coeff / Mathf.Pow(relation[i].magnitude, 2), 0f, 50f);
-                    // if(power>100f) Debug.Log(power);
-                    force = relation[i].normalized * power;
-                    magneticRBodys[i].AddForce(-force);
-                    rbody.AddForce(force);
-                }
+            direction = magneticRbody.transform.position - this.transform.position;
+            distance = direction.magnitude;
+            power = Mathf.Clamp(coeff / (distance*distance), 1f, 50f);
+            force = direction.normalized * power;
+            magneticRbody.AddForce(-force);
+            rbody.AddForce(force);
 
-            }
         }
     }
 
-    void resetArray()
+    void OnTriggerEnter(Collider other)
     {
-        GameObject[] magneticObjs = GameObject.FindGameObjectsWithTag ("Magnetic");
-        magneticRBodys = new Rigidbody[magneticObjs.Length];
-        relation = new Vector3[magneticObjs.Length];
-        for (int i = 0; i < magneticObjs.Length; i++)
+        if(other.gameObject.tag == "Magnetic")
         {
-            magneticRBodys[i] = magneticObjs[i].GetComponent<Rigidbody>();
-            relation[i] = magneticObjs[i].transform.position - this.transform.position;
+            magneticList.Add(other.GetComponent<Rigidbody>());
         }
     }
+
+    void OnTriggerExit(Collider other)
+    {
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        if(magneticList.Contains(rb))
+        {
+            magneticList.Remove(rb);
+        }
+    }
+
 }

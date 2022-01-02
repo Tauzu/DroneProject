@@ -50,13 +50,14 @@ public class ClearProcess : MonoBehaviour
         subCameraObj.SetActive(true);
 
         Vector3[] posisionArray = {
-            new Vector3(-10f, 0f, -10f) ,
-            new Vector3(10f, 0f, -10f) ,
-            new Vector3(-10f, 0f, 10f) ,
-            new Vector3(10f, 0, 10f)
+            new Vector3(-10f, -30f, -10f) ,
+            new Vector3(10f, -30f, -10f) ,
+            new Vector3(-10f, -30f, 10f) ,
+            new Vector3(10f, -30, 10f)
         };
 
-        Vector3 standard = new Vector3(playerTf.position.x, 0f, playerTf.position.z);
+        // Vector3 standard = new Vector3(playerTf.position.x, 0f, playerTf.position.z);
+        Vector3 standard = playerTf.position;
 
         for(int i=0; i<posisionArray.Length; i++)
         {

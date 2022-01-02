@@ -35,7 +35,7 @@ public class CreateEnemy : MonoBehaviour
         while (true) {
             
             GameObject enemy = Instantiate(EnemyPrefab);
-            enemy.transform.parent = this.gameObject.transform;
+            enemy.transform.parent = this.transform.parent; //自分と同じ親を持つ
             enemy.transform.position = this.transform.position + offset;
 
                         //待機

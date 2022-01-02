@@ -12393,6 +12393,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 462376, guid: 6d7985f8534d19e4b8c5bc52a92a075a, type: 3}
   m_PrefabInstance: {fileID: 1477195436}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &483160529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483160530}
+  - component: {fileID: 483160531}
+  m_Layer: 0
+  m_Name: EnemyShip
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &483160530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483160529}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 250}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1350639593}
+  m_Father: {fileID: 1788252636}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &483160531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483160529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3516c9bb18f204c99f571eca33868b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &483791879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14449,7 +14493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationObj:
   - {fileID: 8245200960721926322}
-  - {fileID: 1788252637}
+  - {fileID: 1276375942}
 --- !u!114 &587054578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16653,7 +16697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255722807018501871, guid: fb64934996b606541bc2557bc4f51645, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6015536943543477956, guid: fb64934996b606541bc2557bc4f51645, type: 3}
       propertyPath: m_RootOrder
@@ -32604,12 +32648,12 @@ GameObject:
   - component: {fileID: 1350639594}
   - component: {fileID: 1350639595}
   m_Layer: 0
-  m_Name: EnemyShip
+  m_Name: ShipBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1350639590
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32680,11 +32724,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350639589}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 250}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
-  m_Father: {fileID: 1788252636}
-  m_RootOrder: 2
+  m_Father: {fileID: 483160530}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1350639594
 MonoBehaviour:

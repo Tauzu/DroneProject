@@ -9,6 +9,7 @@ TagManager:
   - Building
   - item
   - coin
+  - SpecialBullet
   layers:
   - Default
   - TransparentFX

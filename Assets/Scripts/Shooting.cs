@@ -5,6 +5,7 @@ public class Shooting : MonoBehaviour
 {
     // bullet prefab
     public GameObject bullet;
+    public GameObject specialBullet;
  
     // 弾丸の速度
     public float defaultSpeed = 50;
@@ -22,7 +23,8 @@ public class Shooting : MonoBehaviour
     Color defaultColor;
     Gradient grad = new Gradient();
 
-    bool specialShot = false;
+    GameObject SAParticle;
+    float specialTimeLimit;
 
     // Use this for initialization
     void Start () {
@@ -56,7 +58,7 @@ public class Shooting : MonoBehaviour
 	void Update () {
 
         Vector3 direction = (CMscript.isFPS)? cameraObj.transform.forward : this.transform.forward;
-        Vector3 shotVelocity = (specialShot)? direction * targetSpeed*2f : direction * targetSpeed;
+        Vector3 shotVelocity = (SAParticle == null)? direction * targetSpeed : direction * targetSpeed*2f;
         // if(CMscript.isFPS) _ballSimurator.Simulate(this.transform.position , shotVelocity);
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
 
@@ -72,7 +74,8 @@ public class Shooting : MonoBehaviour
         // キーから指を離した時
         if (Input.GetKeyUp(KeyCode.Z)){
             // 弾丸の複製
-            GameObject clone = Instantiate(bullet) as GameObject;
+            GameObject clone = (SAParticle == null)?  Instantiate(bullet) as GameObject
+                 : Instantiate(specialBullet) as GameObject;
 
             clone.transform.position = this.transform.position + direction;
 
@@ -87,6 +90,12 @@ public class Shooting : MonoBehaviour
             targetSpeed = defaultSpeed;
 
         }
+
+        if(SAParticle != null){
+            specialTimeLimit -= Time.deltaTime;
+            // Debug.Log(specialTimeLimit);
+            if(specialTimeLimit < 0f) Destroy(SAParticle);
+        }
 		
 	}
 
@@ -94,13 +103,17 @@ public class Shooting : MonoBehaviour
     {
         while (true) {
 
-            if(this.transform.Find("SpecialAmezonParticle") != null)  specialShot = true;
-            
+            Transform SAParticleTf = this.transform.Find("SpecialAmezonParticle");
+            if (SAParticleTf != null && SAParticle == null)//検索に成功し、かつ現在Particleを参照できていない場合
+            {
+                SAParticle = SAParticleTf.gameObject;
+                specialTimeLimit = 30f;
+            }
+
             //待機
             yield return new WaitForSeconds(1f);
 
         }
-
         
     }
 }

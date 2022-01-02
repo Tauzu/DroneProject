@@ -7,11 +7,17 @@ public class DragonBehavior : MonoBehaviour
     Animator animator;
     public GameObject bulletPrefab;
     Transform jawTf;
+
+    Renderer dragonRend;
+    Color defaultColor;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         jawTf = this.transform.Find("Root_Pelvis/Spine/Chest/Neck/Head/Jaw/JawTip");
+
+        dragonRend = this.transform.Find("DragonSoulEater").GetComponent<Renderer>();
+        defaultColor = dragonRend.material.color;
         StartCoroutine(mainCoroutine());
     }
 
@@ -56,4 +62,21 @@ public class DragonBehavior : MonoBehaviour
         }
 
     }
+
+    public void HitDamege()
+    {
+        animator.SetTrigger("Damage");
+        StartCoroutine(GetRed());
+        // Debug.Log("Hit!");
+    }
+
+    IEnumerator GetRed()
+    {
+        dragonRend.material.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        dragonRend.material.color = defaultColor;
+
+    }
+
+
 }

@@ -21,7 +21,8 @@ public class NoticeCollider : MonoBehaviour
     {
         if (other.gameObject.tag == "SpecialBullet")
         {
-            DB.HitDamege();
+            float speed = other.GetComponent<Rigidbody>().velocity.magnitude;
+            DB.HitDamage((int)(speed/10f));
         }
     }
 }

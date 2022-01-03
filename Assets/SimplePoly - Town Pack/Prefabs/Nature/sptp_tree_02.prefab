@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &480072
 Transform:
@@ -109,7 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4282beac10ef2564b862178daa22f96e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: bullet
+  destroyTag:
+  - bullet
+  - Fire
   Obj: {fileID: 1493958779012120596, guid: b9de24523a11d714db3851b5f0f9d527, type: 3}
   numObj: 10
   range: 1

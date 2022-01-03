@@ -6,7 +6,7 @@ public class DestroyScatter : MonoBehaviour
 {
     private Rigidbody rbody;
 
-    public string targetTag = "bullet";
+    public string[] destroyTag = { "bullet" };
 
     public GameObject Obj;
     public int numObj = 10;
@@ -26,19 +26,25 @@ public class DestroyScatter : MonoBehaviour
 
     void OnCollisionEnter(Collision other)//  他のオブジェクトに触れた時の処理
     {
-        if (other.gameObject.tag == targetTag)
+        foreach (string tag in destroyTag)
         {
-            Destroy(other.gameObject);
-            ScatterAndDestroy();
+            if (other.gameObject.tag == tag)
+            {
+                Destroy(other.gameObject);
+                ScatterAndDestroy();
+            }
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        foreach (string tag in destroyTag)
         {
-            // Destroy(other.gameObject);
-            ScatterAndDestroy();
+            if (other.gameObject.tag == tag)
+            {
+                // Destroy(other.gameObject);
+                ScatterAndDestroy();
+            }
         }
     }
 

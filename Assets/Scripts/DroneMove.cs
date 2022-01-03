@@ -259,7 +259,7 @@ public class DroneMove : MonoBehaviour
             }
 
             targetRgtAngle = 60f * rightSPD / baseSpeed;   //左右方向自動ブレーキ
-            if(isBoosting) targetRgtAngle *= 0.5f; //加速時はブレーキ弱める
+            if(isBoosting) targetRgtAngle *= 0.2f; //加速時はブレーキ弱める
 
         }
         else    //ホバリングOFF時

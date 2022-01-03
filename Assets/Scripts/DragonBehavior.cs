@@ -5,11 +5,12 @@ using UnityEngine;
 public class DragonBehavior : MonoBehaviour
 {
     Animator animator;
-    public GameObject bulletPrefab;
+    public GameObject firePrefab;
     Transform jawTf;
 
     Renderer dragonRend;
     Color defaultColor;
+    int HP = 100;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,8 +30,13 @@ public class DragonBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
-        this.transform.position += this.transform.forward*0.1f;
-        this.transform.Rotate(new Vector3(0f, 0.1f, 0f));
+        AnimatorStateInfo ASInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (ASInfo.IsName("Fly Float"))
+        {
+            this.transform.position += this.transform.forward*0.1f;
+            this.transform.Rotate(new Vector3(0f, 0.1f, 0f));
+        }
+
     }
 
     IEnumerator mainCoroutine()
@@ -42,7 +48,7 @@ public class DragonBehavior : MonoBehaviour
             StartCoroutine(fireCoroutine());
 
             //待機
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(10f);
             
         }
 
@@ -51,23 +57,38 @@ public class DragonBehavior : MonoBehaviour
     IEnumerator fireCoroutine()
     {
         yield return new WaitForSeconds(1.2f);
-        Vector3 direction = jawTf.forward;
-        for (int i = 0; i < 100; i++)
+        Vector3 direction = new Vector3(jawTf.forward.x, 0f, jawTf.forward.z);
+        Vector3 standardPosition = jawTf.position;
+        standardPosition.y = Mathf.Max(40f, standardPosition.y);
+        for (int i = 0; i < 5; i++)
         {
-            GameObject clone = Instantiate(bulletPrefab) as GameObject;
-            clone.transform.position = jawTf.position + direction*(float)i*0.5f 
+            GameObject clone = Instantiate(firePrefab) as GameObject;
+            clone.transform.position = standardPosition + direction*(float)(5*i+5) 
                 + new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),Random.Range(-1f,1f));
+
             // clone.GetComponent<Rigidbody>().velocity = direction * 20f;
-            Destroy(clone, 5f);
+            Destroy(clone, 30f);
         }
 
     }
 
-    public void HitDamege()
+    public void HitDamage(int damage)
     {
-        animator.SetTrigger("Damage");
         StartCoroutine(GetRed());
-        // Debug.Log("Hit!");
+        HP -= damage;
+        if (HP > 0)
+        {
+            animator.SetTrigger("Damage");
+        }
+        else
+        {
+            animator.SetTrigger("Die");
+            StartCoroutine(DestroyProcess());
+        }
+
+        Debug.Log("HP=" + HP);
+
+
     }
 
     IEnumerator GetRed()
@@ -75,6 +96,13 @@ public class DragonBehavior : MonoBehaviour
         dragonRend.material.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         dragonRend.material.color = defaultColor;
+
+    }
+
+    IEnumerator DestroyProcess()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(this.gameObject);
 
     }
 

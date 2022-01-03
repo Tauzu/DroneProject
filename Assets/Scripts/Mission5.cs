@@ -18,7 +18,7 @@ public class Mission5 : MonoBehaviour
     void Start()
     {
         message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "[E]を押すと磁力化。\n 宅配物を届けよう！\n目標SCORE:3000";
+        message.text = "ドラゴン襲来！\nどうにかして倒そう！";
 
         CP = this.GetComponent<ClearProcess>();
 

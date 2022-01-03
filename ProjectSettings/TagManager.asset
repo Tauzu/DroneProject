@@ -10,6 +10,7 @@ TagManager:
   - item
   - coin
   - SpecialBullet
+  - Fire
   layers:
   - Default
   - TransparentFX

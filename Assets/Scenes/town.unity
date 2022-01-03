@@ -6253,7 +6253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &212768345
 Light:
   m_ObjectHideFlags: 0
@@ -14633,7 +14633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationObj:
-  - {fileID: 789516863}
+  - {fileID: 1276375942}
 --- !u!114 &587054578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16827,6 +16827,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 789516862}
     m_Modifications:
+    - target: {fileID: 1705487310953206752, guid: fb64934996b606541bc2557bc4f51645, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3836447961605272478, guid: fb64934996b606541bc2557bc4f51645, type: 3}
       propertyPath: m_UpdateMode
       value: 0
@@ -18941,6 +18945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   specialAmezonPrefab: {fileID: 3362484732859677592, guid: c744ba9a5feb3a14787cca8416375696, type: 3}
+  nightSky: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
 --- !u!4 &789913160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 467192, guid: 52e3c281ef0f0ea4985188d26644edcb, type: 3}
@@ -52046,6 +52051,7 @@ GameObject:
   - component: {fileID: 8245200960721926332}
   - component: {fileID: 8245200960721926330}
   - component: {fileID: 8245200960721926324}
+  - component: {fileID: 8245200960721926325}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -52079,6 +52085,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 311bc87b58498d44cbb8f482b452d2bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8245200960721926325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8245200960721926322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1faaea8898c41994c9a072094718b922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &8245200960721926329

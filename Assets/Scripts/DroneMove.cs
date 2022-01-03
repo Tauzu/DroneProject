@@ -235,7 +235,7 @@ public class DroneMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))   //ホバリングスイッチ
         {
             heightHOV = height;
-            isHovering = (isHovering) ? false : true;
+            isHovering = !isHovering;
             hoveringTextObj.SetActive(isHovering);
         }
 
@@ -322,6 +322,12 @@ public class DroneMove : MonoBehaviour
         Vector3 HorizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
         float HorizontalSpeed = Vector3.Dot(velocity3D, HorizontalDirection);
         return HorizontalSpeed;
+    }
+
+    public void DisableHovering()
+    {
+        isHovering = false;
+        hoveringTextObj.SetActive(false);
     }
 
     

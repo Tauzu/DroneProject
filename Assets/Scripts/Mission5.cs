@@ -14,6 +14,13 @@ public class Mission5 : MonoBehaviour
     ScoreManager ScoreMan;
     Transform playerTf;
 
+    Light dLight;
+    Color defaultLightColor;
+    float defaultLightIntensity;
+
+    Material defaultSky;
+    public Material nightSky;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +38,16 @@ public class Mission5 : MonoBehaviour
 
         StartCoroutine(MainCoroutine());
 
+        defaultSky = RenderSettings.skybox;
+        RenderSettings.skybox = nightSky;
+        // RenderSettings.ambientIntensity = 0.1f; // 空の明るさを設定できるかと思ったが、射光の強さだった
+
+        dLight = GameObject.Find("Directional Light").GetComponent<Light>();
+        defaultLightColor = dLight.color;
+        defaultLightIntensity = dLight.intensity;
+        dLight.color = Color.blue;
+        dLight.intensity = 0.5f;
+
     }
 
     // Update is called once per frame
@@ -39,6 +56,12 @@ public class Mission5 : MonoBehaviour
 
         if (dragonObj == null)
         {
+            if(specialAmezonClone != null) Destroy(specialAmezonClone);
+
+            RenderSettings.skybox = defaultSky;
+            dLight.color = defaultLightColor;
+            dLight.intensity = defaultLightIntensity;
+
             CP.ClearNotify();
         }
 

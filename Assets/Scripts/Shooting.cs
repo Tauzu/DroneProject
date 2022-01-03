@@ -107,7 +107,7 @@ public class Shooting : MonoBehaviour
             if (SAParticleTf != null && SAParticle == null)//検索に成功し、かつ現在Particleを参照できていない場合
             {
                 SAParticle = SAParticleTf.gameObject;
-                specialTimeLimit = 30f;
+                specialTimeLimit = 20f;
             }
 
             //待機

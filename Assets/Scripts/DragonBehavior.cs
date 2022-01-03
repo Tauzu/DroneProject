@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;    //Rendering用
 
 public class DragonBehavior : MonoBehaviour
 {
@@ -8,16 +9,17 @@ public class DragonBehavior : MonoBehaviour
     public GameObject firePrefab;
     Transform jawTf;
 
-    Renderer dragonRend;
+    SkinnedMeshRenderer dragonRend;
     Color defaultColor;
     int HP = 100;
+    bool dead = false;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         jawTf = this.transform.Find("Root_Pelvis/Spine/Chest/Neck/Head/Jaw/JawTip");
 
-        dragonRend = this.transform.Find("DragonSoulEater").GetComponent<Renderer>();
+        dragonRend = this.transform.Find("DragonSoulEater").GetComponent<SkinnedMeshRenderer>();
         defaultColor = dragonRend.material.color;
         StartCoroutine(mainCoroutine());
     }
@@ -63,6 +65,7 @@ public class DragonBehavior : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             GameObject clone = Instantiate(firePrefab) as GameObject;
+            clone.transform.parent = this.gameObject.transform;
             clone.transform.position = standardPosition + direction*(float)(5*i+5) 
                 + new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),Random.Range(-1f,1f));
 
@@ -74,14 +77,15 @@ public class DragonBehavior : MonoBehaviour
 
     public void HitDamage(int damage)
     {
-        StartCoroutine(GetRed());
         HP -= damage;
         if (HP > 0)
         {
+            StartCoroutine(GetRed());
             animator.SetTrigger("Damage");
         }
-        else
+        else if(!dead)
         {
+            dead = true;
             animator.SetTrigger("Die");
             StartCoroutine(DestroyProcess());
         }
@@ -101,10 +105,30 @@ public class DragonBehavior : MonoBehaviour
 
     IEnumerator DestroyProcess()
     {
-        yield return new WaitForSeconds(5f);
+        ToFadeMode(dragonRend.material);
+
+        yield return new WaitForSeconds(1f);
+
+        while(dragonRend.material.color.a > 0f){
+            // Debug.Log(dragonRend.material.color.a);
+            dragonRend.material.color -= new Color(0, 0, 0, 0.02f);
+            yield return new WaitForSeconds(0.1f);
+        }
+
         Destroy(this.gameObject);
 
     }
 
+    void ToFadeMode(Material material)
+    {
+        material.SetOverrideTag("RenderType", "Transparent");
+        material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        material.SetInt("_ZWrite", 0);
+        material.DisableKeyword("_ALPHATEST_ON");
+        material.EnableKeyword("_ALPHABLEND_ON");
+        material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        material.renderQueue = 3000;
+    }
 
 }

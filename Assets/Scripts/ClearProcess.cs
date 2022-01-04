@@ -27,7 +27,13 @@ public class ClearProcess : MonoBehaviour
     public void ClearNotify()
     {
         if(!clearFlag){
-            StartCoroutine(CelebrateAndSetNextMission());
+            if (NextMission != null) { StartCoroutine(CelebrateAndSetNextMission()); }
+            else
+            {
+
+                StartCoroutine(FinalCelebration());
+            }
+
             clearFlag = true;
         }
 
@@ -39,7 +45,28 @@ public class ClearProcess : MonoBehaviour
 
         yield return new WaitForSeconds(3f);                    //待機
 
-        if(NextMission != null) NextMission.SetActive(true);
+        //subCameraObj.GetComponent<SubCameraMotion>().Deactivate();
+        NextMission.SetActive(true);
+
+        Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
+
+    }
+
+    IEnumerator FinalCelebration()
+    {
+        Celebration();
+
+        yield return new WaitForSeconds(3f);                    //待機
+
+        GameObject[] buildingArray = GameObject.FindGameObjectsWithTag("Building");
+        GameObject scoreObj = (GameObject)Resources.Load("Score3DText");
+
+        foreach (GameObject building in buildingArray)
+        {
+            GameObject clone = Instantiate(scoreObj) as GameObject;
+            clone.GetComponent<PopupScore>().SetScore(5000, building.transform.position + 20f*Vector3.up);
+            yield return new WaitForSeconds(0.5f);                    //待機
+        }
 
         Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
 

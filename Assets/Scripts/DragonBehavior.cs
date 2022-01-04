@@ -110,7 +110,6 @@ public class DragonBehavior : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         while(dragonRend.material.color.a > 0f){
-            // Debug.Log(dragonRend.material.color.a);
             dragonRend.material.color -= new Color(0, 0, 0, 0.02f);
             yield return new WaitForSeconds(0.1f);
         }

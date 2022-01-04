@@ -11,7 +11,6 @@ public class Mission5 : MonoBehaviour
     GameObject specialAmezonClone;
 
     GameObject dragonObj;
-    ScoreManager ScoreMan;
     Transform playerTf;
 
     Light dLight;
@@ -20,6 +19,8 @@ public class Mission5 : MonoBehaviour
 
     Material defaultSky;
     public Material nightSky;
+
+    bool defeatFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +31,6 @@ public class Mission5 : MonoBehaviour
         CP = this.GetComponent<ClearProcess>();
 
         playerTf = GameObject.Find("Player").transform;
-
-        ScoreMan = GameObject.Find("GameController").GetComponent<ScoreManager>();
 
         dragonObj = this.transform.Find("Dragon").gameObject;
         dragonObj.SetActive(true);
@@ -54,13 +53,17 @@ public class Mission5 : MonoBehaviour
     void Update()
     {
 
-        if (dragonObj == null)
+        if (dragonObj == null && !defeatFlag)
         {
+            defeatFlag = true;
+
             if(specialAmezonClone != null) Destroy(specialAmezonClone);
 
             RenderSettings.skybox = defaultSky;
             dLight.color = defaultLightColor;
             dLight.intensity = defaultLightIntensity;
+
+            StopCoroutine(MainCoroutine());
 
             CP.ClearNotify();
         }

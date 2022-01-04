@@ -19,21 +19,20 @@ public class SubCameraMotion : MonoBehaviour
         this.transform.position = mainCameraObj.transform.position;
         this.transform.rotation = mainCameraObj.transform.rotation;
 
-        Invoke("Deactivate", 3f);
+        //Invoke("Deactivate", 3f);
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 direction = targetPosition - this.transform.position;
-        this.transform.position += 0.1f*direction;
+        this.transform.position += 0.05f * direction;
 
         this.transform.LookAt(playerObj.transform);
     }
 
-    void Deactivate()
+    void OnDestroy()
     {
         mainCameraObj.SetActive(true);
-        gameObject.SetActive(false);
     }
 }

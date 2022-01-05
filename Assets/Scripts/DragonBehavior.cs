@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;    //Rendering用
+using UnityEngine.UI;   //Slider用
 
 public class DragonBehavior : MonoBehaviour
 {
@@ -11,17 +12,28 @@ public class DragonBehavior : MonoBehaviour
 
     SkinnedMeshRenderer dragonRend;
     Color defaultColor;
+
+    public GameObject HPSlider;
+    Slider slider;
     int HP = 100;
     bool dead = false;
+
+    IEnumerator coroutine;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         jawTf = this.transform.Find("Root_Pelvis/Spine/Chest/Neck/Head/Jaw/JawTip");
 
+        HPSlider.SetActive(true);
+        slider = HPSlider.GetComponent<Slider>();
+
         dragonRend = this.transform.Find("DragonSoulEater").GetComponent<SkinnedMeshRenderer>();
         defaultColor = dragonRend.material.color;
-        StartCoroutine(mainCoroutine());
+
+        coroutine = breathCoroutine();
+        StartCoroutine(coroutine);
     }
 
     // Update is called once per frame
@@ -41,7 +53,7 @@ public class DragonBehavior : MonoBehaviour
 
     }
 
-    IEnumerator mainCoroutine()
+    IEnumerator breathCoroutine()
     {
         while (true) {
 
@@ -78,6 +90,7 @@ public class DragonBehavior : MonoBehaviour
     public void HitDamage(int damage)
     {
         HP -= damage;
+        slider.value = (float)HP / (float)100;
         if (HP > 0)
         {
             StartCoroutine(GetRed());
@@ -86,6 +99,7 @@ public class DragonBehavior : MonoBehaviour
         else if(!dead)
         {
             dead = true;
+            StopCoroutine(coroutine);
             animator.SetTrigger("Die");
             StartCoroutine(DestroyProcess());
         }
@@ -113,6 +127,8 @@ public class DragonBehavior : MonoBehaviour
             dragonRend.material.color -= new Color(0, 0, 0, 0.02f);
             yield return new WaitForSeconds(0.1f);
         }
+
+        HPSlider.SetActive(false);
 
         Destroy(this.gameObject);
 

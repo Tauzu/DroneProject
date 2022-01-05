@@ -27,7 +27,7 @@ public class ColliderDestroy : MonoBehaviour
             Vector3 direction = other.transform.position - this.transform.position;
             float y = Vector3.Dot(direction, this.transform.up);
             float r = Mathf.Sqrt(direction.magnitude * direction.magnitude - y * y);
-            score = (r == 0f) ? 500 : (int)(200f / r);
+            score = (r == 0f) ? 500 : (int)(200f*(2f-r)+150f);
             score = (score / 100) * 100;
             score = Mathf.Clamp(score, 100, 500);
 

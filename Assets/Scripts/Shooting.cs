@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;   //Slider用
+
 public class Shooting : MonoBehaviour
 {
     // bullet prefab
@@ -13,6 +15,9 @@ public class Shooting : MonoBehaviour
     float targetSpeed;
     private GameObject cameraObj;
     CameraMove CMscript;
+
+    public GameObject chargeSlider;
+    Slider slider;
 
     private Rigidbody thisRbody;
 
@@ -33,6 +38,8 @@ public class Shooting : MonoBehaviour
         thisRbody = this.GetComponent<Rigidbody>();
 
         _ballSimurator = simulatorObj.GetComponent<BallSimulator>();
+
+        slider = chargeSlider.GetComponent<Slider>();
 
         targetSpeed = defaultSpeed;
 
@@ -61,6 +68,7 @@ public class Shooting : MonoBehaviour
         Vector3 shotVelocity = (SAParticle == null)? direction * targetSpeed : direction * targetSpeed*2f;
         // if(CMscript.isFPS) _ballSimurator.Simulate(this.transform.position , shotVelocity);
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
+        if (Input.GetKeyDown(KeyCode.Z)) chargeSlider.SetActive(true);
 
         if (Input.GetKey(KeyCode.Z)){
             targetSpeed += 1f;
@@ -68,6 +76,8 @@ public class Shooting : MonoBehaviour
             float gradLocation = (targetSpeed - defaultSpeed) / (maxSpeed - defaultSpeed);
             rend.material.color = grad.Evaluate(gradLocation);
             _ballSimurator.Simulate(this.transform.position , shotVelocity, gradLocation);
+
+            slider.value = gradLocation;
 
         }
 
@@ -88,6 +98,8 @@ public class Shooting : MonoBehaviour
             Destroy(clone, 5.0f);
 
             targetSpeed = defaultSpeed;
+
+            chargeSlider.SetActive(false);
 
         }
 

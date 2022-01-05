@@ -5,6 +5,9 @@ using UnityEngine;
 public class NoticeCollider : MonoBehaviour
 {
     DragonBehavior DB;
+    //int count=0;
+    float hitLimit = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,15 +17,18 @@ public class NoticeCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hitLimit -= Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "SpecialBullet")
+        if (other.gameObject.tag == "SpecialBullet" && hitLimit < 0f)
         {
-            float speed = other.GetComponent<Rigidbody>().velocity.magnitude;
-            DB.HitDamage((int)(speed/100f));
+            //count++;
+            //Debug.Log(count);
+            float speed = other.attachedRigidbody.velocity.magnitude;
+            DB.HitDamage(Mathf.Max((int)(speed*speed*0.0001f), 1));
+            hitLimit = 0.5f;
         }
     }
 }

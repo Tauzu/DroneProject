@@ -33,6 +33,6 @@ public class SubCameraMotion : MonoBehaviour
 
     void OnDestroy()
     {
-        mainCameraObj.SetActive(true);
+        if(mainCameraObj != null) mainCameraObj.SetActive(true);
     }
 }

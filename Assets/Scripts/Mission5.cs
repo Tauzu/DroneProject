@@ -20,6 +20,8 @@ public class Mission5 : MonoBehaviour
     Material defaultSky;
     public Material nightSky;
 
+    IEnumerator enumerator;
+
     bool defeatFlag = false;
 
     // Start is called before the first frame update
@@ -35,7 +37,8 @@ public class Mission5 : MonoBehaviour
         dragonObj = this.transform.Find("Dragon").gameObject;
         dragonObj.SetActive(true);
 
-        StartCoroutine(MainCoroutine());
+        enumerator = MainCoroutine();
+        StartCoroutine(enumerator);
 
         defaultSky = RenderSettings.skybox;
         RenderSettings.skybox = nightSky;
@@ -57,13 +60,12 @@ public class Mission5 : MonoBehaviour
         {
             defeatFlag = true;
 
-            if(specialAmezonClone != null) Destroy(specialAmezonClone);
+            StopCoroutine(enumerator);
+            if (specialAmezonClone != null) Destroy(specialAmezonClone);
 
             RenderSettings.skybox = defaultSky;
             dLight.color = defaultLightColor;
             dLight.intensity = defaultLightIntensity;
-
-            StopCoroutine(MainCoroutine());
 
             CP.ClearNotify();
         }

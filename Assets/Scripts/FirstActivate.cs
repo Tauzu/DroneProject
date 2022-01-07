@@ -6,32 +6,40 @@ public class FirstActivate : MonoBehaviour
 {
     public GameObject[] activationObj;
 
-    DroneMove DMScript;
     FPS_counter FPS_script;
+    GameObject startButton;
 
     void Start()
     {
-        DMScript = GameObject.Find("Player").GetComponent<DroneMove>();
+        //playerObj = GameObject.Find("Player");
         // DMScript.enabled = false;   //ドローン制御をオフにする(処理が安定するのを待つ)
 
-        FPS_script = this.GetComponent<FPS_counter>();
+        FPS_script = GameObject.Find("GameController").GetComponent<FPS_counter>();
+
+        startButton = transform.Find("TitleCanvas/StartButton").gameObject;
     }
 
     void Update()
     {
         if(FPS_script.fps > 45f)
         {
-            DMScript.enabled = true;   //FPSが45を超えたらドローン制御をオン
-
-            for(int i=0; i<activationObj.Length; i++)
-            {
-                activationObj[i].SetActive(true);
-            }
-
-            Destroy(this);
+            startButton.SetActive(true);   //FPSが45を超えたらスタートボタン表示
         }
 
+    }
 
+    public void ActivateDroneAndMission()
+    {
+
+        for (int i = 0; i < activationObj.Length; i++)
+        {
+            activationObj[i].SetActive(true);
+        }
+
+        //DMScript.enabled = true;
+        //playerObj.SetActive(true);
+
+        Destroy(this.gameObject);
     }
 
 }

@@ -8,7 +8,7 @@ public class BuildingCounter : MonoBehaviour
     int[] numBuilding = new int[2];
     ReloadScene reload;
     Text warningText;
-    float timeCounter;
+    float timeCounter = 0f;
     // Start is called before the first frame update
     void Start()
     {

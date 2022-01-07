@@ -104,7 +104,7 @@ public class DragonBehavior : MonoBehaviour
             StartCoroutine(DestroyProcess());
         }
 
-        Debug.Log("HP=" + HP);
+        //Debug.Log("HP=" + HP);
 
 
     }

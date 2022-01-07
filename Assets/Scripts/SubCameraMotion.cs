@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class SubCameraMotion : MonoBehaviour
 {
-    GameObject mainCameraObj;
-    GameObject playerObj;
+    //GameObject mainCameraObj;
+    Transform playerTf;
     public Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = GameObject.Find("Player");
+        //mainCameraObj = GameObject.Find("Main Camera");
+        //mainCameraObj.SetActive(false);
 
-        mainCameraObj = GameObject.Find("Main Camera");
-        mainCameraObj.SetActive(false);
+        playerTf = GameObject.Find("Player").transform;
 
-        this.transform.position = mainCameraObj.transform.position;
-        this.transform.rotation = mainCameraObj.transform.rotation;
+        //this.transform.position = mainCameraObj.transform.position;
+        //this.transform.rotation = mainCameraObj.transform.rotation;
 
         //Invoke("Deactivate", 3f);
     }
@@ -25,14 +25,19 @@ public class SubCameraMotion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    private void FixedUpdate()
+    {
         Vector3 direction = targetPosition - this.transform.position;
         this.transform.position += 0.05f * direction;
 
-        this.transform.LookAt(playerObj.transform);
+        this.transform.LookAt(playerTf);
     }
 
     void OnDestroy()
     {
-        if(mainCameraObj != null) mainCameraObj.SetActive(true);
+        //if(mainCameraObj != null) mainCameraObj.SetActive(true);
     }
 }

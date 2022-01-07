@@ -1,24 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
 
 public class ScoreManager : MonoBehaviour
 {
     [System.NonSerialized]  //publicだがインスペクター上には表示しない
     public int score = 0;
-    public GameObject scoreTextObj;
-    Text scoreText;
+
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
+    public int numBuilding;
+
+    public GameObject gameOverObj;
+
+    ReloadScene reload;
 
     // Start is called before the first frame update
     void Start()
     {
-        scoreText = scoreTextObj.GetComponent<Text>();
+        reload = GetComponent<ReloadScene>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        scoreText.text = "SCORE:" + score.ToString().PadLeft(8);
+        numBuilding = GameObject.FindGameObjectsWithTag("Building").Length;
+        if (numBuilding == 0)
+        {
+            GameObject.Find("Directional Light").GetComponent<Light>().color = Color.red;
+            //Camera.main.enabled = false;
+            gameOverObj.SetActive(true);
+            Destroy(this);
+        }
     }
 }

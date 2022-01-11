@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class TitleCameraMotion : MonoBehaviour
 {
-    Vector3 center = new Vector3(42f, 0f, 35f);
+    public GameObject centerObj;
+    Vector3 center;
     // Start is called before the first frame update
     void Start()
     {
-        
+        center = centerObj.transform.position;
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class TitleCameraMotion : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.RotateAround(center, Vector3.down, 0.1f);
+        transform.RotateAround(center, Vector3.down, -0.1f);
 
     }
 }

@@ -59,6 +59,7 @@ public class ClearProcess : MonoBehaviour
     IEnumerator FinalCelebration()
     {
         Celebration();
+        //subCameraObj.GetComponent<SubCameraMotion>().lookingTf = GameObject.Find("Center").transform;
 
         yield return new WaitForSeconds(3f);                    //待機
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SubCameraMotion : MonoBehaviour
 {
     //GameObject mainCameraObj;
-    Transform playerTf;
+    public Transform lookingTf;
     public Vector3 targetPosition;
 
     // Start is called before the first frame update
@@ -14,7 +14,7 @@ public class SubCameraMotion : MonoBehaviour
         //mainCameraObj = GameObject.Find("Main Camera");
         //mainCameraObj.SetActive(false);
 
-        playerTf = GameObject.Find("Player").transform;
+        if(lookingTf==null) lookingTf = GameObject.Find("Player").transform;
 
         //this.transform.position = mainCameraObj.transform.position;
         //this.transform.rotation = mainCameraObj.transform.rotation;
@@ -33,7 +33,7 @@ public class SubCameraMotion : MonoBehaviour
         Vector3 direction = targetPosition - this.transform.position;
         this.transform.position += 0.05f * direction;
 
-        this.transform.LookAt(playerTf);
+        this.transform.LookAt(lookingTf);
     }
 
     void OnDestroy()

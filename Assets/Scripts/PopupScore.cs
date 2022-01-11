@@ -24,7 +24,8 @@ public class PopupScore : MonoBehaviour
         if (camera == null) camera = GameObject.Find("SubCamera").GetComponent<Camera>();
         Vector3 direction = position - camera.transform.position;
         this.transform.rotation = Quaternion.LookRotation(direction);    //向きベクトルを与えて回転
-        this.transform.localScale = Vector3.one * direction.magnitude / 20f;
+        //Debug.Log(direction.magnitude / 20f);
+        this.transform.localScale = Vector3.one * Mathf.Clamp(direction.magnitude / 20f, 1f, 5f);
 
         TextMesh tMesh = this.GetComponent<TextMesh>();
         tMesh.text = score.ToString();

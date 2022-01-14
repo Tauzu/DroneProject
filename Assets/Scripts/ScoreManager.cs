@@ -26,8 +26,6 @@ public class ScoreManager : MonoBehaviour
         numBuilding = GameObject.FindGameObjectsWithTag("Building").Length;
         if (numBuilding == 0)
         {
-            GameObject.Find("Directional Light").GetComponent<Light>().color = Color.red;
-            //Camera.main.enabled = false;
             gameOverObj.SetActive(true);
             Destroy(this);
         }

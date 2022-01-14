@@ -9,6 +9,9 @@ public class FirstActivate : MonoBehaviour
     FPS_counter FPS_script;
     GameObject startButton;
 
+    public BgmManager bgmManager;
+    public AudioClip titleBGM;
+
     void Start()
     {
         //playerObj = GameObject.Find("Player");
@@ -17,13 +20,15 @@ public class FirstActivate : MonoBehaviour
         FPS_script = GameObject.Find("GameController").GetComponent<FPS_counter>();
 
         startButton = transform.Find("TitleCanvas/StartButton").gameObject;
+
     }
 
     void Update()
     {
-        if(FPS_script.fps > 45f)
+        if(FPS_script.fps > 45f && !startButton.activeSelf)
         {
             startButton.SetActive(true);   //FPSが45を超えたらスタートボタン表示
+            bgmManager.PlayBGM(titleBGM);
         }
 
     }
@@ -38,6 +43,8 @@ public class FirstActivate : MonoBehaviour
 
         //DMScript.enabled = true;
         //playerObj.SetActive(true);
+
+        bgmManager.PlayDefaultBGM();
 
         Destroy(this.gameObject);
     }

@@ -53,7 +53,8 @@ public class DroneMove : MonoBehaviour
     private Color defaultColor;
     private Renderer rend;
 
-
+    AudioSource audioSource;
+    //public AudioClip bladeSE;
 
     // Start is called before the first frame update
     void Start()
@@ -87,6 +88,8 @@ public class DroneMove : MonoBehaviour
 
         rend = this.transform.Find("BoxBody").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
+
+        audioSource = this.GetComponent<AudioSource>();
 
     }
 
@@ -170,12 +173,19 @@ public class DroneMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        float maxPow = 0f;
         for(int i=0; i<BladeNum; i++)
         {
             rbody.AddForceAtPosition(this.transform.up * coeff * Blade[i].power, Blade[i].tf.position);
             Blade[i].tf.Rotate(new Vector3(0, 100 * Blade[i].power * Blade[i].sign, 0));
+            //audioSource.PlayOneShot(bladeSE, Blade[i].power);
+            maxPow = Mathf.Max(maxPow, Mathf.Abs(Blade[i].power));
             // Debug.Log(Blade[i].power);
         }
+
+        //Debug.Log(maxPow);
+        audioSource.volume = Mathf.Clamp(2f*maxPow, 0f, 1f);
+        audioSource.pitch = (maxPow-1f)*0.1f + 1f;
 
         // 指定軸まわりに回転させるQuaternionを作成
         Quaternion rot = Quaternion.AngleAxis(10f*yawDiff, this.transform.up);

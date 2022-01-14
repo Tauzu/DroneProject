@@ -6,7 +6,6 @@ using UnityEngine.UI; // <--忘れがち
 public class Mission2 : MonoBehaviour
 {
     Text message;
-    public GameObject goalObj;
     ClearProcess CP;
 
     // Start is called before the first frame update
@@ -16,8 +15,6 @@ public class Mission2 : MonoBehaviour
         message.text = "空中で[C]を押し、ホバリング。\n [WASD]で移動してコインを集めよ！";
 
         CP = this.GetComponent<ClearProcess>();
-
-        goalObj.SetActive(true);
 
     }
 

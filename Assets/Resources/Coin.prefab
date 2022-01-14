@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6704578173373127452}
   - component: {fileID: 6704578173373127453}
   - component: {fileID: 6704578173373127450}
-  - component: {fileID: 6704578173373127454}
+  - component: {fileID: 1532674301944975426}
   m_Layer: 0
   m_Name: Coin
   m_TagString: coin
@@ -97,7 +97,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &6704578173373127454
+--- !u!114 &1532674301944975426
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,9 +106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6704578173373127451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f32068717a575849a9fe601cb9b2873, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dd1c7d4c331f394c84a0b212995ad50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagName: Player
   scorePrefab: {fileID: 1206199768160619886, guid: 6aecba5b6a106d941b97c216ade544c2, type: 3}
-  score: 100

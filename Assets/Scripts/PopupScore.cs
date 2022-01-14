@@ -5,6 +5,9 @@ using UnityEngine;
 public class PopupScore : MonoBehaviour
 {
     public Gradient grad;
+    AudioSource audioSource;
+    public AudioClip getItemSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +17,7 @@ public class PopupScore : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SetScore(int score, Vector3 position)
@@ -33,6 +36,9 @@ public class PopupScore : MonoBehaviour
 
         GameObject controlObj = GameObject.Find("GameController");
         controlObj.GetComponent<ScoreManager>().score += score;
+
+        audioSource = this.GetComponent<AudioSource>();
+        audioSource.PlayOneShot(getItemSE);
 
         Destroy(this.gameObject, 2f);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
     }

@@ -5,22 +5,22 @@ using UnityEngine;
 public class BgmManager : MonoBehaviour
 {
     public AudioClip defaultBGM;
-    public AudioClip goalBGM;
-    public AudioClip winBGM;
+    //public AudioClip goalBGM;
+    //public AudioClip winBGM;
 
     AudioSource audioSource;
 
     // ScoreManager SMscript;
 
-    public GameObject goalObj;
-	public GameObject winObj;
+ //   public GameObject goalObj;
+	//public GameObject winObj;
 
     // Start is called before the first frame update
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
 
-        PlayBGM(defaultBGM);
+        //PlayBGM(defaultBGM);
 
         // SMscript = this.GetComponent<ScoreManager>();
 
@@ -29,25 +29,28 @@ public class BgmManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((goalObj.activeSelf) && !(winObj.activeSelf))
-        {
-            PlayBGM(goalBGM);
+        //if((goalObj.activeSelf) && !(winObj.activeSelf))
+        //{
+        //    PlayBGM(goalBGM);
 
-        }else if(winObj.activeSelf)
-        {
-            PlayBGM(winBGM);
-        }
+        //}else if(winObj.activeSelf)
+        //{
+        //    PlayBGM(winBGM);
+        //}
 
     }
 
-    void PlayBGM(AudioClip clip)
+    public void PlayBGM(AudioClip clip)
     {
-        if(clip != audioSource.clip)
-        {
-            audioSource.clip = clip;
-            audioSource.Play();
-
-        }
+        audioSource.clip = clip;
+        audioSource.Play();
         
+    }
+
+    public void PlayDefaultBGM()
+    {
+        audioSource.clip = defaultBGM;
+        audioSource.Play();
+
     }
 }

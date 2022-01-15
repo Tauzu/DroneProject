@@ -8,6 +8,7 @@ public class DragonBehavior : MonoBehaviour
 {
     Animator animator;
     public GameObject firePrefab;
+    public GameObject fireballParent;
     Transform jawTf;
 
     SkinnedMeshRenderer dragonRend;
@@ -22,7 +23,15 @@ public class DragonBehavior : MonoBehaviour
     //GameObject particleObj;
     bool isFloating;
 
-    Vector3 relativePos;
+    public float speed = 10f;
+    Vector3 targetVelocity;
+    Vector3 relation;
+    SphereCollider sphereCollider;
+    Transform pelvisTf;
+
+    Rigidbody rbody;
+
+    float hitLimit = 0f;
 
     IEnumerator coroutine;
 
@@ -42,12 +51,18 @@ public class DragonBehavior : MonoBehaviour
         StartCoroutine(coroutine);
 
         //particleObj = (GameObject)Resources.Load("TargetParticle");
+        pelvisTf = this.transform.Find("Root_Pelvis");
+        sphereCollider = this.GetComponent<SphereCollider>();
+        rbody = this.GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         isFloating = animator.GetCurrentAnimatorStateInfo(0).IsName("Fly Float");
+
+        sphereCollider.center = pelvisTf.localPosition + Vector3.forward;
 
         if (targetObj == null)
         {
@@ -66,30 +81,36 @@ public class DragonBehavior : MonoBehaviour
         else
         {
             // ターゲット方向のベクトルを取得
-            relativePos = targetObj.transform.position - this.transform.position;
-            relativePos = new Vector3(relativePos.x, 0f, relativePos.z);    //鉛直方向は無視
+            relation = new Vector3(targetObj.transform.position.x, 10f, targetObj.transform.position.z) 
+                - this.transform.position;
+            Vector3 direction = relation - 30f * new Vector3(relation.x, 0f, relation.z).normalized;
+
+            float targetSpeed = Mathf.Clamp(direction.magnitude, 0f, speed);
+            targetVelocity = targetSpeed * direction.normalized;
 
             //this.transform.LookAt(targetObj.transform);    //向きベクトルを与えて回転
 
         }
+
+        hitLimit -= Time.deltaTime;
+
+        transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f));//回転をy軸に限定
     }
 
     void FixedUpdate()
     {
         if (isFloating)
         {
-
             //this.transform.Rotate(new Vector3(0f, 0.1f, 0f));
 
-            // 補完スピードを決める
-            float speed = 0.1f;
-            // 方向を、回転情報に変換
-            Quaternion rotation = Quaternion.LookRotation(relativePos);
-            // 現在の回転情報と、ターゲット方向の回転情報を補完する
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, speed);
-
             //Debug.Log(relativePos.magnitude);
-            this.transform.position += this.transform.forward * Mathf.Clamp(relativePos.magnitude - 30f, -0.1f, 0.1f);
+            //this.transform.position += this.transform.forward * Mathf.Clamp(relativePos.magnitude - 30f, -0.1f, 0.1f);
+            rbody.AddForce(targetVelocity - rbody.velocity, ForceMode.Acceleration);
+
+            // 方向を、回転情報に変換
+            Quaternion rotation = Quaternion.LookRotation(relation.normalized);
+            // 現在の回転情報と、ターゲット方向の回転情報を補完する
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, 0.01f);
 
         }
 
@@ -121,7 +142,7 @@ public class DragonBehavior : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             GameObject clone = Instantiate(firePrefab) as GameObject;
-            //clone.transform.parent = this.gameObject.transform;
+            clone.transform.parent = fireballParent.transform;
             clone.transform.position = standardPosition + direction*(float)(5*i+5) 
                 + new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),Random.Range(-1f,1f));
 
@@ -131,10 +152,12 @@ public class DragonBehavior : MonoBehaviour
 
     }
 
-    public void HitDamage(int damage)
+    void HitDamage(int damage)
     {
         HP -= damage;
         slider.value = (float)HP / (float)100;
+        rbody.velocity = Vector3.zero;
+
         if (HP > 0)
         {
             StartCoroutine(GetRed());
@@ -173,7 +196,7 @@ public class DragonBehavior : MonoBehaviour
         }
 
         HPSlider.SetActive(false);
-
+        Destroy(fireballParent);
         Destroy(this.gameObject);
 
     }
@@ -188,6 +211,18 @@ public class DragonBehavior : MonoBehaviour
         material.EnableKeyword("_ALPHABLEND_ON");
         material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         material.renderQueue = 3000;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "SpecialBullet" && hitLimit < 0f)
+        {
+            //count++;
+            //Debug.Log(count);
+            float speed = other.attachedRigidbody.velocity.magnitude;
+            HitDamage(Mathf.Max((int)(speed * speed * 0.0001f), 1));
+            hitLimit = 0.5f;
+        }
     }
 
 }

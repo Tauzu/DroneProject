@@ -35,10 +35,9 @@ public class DroneMove : MonoBehaviour
     public Vector3 minPosi = new Vector3(-1.0e2f, -1.0e1f, -2.0e1f);
     public Vector3 maxPosi = new Vector3(1.0e2f, 1.0e4f, 2.0e2f);
 
-    public bool  isBoosting;
+    bool isBoosting;
 
-    [System.NonSerialized]  //publicだがインスペクター上には表示しない
-    public bool  isHovering;
+    bool isHovering;
     
     private float heightHOV;
     private float yawDiff;
@@ -47,6 +46,8 @@ public class DroneMove : MonoBehaviour
     private float targetRgtAngle;
 
     private GameObject hoveringTextObj;
+
+    public TextMesh faceText;
 
     private GameObject cameraObj;
 
@@ -169,6 +170,7 @@ public class DroneMove : MonoBehaviour
             } 
         }
 
+
     }
 
     void FixedUpdate()
@@ -229,10 +231,16 @@ public class DroneMove : MonoBehaviour
         if (isBoosting)    //加速時色変化
         {
             rend.material.color = Color.red;
+
+            faceText.text = "`^´";
+            faceText.color = Color.yellow;
         }
         else
         {
             rend.material.color = defaultColor;
+
+            faceText.text = "'~'";
+            faceText.color = Color.blue;
         }
 
         return inputMagnitude;

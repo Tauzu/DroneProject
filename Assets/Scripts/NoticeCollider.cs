@@ -30,13 +30,13 @@ public class NoticeCollider : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "SpecialBullet" && hitLimit < 0f)
-        {
-            //count++;
-            //Debug.Log(count);
-            float speed = other.attachedRigidbody.velocity.magnitude;
-            DB.HitDamage(Mathf.Max((int)(speed*speed*0.0001f), 1));
-            hitLimit = 0.5f;
-        }
+        //if (other.gameObject.tag == "SpecialBullet" && hitLimit < 0f)
+        //{
+        //    //count++;
+        //    //Debug.Log(count);
+        //    float speed = other.attachedRigidbody.velocity.magnitude;
+        //    DB.HitDamage(Mathf.Max((int)(speed*speed*0.0001f), 1));
+        //    hitLimit = 0.5f;
+        //}
     }
 }

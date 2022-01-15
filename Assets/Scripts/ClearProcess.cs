@@ -69,7 +69,7 @@ public class ClearProcess : MonoBehaviour
         foreach (GameObject building in buildingArray)
         {
             GameObject clone = Instantiate(scoreObj) as GameObject;
-            clone.GetComponent<PopupScore>().SetScore(5000, building.transform.position + 20f*Vector3.up);
+            clone.GetComponent<PopupScore>().SetScore(2000, building.transform.position + 15f*Vector3.up);
             yield return new WaitForSeconds(0.5f);                    //待機
         }
 

@@ -47,24 +47,38 @@ public class AmezonBoxBehavior : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)//  他のオブジェクトに触れた時の処理
+    //void OnCollisionEnter(Collision other)//  他のオブジェクトに触れた時の処理
+    //{
+    //    if (other.gameObject == effectClone)
+    //    {
+    //        Success();
+    //    }
+
+    //}
+
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == targetObj)
+        if (other.gameObject == effectClone)
         {
-            GameObject clone = Instantiate(scorePrefab) as GameObject;
-            clone.GetComponent<PopupScore>().SetScore(1000, this.transform.position + Vector3.up);
-
-            if (special)
-            {
-                Transform playerTf = GameObject.Find("Player").transform;
-                Transform SAParticleTf = this.transform.Find("SpecialAmezonParticle");
-                SAParticleTf.parent = playerTf;
-                SAParticleTf.localPosition = Vector3.zero;
-            }
-
-            Destroy(this.gameObject);
+            Success();
         }
 
+    }
+
+    void Success()
+    {
+        GameObject clone = Instantiate(scorePrefab) as GameObject;
+        clone.GetComponent<PopupScore>().SetScore(1000, this.transform.position + Vector3.up);
+
+        if (special)
+        {
+            Transform playerTf = GameObject.Find("Player").transform;
+            Transform SAParticleTf = this.transform.Find("SpecialAmezonParticle");
+            SAParticleTf.parent = playerTf;
+            SAParticleTf.localPosition = Vector3.zero;
+        }
+
+        Destroy(this.gameObject);
     }
 
     void OnDestroy()

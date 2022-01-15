@@ -8,16 +8,24 @@ public class NoticeCollider : MonoBehaviour
     //int count=0;
     float hitLimit = 0f;
 
+    //Rigidbody rbody;
+
     // Start is called before the first frame update
     void Start()
     {
         DB = this.GetComponentInParent<DragonBehavior>();
+        //rbody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         hitLimit -= Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        //rbody.AddForce(this.transform.forward);
     }
 
     void OnTriggerEnter(Collider other)

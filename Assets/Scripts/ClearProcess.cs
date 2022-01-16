@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ClearProcess : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ClearProcess : MonoBehaviour
     public GameObject NextMission;
     Transform playerTf;
     bool clearFlag = false;
+    TextMeshProUGUI clearText;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,8 @@ public class ClearProcess : MonoBehaviour
         // subCameraObj = GameObject.Find("SubCamera"); //これだと非アクティブなオブジェクトは取得できない
         subCameraObj = this.transform.Find("SubCamera").gameObject;
         mainCameraObj = GameObject.Find("Main Camera");
+
+        clearText = this.transform.Find("SubCamCanvas/ClearText").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -48,6 +52,7 @@ public class ClearProcess : MonoBehaviour
         yield return new WaitForSeconds(3f);                    //待機
 
         CameraShift();
+        clearText.text = "";
 
         //subCameraObj.GetComponent<SubCameraMotion>().Deactivate();
         NextMission.SetActive(true);    //次のミッション起動前にはカメラはメインに戻っていなくてはならない
@@ -74,7 +79,7 @@ public class ClearProcess : MonoBehaviour
         }
 
         CameraShift();
-
+        clearText.text = "";
         Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
 
     }
@@ -82,6 +87,7 @@ public class ClearProcess : MonoBehaviour
     void Celebration()
     {
         CameraShift();
+        StartCoroutine(ClearMessage());
 
         Vector3[] posisionArray = {
             new Vector3(-10f, -30f, -10f) ,
@@ -98,6 +104,19 @@ public class ClearProcess : MonoBehaviour
             GameObject clone = Instantiate(fireworkPrefab);
             clone.transform.position = standard + posisionArray[i];
 
+            Destroy(clone, 3f);
+        }
+
+    }
+
+    IEnumerator ClearMessage()
+    {
+        string message = "Mission CLEAR!";
+
+        for (int i = 0; i < message.Length; i++)
+        {
+            clearText.text = "<i>" + message.Substring(0, i);
+            yield return new WaitForSeconds(0.05f);                    //待機
         }
 
     }

@@ -1,7 +1,7 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--–Y‚ê‚ª‚¿
+using UnityEngine.UI; // <--å¿˜ã‚ŒãŒã¡
 
 public class WarningUI : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class WarningUI : MonoBehaviour
         numBuilding[1] = scoreManager.numBuilding;
         if (numBuilding[1] < numBuilding[0])
         {
-            warningText.text = "Œš•¨‚ª”j‰ó‚³‚ê‚½I\nŽc‚èF" + numBuilding[1].ToString();
+            warningText.text = "å»ºç‰©ãŒç ´å£Šã•ã‚ŒãŸï¼\næ®‹ã‚Šï¼š" + numBuilding[1].ToString();
             timeCounter = 5f;
         }
 

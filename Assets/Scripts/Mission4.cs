@@ -41,6 +41,7 @@ public class Mission4 : MonoBehaviour
         }
         else if(enemyShip == null && phase == 2)
         {
+            message.text = "";
             CP.ClearNotify();
         }
 

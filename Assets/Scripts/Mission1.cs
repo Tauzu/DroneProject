@@ -25,6 +25,7 @@ public class Mission1 : MonoBehaviour
     void Update()
     {
         if(coinObj == null){
+            message.text = "";
             CP.ClearNotify();
         }
     }

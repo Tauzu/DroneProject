@@ -32,6 +32,7 @@ public class Mission3 : MonoBehaviour
 
         if (ScoreMan.score >= 6000)
         {
+            message.text = "";
             CP.ClearNotify();
         }
         else

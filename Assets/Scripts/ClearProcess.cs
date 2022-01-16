@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI; // <--忘れがち
 
 public class ClearProcess : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class ClearProcess : MonoBehaviour
     public GameObject NextMission;
     Transform playerTf;
     bool clearFlag = false;
-    TextMeshProUGUI clearText;
+    Text clearText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class ClearProcess : MonoBehaviour
         subCameraObj = this.transform.Find("SubCamera").gameObject;
         mainCameraObj = GameObject.Find("Main Camera");
 
-        clearText = this.transform.Find("SubCamCanvas/ClearText").GetComponent<TextMeshProUGUI>();
+        clearText = this.transform.Find("SubCamCanvas/ClearText").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -75,11 +75,12 @@ public class ClearProcess : MonoBehaviour
         {
             GameObject clone = Instantiate(scoreObj) as GameObject;
             clone.GetComponent<PopupScore>().SetScore(2000, building.transform.position + 15f*Vector3.up);
-            yield return new WaitForSeconds(0.5f);                    //待機
+            yield return new WaitForSeconds(0.2f);                    //待機
         }
 
         CameraShift();
         clearText.text = "";
+        Destroy(GameObject.Find("MessageWindow"));
         Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
 
     }
@@ -115,7 +116,7 @@ public class ClearProcess : MonoBehaviour
 
         for (int i = 0; i < message.Length; i++)
         {
-            clearText.text = "<i>" + message.Substring(0, i);
+            clearText.text = "<i>" + message.Substring(0, i) + "</i>";
             yield return new WaitForSeconds(0.05f);                    //待機
         }
 

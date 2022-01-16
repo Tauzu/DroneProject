@@ -22,6 +22,7 @@ public class Mission2 : MonoBehaviour
     void Update()
     {
         if(GameObject.FindGameObjectsWithTag("coin").Length == 0){
+            message.text = "";
             CP.ClearNotify();
         }
     }

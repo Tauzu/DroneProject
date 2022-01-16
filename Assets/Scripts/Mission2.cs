@@ -12,7 +12,7 @@ public class Mission2 : MonoBehaviour
     void Start()
     {
         message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "空中で[C]を押し、ホバリング。\n [WASD]で移動してコインを集めよ！";
+        message.text = "空中で[C]を押し、ホバリング。\n [WASD]で移動してコインを\n集めよう！";
 
         CP = this.GetComponent<ClearProcess>();
 

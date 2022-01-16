@@ -105,7 +105,7 @@ public class DragonBehavior : MonoBehaviour
 
             //Debug.Log(relativePos.magnitude);
             //this.transform.position += this.transform.forward * Mathf.Clamp(relativePos.magnitude - 30f, -0.1f, 0.1f);
-            rbody.AddForce(targetVelocity - rbody.velocity, ForceMode.Acceleration);
+            rbody.AddForce(0.1f*(targetVelocity - rbody.velocity), ForceMode.Acceleration);
 
             // 方向を、回転情報に変換
             Quaternion rotation = Quaternion.LookRotation(relation.normalized);
@@ -217,8 +217,6 @@ public class DragonBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "SpecialBullet" && hitLimit < 0f)
         {
-            //count++;
-            //Debug.Log(count);
             float speed = other.attachedRigidbody.velocity.magnitude;
             HitDamage(Mathf.Max((int)(speed * speed * 0.0001f), 1));
             hitLimit = 0.5f;

@@ -9,7 +9,6 @@ public class Mission4 : MonoBehaviour
     ClearProcess CP;
     GameObject firstEnemy;
     GameObject enemyShip;
-    Transform playerTf;
 
     int phase = 0;
 
@@ -17,11 +16,9 @@ public class Mission4 : MonoBehaviour
     void Start()
     {
         message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "上空に敵出現！\n[Shift(右)]を2連続押しで視点切替。\n[Z]で弾丸発射。";
+        message.text = "上空に敵出現！\n[Shift(右)]を2連押しで視点切替。\n[Z]で弾丸発射。";
 
         CP = this.GetComponent<ClearProcess>();
-
-        playerTf = GameObject.Find("Player").transform;
 
         firstEnemy = transform.Find("FirstEnemy").gameObject;
         firstEnemy.SetActive(true);
@@ -38,7 +35,7 @@ public class Mission4 : MonoBehaviour
         if (firstEnemy == null && phase == 1)
         {
             enemyShip.SetActive(true);
-            message.text = "敵艦隊出現！\n駆逐せよ！";
+            message.text = "敵発生装置出現！\n発見し破壊せよ！\n敵も駆逐せよ！";
             phase = 2;
 
         }

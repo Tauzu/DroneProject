@@ -61,6 +61,7 @@ public class DroneMove : MonoBehaviour
     void Start()
     {
         rbody = this.GetComponent<Rigidbody>();
+        rbody.centerOfMass = Vector3.zero;
         // rbody = this.transform.Find("BoxBody").gameObject.GetComponent<Rigidbody>();
 
         Blade[0].tf = this.transform.Find("blade1");

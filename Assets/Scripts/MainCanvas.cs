@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DieWithChildren : MonoBehaviour
+public class MainCanvas : MonoBehaviour
 {
+    public GameObject mainUI;
+    public GameObject howToUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +16,7 @@ public class DieWithChildren : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(this.transform.childCount == 0) Destroy(this.gameObject);
+        mainUI.SetActive(!Input.GetKey(KeyCode.Escape));
+        howToUI.SetActive(Input.GetKey(KeyCode.Escape));
     }
-
 }

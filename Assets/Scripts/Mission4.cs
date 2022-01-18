@@ -10,13 +10,15 @@ public class Mission4 : MonoBehaviour
     GameObject firstEnemy;
     GameObject enemyShip;
 
+    public AudioSource audioSrc;
+
     int phase = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "上空に敵出現！\n[Shift(右)]を2連押しで視点切替。\n[Z]で弾丸発射。";
+        message.text = "上空に敵出現！\n[Enter]で視点切替。\n[Z]で弾丸発射。";
 
         CP = this.GetComponent<ClearProcess>();
 
@@ -25,6 +27,8 @@ public class Mission4 : MonoBehaviour
         phase = 1;
 
         enemyShip = transform.Find("EnemyShip").gameObject;
+
+        audioSrc.Stop();
 
     }
 

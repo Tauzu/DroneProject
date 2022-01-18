@@ -31,11 +31,16 @@ public class Shooting : MonoBehaviour
     GameObject SAParticle;
     float specialTimeLimit;
 
+    AudioSource audioSrc;
+    public AudioClip shotSE;
+
     // Use this for initialization
     void Start () {
 		cameraObj = GameObject.Find("Main Camera");
         CMscript = cameraObj.GetComponent<CameraMove>();
         thisRbody = this.GetComponent<Rigidbody>();
+
+        audioSrc = this.GetComponent<AudioSource>();
 
         _ballSimurator = simulatorObj.GetComponent<BallSimulator>();
 
@@ -66,20 +71,9 @@ public class Shooting : MonoBehaviour
 
         Vector3 direction = (CMscript.isFPS)? cameraObj.transform.forward : this.transform.forward;
         Vector3 shotVelocity = (SAParticle == null)? direction * targetSpeed : direction * targetSpeed*2f;
+        float gradLocation = (targetSpeed - defaultSpeed) / (maxSpeed - defaultSpeed);
         // if(CMscript.isFPS) _ballSimurator.Simulate(this.transform.position , shotVelocity);
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
-        if (Input.GetKeyDown(KeyCode.Z)) chargeSlider.SetActive(true);
-
-        if (Input.GetKey(KeyCode.Z)){
-            targetSpeed += 1f;
-            targetSpeed = Mathf.Min(targetSpeed, maxSpeed);
-            float gradLocation = (targetSpeed - defaultSpeed) / (maxSpeed - defaultSpeed);
-            rend.material.color = grad.Evaluate(gradLocation);
-            _ballSimurator.Simulate(this.transform.position , shotVelocity, gradLocation);
-
-            slider.value = gradLocation;
-
-        }
 
         // キーから指を離した時
         if (Input.GetKeyUp(KeyCode.Z)){
@@ -101,9 +95,24 @@ public class Shooting : MonoBehaviour
 
             chargeSlider.SetActive(false);
 
+            audioSrc.PlayOneShot(shotSE, Mathf.Max(Mathf.Sqrt(gradLocation), 0.3f));
+
         }
 
-        if(SAParticle != null){
+        if (Input.GetKey(KeyCode.Z))
+        {
+            rend.material.color = grad.Evaluate(gradLocation);
+            _ballSimurator.Simulate(this.transform.position + direction, shotVelocity, gradLocation);
+
+            chargeSlider.SetActive(true);
+            slider.value = gradLocation;
+
+            targetSpeed += 1f;
+            targetSpeed = Mathf.Min(targetSpeed, maxSpeed);
+
+        }
+
+        if (SAParticle != null){
             specialTimeLimit -= Time.deltaTime;
             // Debug.Log(specialTimeLimit);
             if(specialTimeLimit < 0f) Destroy(SAParticle);

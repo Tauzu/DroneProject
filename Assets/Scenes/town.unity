@@ -3055,7 +3055,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '<color=blue><size=60>Drothy</size></color>
+  m_Text: '<color=lightblue><size=60>Drothy</size></color>
 
     <color=white><size=30><i>
 
@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.0122385025, g: 0, b: 1, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!4 &89449689 stripped
@@ -5149,7 +5149,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 488153420}
+    m_TransformParent: {fileID: 1385409897}
     m_Modifications:
     - target: {fileID: 137390, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5161,7 +5161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7100809
+      value: 1.6000068
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5169,23 +5169,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11.52998
+      value: -3.5899959
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071043
+      value: 0.7071075
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 1.7763568e-15
+      value: -1.7763568e-15
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071092
+      value: 0.7071062
       objectReference: {fileID: 0}
     - target: {fileID: 446626, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000030908716
+      value: -0.000000030908588
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d42226b8b4a94f4487b307b6b18dd43, type: 3}
@@ -19851,6 +19851,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialAmezonPrefab: {fileID: 3362484732859677592, guid: c744ba9a5feb3a14787cca8416375696, type: 3}
   nightSky: {fileID: 2100000, guid: d4454f71d85928744be7771e2143dab7, type: 2}
+  audioSrc: {fileID: 1748863028}
+  bossBGM: {fileID: 8300000, guid: 4f8a3849ab0d788438d35d29aba97a4c, type: 3}
 --- !u!4 &789913160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 467192, guid: 52e3c281ef0f0ea4985188d26644edcb, type: 3}
@@ -27126,7 +27128,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "[Shift(L)]:\u4E0A\u6607\n[Ctrl(L)]:\u4E0B\u964D\n[C]:\u30DB\u30D0\u30EA\u30F3\u30B0\u5207\u66FF\n[WASD]:\u79FB\u52D5\n[Q]:\u52A0\u901F\n[Z]:\u5F3E\u4E38\u767A\u5C04\n[E]:\u78C1\u5834\u767A\u751F\n[X]:\u5468\u56F2\u7834\u58CA\n\n[\u2191\u2190\u2192\u2193]:\u30AB\u30E1\u30E9\u64CD\u4F5C\n[Shif(R)]:\u30BA\u30FC\u30E0\u30A4\u30F3\n[Ctrl(R):\u30BA\u30FC\u30E0\u30A2\u30A6\u30C8"
+  m_Text: "[Shift(L)]:\u4E0A\u6607\n[Ctrl(L)]:\u4E0B\u964D\n[C]:\u30DB\u30D0\u30EA\u30F3\u30B0\u5207\u66FF\n[WASD]:\u79FB\u52D5\n[Q]:\u52A0\u901F\n[Z]:\u5F3E\u4E38\u767A\u5C04\n[E]:\u78C1\u5834\u767A\u751F\n[X]:\u5468\u56F2\u7834\u58CA(\u203B\u4F7F\u7528\u4E2D\u5236\u5FA1\u4E0D\u80FD)\n\n[\u2191\u2190\u2192\u2193]:\u30AB\u30E1\u30E9\u64CD\u4F5C\n[Shif(R)]:\u30BA\u30FC\u30E0\u30A4\u30F3\n[Ctrl(R):\u30BA\u30FC\u30E0\u30A2\u30A6\u30C8\n[Enter]:\u8996\u70B9\u5207\u66FF"
 --- !u!222 &1053225696
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33364,6 +33366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca27df90011bf5648ad2f2ee38797a97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSrc: {fileID: 1748863028}
+  missionBGM: {fileID: 8300000, guid: e75751b3bc0df3d4f9f91d07bdb05c43, type: 3}
 --- !u!4 &1276375945 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 626370144835912093, guid: e226cf60df1eb7e42a245b0a40767751, type: 3}
@@ -41146,7 +41150,7 @@ MonoBehaviour:
   - {fileID: 1361079514}
   - {fileID: 8245200960721926322}
   - {fileID: 302464132}
-  bgmManager: {fileID: 1748863027}
+  audioSrc: {fileID: 1748863028}
   titleBGM: {fileID: 8300000, guid: b17a5c1f5aba28146b82a0ba3e3a1726, type: 3}
 --- !u!1001 &1635574603
 PrefabInstance:
@@ -44128,7 +44132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1748863026}
   - component: {fileID: 1748863028}
-  - component: {fileID: 1748863027}
   m_Layer: 0
   m_Name: BGMAudio
   m_TagString: Untagged
@@ -44150,19 +44153,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 175
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1748863027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1748863025}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239e2589bbffb144ca084085b68810ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultBGM: {fileID: 8300000, guid: e75751b3bc0df3d4f9f91d07bdb05c43, type: 3}
 --- !u!82 &1748863028
 AudioSource:
   m_ObjectHideFlags: 0
@@ -44175,7 +44165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -45394,6 +45384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5470ca1f4732f479e02a7cfc1569cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSrc: {fileID: 1748863028}
 --- !u!4 &1790031956 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 466690, guid: 70ea0ba299bdf0a49a2af90f19b23cca, type: 3}
@@ -54593,7 +54584,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 10
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -54629,7 +54620,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -54711,6 +54702,7 @@ MonoBehaviour:
   maxSpeed: 300
   chargeSlider: {fileID: 2034884383}
   simulatorObj: {fileID: 546336328}
+  shotSE: {fileID: 8300000, guid: 338b143a01c08ca47912f0a733b97145, type: 3}
 --- !u!114 &8245200960721926332
 MonoBehaviour:
   m_ObjectHideFlags: 0

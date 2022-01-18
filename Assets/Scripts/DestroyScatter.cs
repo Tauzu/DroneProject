@@ -64,6 +64,11 @@ public class DestroyScatter : MonoBehaviour
             Destroy(clone, 5.0f);
         }
 
+        GameObject explosionAudio = (GameObject)Resources.Load("ExplosionAudio");
+        GameObject cloneAudio = Instantiate(explosionAudio);
+        cloneAudio.transform.position = this.transform.position;
+        Destroy(cloneAudio, 3.0f);
+
         Destroy(this.gameObject);
     }
 }

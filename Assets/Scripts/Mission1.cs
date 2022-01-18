@@ -9,6 +9,9 @@ public class Mission1 : MonoBehaviour
     GameObject coinObj;
     ClearProcess CP;
 
+    public AudioSource audioSrc;
+    public AudioClip missionBGM;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,9 @@ public class Mission1 : MonoBehaviour
         coinObj = this.transform.Find("Coin").gameObject;
 
         CP = this.GetComponent<ClearProcess>();
+
+        audioSrc.clip = missionBGM;
+        audioSrc.Play();
 
     }
 

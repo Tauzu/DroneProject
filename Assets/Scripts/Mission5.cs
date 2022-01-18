@@ -20,6 +20,9 @@ public class Mission5 : MonoBehaviour
     Material defaultSky;
     public Material nightSky;
 
+    public AudioSource audioSrc;
+    public AudioClip bossBGM;
+
     IEnumerator enumerator;
 
     bool defeatFlag = false;
@@ -27,6 +30,9 @@ public class Mission5 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSrc.clip = bossBGM;
+        audioSrc.Play();
+
         message = GameObject.Find("MessageText").GetComponent<Text>();
         message.text = "ドラゴン襲来！\nどうにかして倒そう！";
 
@@ -58,6 +64,7 @@ public class Mission5 : MonoBehaviour
 
         if (dragonObj == null && !defeatFlag)
         {
+            audioSrc.Stop();
             defeatFlag = true;
 
             StopCoroutine(enumerator);

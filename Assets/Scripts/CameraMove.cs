@@ -14,15 +14,15 @@ public class CameraMove : MonoBehaviour
     private Vector3 targetPosition;
     private Vector3 direction;
     private Vector3 relation;
-    private Vector3 relationIni;
+    //private Vector3 relationIni;
 
     private float xzOffset;
     private float yOffset;
-    private float distanceIni;
+    //private float distanceIni;
     private float signSide;
     private float signTop;
 
-    int doubleDownCount = 0;
+    //int doubleDownCount = 0;
 
     struct PolarCoordinates
     {
@@ -33,7 +33,7 @@ public class CameraMove : MonoBehaviour
 
     private PolarCoordinates cameraPCDN;
 
-    private Vector3 axis;
+    //private Vector3 axis;
     public float speed = 2;
 
     public bool Reverce;
@@ -72,7 +72,7 @@ public class CameraMove : MonoBehaviour
         cameraPCDN.phi -= 0.01f * speed * signSide;
 
         signTop = Input.GetAxis ("Vertical");
-        axis = this.transform.right;
+        //axis = this.transform.right;
         cameraPCDN.theta -= 0.01f * speed * signTop;
         cameraPCDN.theta = Mathf.Clamp(cameraPCDN.theta, 0.1f, 0.9f*Mathf.PI);
 
@@ -95,11 +95,13 @@ public class CameraMove : MonoBehaviour
             
         }
 
-        if(Input.GetKeyDown(KeyCode.RightShift))
-        {
-            doubleDownCount++;
-            Invoke("SwitchFPS",0.3f);
-        }
+        if (Input.GetKeyDown(KeyCode.Return)) SwitchFPS();  //Return:EnterKey
+
+        //if (Input.GetKeyDown(KeyCode.RightShift))
+        //{
+        //    doubleDownCount++;
+        //    Invoke("SwitchFPS",0.3f);
+        //}
 
         if(isFPS){
             float view = cam.fieldOfView - 0.5f*Input.GetAxis("Ctrl-Shift_Right");
@@ -124,7 +126,7 @@ public class CameraMove : MonoBehaviour
         PolarCoordinates polar;
 
         polar.theta = Mathf.Acos(rectangular.y / rectangular.magnitude);
-        polar.phi = Mathf.Atan2(rectangular.z, rectangular.x); //xがゼロの場合も考慮する関数
+        polar.phi = Mathf.Atan2(rectangular.z, rectangular.x); //xがゼロの場合も考慮するArcTangent
         polar.r = rectangular.magnitude;
 
         return polar;
@@ -143,9 +145,9 @@ public class CameraMove : MonoBehaviour
 
     void SwitchFPS()
     {
-        bool switchFlag = (doubleDownCount == 2)? true : false;
-        doubleDownCount = 0;
-        if(!switchFlag) { return; }
+        //bool switchFlag = (doubleDownCount == 2)? true : false;
+        //doubleDownCount = 0;
+        //if(!switchFlag) { return; }
 
         isFPS = (isFPS)? false : true;
         Vector3 lastRelation = this.transform.position - targetPosition;

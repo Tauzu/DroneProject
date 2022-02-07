@@ -54513,6 +54513,7 @@ GameObject:
   - component: {fileID: 8245200960721926333}
   - component: {fileID: 8245200960721926323}
   - component: {fileID: 8245200960721926332}
+  - component: {fileID: 8245200960721926327}
   - component: {fileID: 8245200960721926330}
   - component: {fileID: 8245200960721926324}
   - component: {fileID: 8245200960721926325}
@@ -54660,6 +54661,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8245200960721926327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8245200960721926322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d800bbb26afedc84496f629411067660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8245200960721926329
 Transform:
   m_ObjectHideFlags: 0
@@ -54718,6 +54731,9 @@ MonoBehaviour:
   minPosi: {x: -300, y: -10, z: -300}
   maxPosi: {x: 300, y: 900, z: 300}
   faceText: {fileID: 8245200961524917120}
+  inputForward: 0
+  inputSide: 0
+  isBoosting: 0
 --- !u!65 &8245200960721926333
 BoxCollider:
   m_ObjectHideFlags: 0

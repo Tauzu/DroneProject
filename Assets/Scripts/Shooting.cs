@@ -48,7 +48,7 @@ public class Shooting : MonoBehaviour
 
         targetSpeed = defaultSpeed;
 
-        rend = this.transform.Find("BoxBody").gameObject.GetComponent<Renderer>();
+        rend = this.transform.Find("BodyMesh").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
 
         var colorKey = new GradientColorKey[2];

@@ -19,8 +19,14 @@ public class DroneController : MonoBehaviour
         DM.inputSide = Input.GetAxis("D-A");
         DM.isBoosting = Input.GetKey(KeyCode.Q);   //â¡ë¨ÉtÉâÉO
 
-        if (Input.GetKey(KeyCode.LeftShift)) DM.Up();   //è„è∏
-        if (Input.GetKey(KeyCode.LeftControl)) DM.Down();   //â∫ç~
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            DM.Up();   //è„è∏
+        }
+        else if (Input.GetKey(KeyCode.LeftControl))
+        {
+            DM.Down();   //â∫ç~
+        }
 
         if (Input.GetKeyDown(KeyCode.C)) DM.SwitchHovering();
         if (Input.GetKey(KeyCode.X)) DM.HeavyRotate();

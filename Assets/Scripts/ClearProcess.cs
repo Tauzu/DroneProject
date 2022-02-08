@@ -73,9 +73,13 @@ public class ClearProcess : MonoBehaviour
 
         foreach (GameObject building in buildingArray)
         {
-            GameObject clone = Instantiate(scoreObj) as GameObject;
-            clone.GetComponent<PopupScore>().SetScore(2000, building.transform.position + 15f*Vector3.up);
-            yield return new WaitForSeconds(0.2f);                    //待機
+            if(building != null)
+            {
+                GameObject clone = Instantiate(scoreObj) as GameObject;
+                clone.GetComponent<PopupScore>().SetScore(2000, building.transform.position + 15f * Vector3.up);
+                yield return new WaitForSeconds(0.2f);                    //待機
+            }
+
         }
 
         CameraShift();

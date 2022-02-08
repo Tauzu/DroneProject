@@ -7,11 +7,11 @@ public class DroneMove : MonoBehaviour
     public Vector3 minPosi = new Vector3(-1.0e2f, -1.0e1f, -2.0e1f);
     public Vector3 maxPosi = new Vector3(1.0e2f, 1.0e4f, 2.0e2f);
 
-    public TextMesh faceText;
-
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
     public float inputForward;
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
     public float inputSide;
-
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
     public bool isBoosting;
 
     //=================================================================
@@ -47,6 +47,7 @@ public class DroneMove : MonoBehaviour
     float targetFwdAngle;
     float targetRgtAngle;
 
+    TextMesh faceText;
     GameObject hoveringTextObj;
 
     GameObject cameraObj;
@@ -67,7 +68,7 @@ public class DroneMove : MonoBehaviour
     {
         rbody = this.GetComponent<Rigidbody>();
         rbody.centerOfMass = Vector3.zero;
-        // rbody = this.transform.Find("BoxBody").gameObject.GetComponent<Rigidbody>();
+        // rbody = this.transform.Find("BodyMesh").gameObject.GetComponent<Rigidbody>();
 
         Blade[0].tf = this.transform.Find("blade1");
         Blade[0].sign = -1f;
@@ -83,13 +84,15 @@ public class DroneMove : MonoBehaviour
 
         hoveringTextObj = this.transform.Find("HoveringText").gameObject;
 
+        faceText = this.transform.Find("PlayerTextFace").gameObject.GetComponent<TextMesh>();
+
         height = this.transform.position.y;
         FwdY[0] = this.transform.forward.y;
         RgtY[0] = this.transform.right.y;
 
         cameraObj = GameObject.Find("Main Camera");
 
-        rend = this.transform.Find("BoxBody").gameObject.GetComponent<Renderer>();
+        rend = this.transform.Find("BodyMesh").gameObject.GetComponent<Renderer>();
         defaultColor = rend.material.color;
 
         audioSource = this.GetComponent<AudioSource>();

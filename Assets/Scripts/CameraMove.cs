@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public GameObject Target;
+    Transform targetTf;
 
     public GameObject AimObj;
 
@@ -48,11 +48,11 @@ public class CameraMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Target = GameObject.Find("Player");
+        targetTf = GameObject.Find("Player").transform;
         cam = GetComponent<Camera>();
         defaultFOV = cam.fieldOfView;
 
-        relation = this.transform.position - Target.transform.position;
+        relation = this.transform.position - targetTf.position;
         xzOffset = new Vector2(relation.x, relation.z).magnitude;
         yOffset = relation.y;
 
@@ -63,7 +63,7 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPosition = Target.transform.position;
+        targetPosition = targetTf.position;
 
         signSide = Input.GetAxis ("Horizontal");
         if(!isFPS){
@@ -81,7 +81,7 @@ public class CameraMove : MonoBehaviour
         {
             if(!(isFPS))
             {
-                back_direction = - Target.transform.forward;
+                back_direction = - targetTf.forward;
                 relation = new Vector3(back_direction.x, 0, back_direction.z);
                 relation = relation.normalized * xzOffset + new Vector3(0, yOffset, 0);
                 cameraPCDN = Rect2Polar(relation);
@@ -89,7 +89,7 @@ public class CameraMove : MonoBehaviour
             }
             else
             {
-                relation = Target.transform.forward;
+                relation = targetTf.forward;
                 cameraPCDN = Rect2Polar(relation);
             }
             

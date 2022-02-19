@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;   //Slider用
+
 
 public class Shooting : MonoBehaviour
 {
@@ -13,11 +13,15 @@ public class Shooting : MonoBehaviour
     public float defaultSpeed = 50;
     public float maxSpeed = 300;
     float targetSpeed;
-    private GameObject cameraObj;
-    CameraMove CMscript;
 
-    public GameObject chargeSlider;
-    Slider slider;
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
+    public bool isCharging;
+
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
+    public float gradLocation;
+
+    GameObject cameraObj;
+    CameraMove CMscript;
 
     private Rigidbody thisRbody;
 
@@ -44,7 +48,6 @@ public class Shooting : MonoBehaviour
 
         _ballSimurator = simulatorObj.GetComponent<BallSimulator>();
 
-        slider = chargeSlider.GetComponent<Slider>();
 
         targetSpeed = defaultSpeed;
 
@@ -71,7 +74,7 @@ public class Shooting : MonoBehaviour
 
         Vector3 direction = (CMscript.isFPS)? cameraObj.transform.forward : this.transform.forward;
         Vector3 shotVelocity = (SAParticle == null)? direction * targetSpeed : direction * targetSpeed*2f;
-        float gradLocation = (targetSpeed - defaultSpeed) / (maxSpeed - defaultSpeed);
+        gradLocation = (targetSpeed - defaultSpeed) / (maxSpeed - defaultSpeed);
         // if(CMscript.isFPS) _ballSimurator.Simulate(this.transform.position , shotVelocity);
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
 
@@ -93,19 +96,17 @@ public class Shooting : MonoBehaviour
 
             targetSpeed = defaultSpeed;
 
-            chargeSlider.SetActive(false);
-
             audioSrc.PlayOneShot(shotSE, Mathf.Max(Mathf.Sqrt(gradLocation), 0.3f));
 
+            isCharging = false;
         }
 
         if (Input.GetKey(KeyCode.Z))
         {
+            isCharging = true;
+
             rend.material.color = grad.Evaluate(gradLocation);
             _ballSimurator.Simulate(this.transform.position + direction, shotVelocity, gradLocation);
-
-            chargeSlider.SetActive(true);
-            slider.value = gradLocation;
 
             targetSpeed += 1f;
             targetSpeed = Mathf.Min(targetSpeed, maxSpeed);
@@ -128,7 +129,7 @@ public class Shooting : MonoBehaviour
             if (SAParticleTf != null && SAParticle == null)//検索に成功し、かつ現在Particleを参照できていない場合
             {
                 SAParticle = SAParticleTf.gameObject;
-                specialTimeLimit = 20f;
+                specialTimeLimit = 30f;
             }
 
             //待機

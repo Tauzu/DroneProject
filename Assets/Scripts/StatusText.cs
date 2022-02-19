@@ -5,7 +5,7 @@ using UnityEngine.UI; // <--忘れがち
 
 public class StatusText : MonoBehaviour
 {
-    public GameObject gameOB;
+    GameObject gameOB;
     private float height;
     private float speed;
     private Rigidbody rbody;
@@ -15,6 +15,7 @@ public class StatusText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameOB = GameObject.Find("Player");
         rbody = gameOB.GetComponent<Rigidbody>();
         statusText = this.GetComponent<Text>();
         // DMscript = gameOB.GetComponent<DroneMove>();

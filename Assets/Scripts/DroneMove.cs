@@ -4,96 +4,110 @@ using UnityEngine;
 
 public class DroneMove : MonoBehaviour
 {
-    public Vector3 minPosi = new Vector3(-1.0e2f, -1.0e1f, -2.0e1f);
-    public Vector3 maxPosi = new Vector3(1.0e2f, 1.0e4f, 2.0e2f);
-
-    [System.NonSerialized]  //publicだがインスペクター上には表示しない
-    public float inputForward;
-    [System.NonSerialized]  //publicだがインスペクター上には表示しない
-    public float inputSide;
-    [System.NonSerialized]  //publicだがインスペクター上には表示しない
-    public bool isBoosting;
+    //publicだがインスペクター上には表示しない
+    [System.NonSerialized]
+    public Vector2 targetVector;
+    [System.NonSerialized]
+    public float targetHeight;
+    [System.NonSerialized]
+    public float inputVertical;
+    [System.NonSerialized]
+    public bool isHovering = false;
+    [System.NonSerialized]
+    public bool isBoosting = false;
 
     //=================================================================
 
-    Rigidbody rbody;//  Rigidbodyを使うための変数
+    [SerializeField]
+    TextMesh faceText;
 
-    struct BladeParam
+    [SerializeField]
+    GameObject hoveringTextObj;
+
+    [SerializeField]
+    Renderer bodyRenderer;
+
+    Transform tf;
+    Rigidbody rbody;
+
+    struct Blade
     {
-        public Transform tf;
-        public float sign;
-        public float power;
+        Transform tf;
+        int pitchSign;
+        int rollSign;
+
+        public Blade(Transform tf, int pitchSign, int rollSign)
+        {
+            this.tf = tf;
+            this.pitchSign = pitchSign;
+            this.rollSign = rollSign;
+        }
+
+        public void Rotate(float power)
+        {
+            this.tf.Rotate(new Vector3(0, 100 * power * this.pitchSign, 0));
+        }
+
+        public Vector3 Position()
+        {
+            return this.tf.position;
+        }
+
+        public float GetPower(float hoveringPow, float pitchCtrlPow, float rollCtrlPow)
+        {
+            return hoveringPow + this.pitchSign * pitchCtrlPow + this.rollSign * rollCtrlPow;
+        }
+
+        //public void HeavyRotate()
+        //{
+        //    this.power += 100f * this.pitchSign;
+        //}
 
     };
 
-    const int BladeNum = 4;
+    const int numBlade = 4;
 
-    BladeParam[] Blade = new BladeParam[BladeNum];
+    Blade[] bladeArray = new Blade[numBlade];
 
-    float inputMagnitude;
-
-    float height;
     float[] FwdY = new float[2];
     float[] RgtY = new float[2];
 
-    float horizontalForwardSPD;
-    float horizontalRightSPD;
-
-    bool isHovering;
-
-    float heightHOV;
-    float yawDiff;
-
-    float targetFwdAngle;
-    float targetRgtAngle;
-
-    TextMesh faceText;
-    GameObject hoveringTextObj;
-
-    GameObject cameraObj;
+    float yaw;
 
     Color defaultColor;
-    Renderer rend;
 
     AudioSource audioSource;
     //public AudioClip bladeSE;
 
     const float baseSpeed = 10f;
     const float coeff = 10f;
-    const float Kp = 10f;
+    const float Kp = 5f;
     const float decay = 1f;
+
+    Vector3 positionMin = new Vector3(-200f, -10f, -200f);
+    Vector3 positionMax = new Vector3(200f, 10000f, 200f);
 
     // Start is called before the first frame update
     void Start()
     {
+        tf = this.transform;
+        
         rbody = this.GetComponent<Rigidbody>();
-        rbody.centerOfMass = Vector3.zero;
-        // rbody = this.transform.Find("BodyMesh").gameObject.GetComponent<Rigidbody>();
+        rbody.centerOfMass = Vector3.zero; //BodyBoxの中心を全体の重心とする（ブレードの質量は無視）
+        // rbody = tf.Find("BodyMesh").gameObject.GetComponent<Rigidbody>();
 
-        Blade[0].tf = this.transform.Find("blade1");
-        Blade[0].sign = -1f;
+        bladeArray[0] = new Blade(tf.Find("blade1"), -1, 1);
+        bladeArray[1] = new Blade(tf.Find("blade2"), 1, 1);
+        bladeArray[2] = new Blade(tf.Find("blade3"), 1, -1);
+        bladeArray[3] = new Blade(tf.Find("blade4"), -1, -1);
 
-        Blade[1].tf = this.transform.Find("blade2");
-        Blade[1].sign = 1f;
+        //faceText = tf.Find("PlayerTextFace").gameObject.GetComponent<TextMesh>();
 
-        Blade[2].tf = this.transform.Find("blade3");
-        Blade[2].sign = 1f;
+        FwdY[0] = tf.forward.y;
+        RgtY[0] = tf.right.y;
 
-        Blade[3].tf = this.transform.Find("blade4");
-        Blade[3].sign = -1f;
-
-        hoveringTextObj = this.transform.Find("HoveringText").gameObject;
-
-        faceText = this.transform.Find("PlayerTextFace").gameObject.GetComponent<TextMesh>();
-
-        height = this.transform.position.y;
-        FwdY[0] = this.transform.forward.y;
-        RgtY[0] = this.transform.right.y;
-
-        cameraObj = GameObject.Find("Main Camera");
-
-        rend = this.transform.Find("BodyMesh").gameObject.GetComponent<Renderer>();
-        defaultColor = rend.material.color;
+        //rend = tf.Find("BodyMesh").gameObject.GetComponent<Renderer>();
+        defaultColor = bodyRenderer.material.color;
 
         audioSource = this.GetComponent<AudioSource>();
 
@@ -104,222 +118,225 @@ public class DroneMove : MonoBehaviour
     {
         // Debug.Log(rbody.centerOfMass);
 
-        height = this.transform.position.y;
+        //float inputMagnitude = targetVector.magnitude;
 
-        horizontalForwardSPD = CalcHorizontalSpeed(this.rbody.velocity, this.transform.forward);
-        horizontalRightSPD = CalcHorizontalSpeed(this.rbody.velocity, this.transform.right);
+        //(bool isBacking, float directionCosine) = CalculateYaw(inputMagnitude);
 
-        inputMagnitude = Mathf.Clamp(Mathf.Abs(inputForward) + Mathf.Abs(inputSide), 0f, 1f);
+        //float hoveringPower = HoveringPower();
 
-        HorizontalMoveProcess();
+        //(float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
+        //    inputMagnitude, hoveringPower, isBacking, directionCosine
+        //    );
 
-        float hoveringPower = HoveringProcess();
-
-        // if (Input.GetKeyDown(KeyCode.F))   //z軸方向を向く
-        // {
-        //     rbody.angularVelocity = Vector3.zero;
-        //     transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        // }
-
-        // targetFwdAngle = Mathf.Clamp(targetFwdAngle, -45f, 45f);
-        // targetRgtAngle = Mathf.Clamp(targetRgtAngle, -45f, 45f);
-
-        float[] attitudeControlPower = AttitudeControl();
-
-        for (int i = 0; i < BladeNum; i++)
-        {
-            Blade[i].power = attitudeControlPower[i] + hoveringPower;
-            //Blade[i].power = Mathf.Clamp(Blade[i].power, -4f, 4f);
-        }
+        //foreach (Blade blade in bladeArray)   //これだとコピーになる（Arrayの中身を操作できない）
+        //for (int i = 0; i < numBlade; i++)
+        //{
+        //    bladeArray[i].SetPower(hoveringPower, pitchCtrlPower, rollCtrlPower);
+        //}
 
         PositionClamp();
 
-
+        BoostingChange();
     }
 
     void FixedUpdate()
     {
+        float inputMagnitude = targetVector.magnitude;
+
+        (bool isBacking, float directionCosine) = CalculateYaw(inputMagnitude);
+
+        float hoveringPower = HoveringPower();
+
+        (float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
+            inputMagnitude, hoveringPower, isBacking, directionCosine
+            );
+
+        float power;
         float maxPow = 0f;
-        for (int i = 0; i < BladeNum; i++)
+        foreach (Blade blade in bladeArray)
         {
-            rbody.AddForceAtPosition(this.transform.up * coeff * Blade[i].power, Blade[i].tf.position);
-            Blade[i].tf.Rotate(new Vector3(0, 100 * Blade[i].power * Blade[i].sign, 0));
+            //Debug.Log(blade.GetPower());
+            power = blade.GetPower(hoveringPower, pitchCtrlPower, rollCtrlPower);
+
+            rbody.AddForceAtPosition(tf.up * coeff * power, blade.Position());
+
+            blade.Rotate(power);
+
             //audioSource.PlayOneShot(bladeSE, Blade[i].power);
-            maxPow = Mathf.Max(maxPow, Mathf.Abs(Blade[i].power));
+            maxPow = Mathf.Max(maxPow, Mathf.Abs(power));
             // Debug.Log(Blade[i].power);
         }
 
-        //Debug.Log(maxPow);
+        //ブレード効果音
         audioSource.volume = Mathf.Clamp(2f * maxPow, 0f, 1f);
         audioSource.pitch = (maxPow - 1f) * 0.1f + 1f;
 
-        // 指定軸まわりに回転させるQuaternionを作成
-        Quaternion rot = Quaternion.AngleAxis(10f * yawDiff, this.transform.up);
-        // 自身に乗じることで回転
-        this.transform.rotation *= rot;
+        // 機体ヨー回転
+        Quaternion rot = Quaternion.AngleAxis(10f * yaw, tf.up);
+        tf.rotation *= rot;
 
-        heightHOV += 0.01f * (height - heightHOV); //目標高さを、自分の高さに少し近づける（安定化のため）
+        targetHeight += 0.01f * (tf.position.y - targetHeight); //目標高さを、自分の高さに少し近づける（安定化のため）
 
     }
 
-    void HorizontalMoveProcess()
+    (bool, float) CalculateYaw(float inputMagnitude)
     {
-        Vector3 cameraFwd = cameraObj.transform.forward;
-        Vector3 cameraRgt = cameraObj.transform.right;
-        Vector2 forwardXZ = new Vector2(this.transform.forward.x, this.transform.forward.z).normalized;
-        Vector2 rightXZ = new Vector2(this.transform.right.x, this.transform.right.z).normalized;
-        Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
-        Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
-        Vector2 targetXZ = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
+        Vector2 forwardXZ = new Vector2(tf.forward.x, tf.forward.z).normalized;
+        Vector2 rightXZ = new Vector2(tf.right.x, tf.right.z).normalized;
 
-        float inner = Vector2.Dot(forwardXZ, targetXZ); //現在の方向ベクトルと、目標方向ベクトルとの内積
+        float inner = Vector2.Dot(forwardXZ, targetVector.normalized); //現在の方向ベクトルと、目標方向ベクトルとの内積
         bool isBacking = (inner < -0.1f) ? true : false;
 
         //ヨー回転要求量
-        yawDiff = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
+        yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
                              : inputMagnitude * Mathf.Abs(1f - inner);     //前進時
-        if (Vector2.Dot(rightXZ, targetXZ) < 0f) yawDiff *= -1f;    //回転方向
-        if (isBacking) yawDiff *= -1f;    //バック時は回転方向がさらに逆になる
+        if (Vector2.Dot(rightXZ, targetVector) < 0f) yaw *= -1f;    //回転方向
+        if (isBacking) yaw *= -1f;    //バック時は回転方向がさらに逆になる
 
-        float targetSPD = baseSpeed * inputMagnitude;
-        if (isBoosting) targetSPD *= 2f;
-        if (isBacking) targetSPD *= -1;
-        float difference = (targetSPD - horizontalForwardSPD) / baseSpeed;//目標速度までの差の指標
-        targetFwdAngle = 90f * -difference * Mathf.Abs(inner);
-        // Debug.Log(targetFwdAngle);
+        return (isBacking, inner);
 
+    }
+
+    void BoostingChange()
+    {
         if (isBoosting)    //加速時色変化
         {
-            rend.material.color = Color.red;
+            bodyRenderer.material.color = Color.red;
 
             faceText.text = "`^´";
             faceText.color = Color.yellow;
         }
         else
         {
-            rend.material.color = defaultColor;
+            bodyRenderer.material.color = defaultColor;
 
             faceText.text = "'~'";
             faceText.color = Color.blue;
         }
-
     }
 
-    // float maxPow = 0f;
-    float HoveringProcess()
+    float HoveringPower()
     {
-        float HovPower;
-        if (isHovering && (this.transform.up.y > 0f))   //ホバリング処理
+        float power;
+        if (isHovering && (tf.up.y > 0f))   //ホバリング処理
         {
-            HovPower = Mathf.Clamp(-Kp * (height - heightHOV) - decay * this.rbody.velocity.y, -10f, 10f);
-            // if(Mathf.Abs(HovPower) > maxPow){
-            //     maxPow = Mathf.Abs(HovPower);
-            //     Debug.Log(HovPower);
-            // }
-            for (int i = 0; i < BladeNum; i++)
-            {
-                // Blade[i].power -= decay*(height[1] - height[0]);
-                Blade[i].power = HovPower;
+            targetHeight += 0.2f*inputVertical;
+            //targetHeight += Mathf.Max(0.5f*inputVertical, -0.2f);
 
-            }
-
-            if (inputMagnitude < 0.1f)   //前後方向自動ブレーキ
-            {
-                targetFwdAngle = 45f * horizontalForwardSPD / baseSpeed;
-            }
-
-            targetRgtAngle = 60f * horizontalRightSPD / baseSpeed;   //左右方向自動ブレーキ
-            if (isBoosting) targetRgtAngle *= 0.2f; //加速時はブレーキ弱める
+            power = -Kp * (tf.position.y - targetHeight) - decay * this.rbody.velocity.y;
 
         }
         else    //ホバリングOFF時
         {
-            if (inputMagnitude < 0.1f)  //入力がないときは水平姿勢を目指す
-            {
-                targetFwdAngle = 0f;
-                targetRgtAngle = 0f;
-            }
+            power = inputVertical;
 
-            HovPower = 0;
         }
 
-        return HovPower;
+        power = Mathf.Clamp(power, -10f, 10f);
+
+        return power;
 
     }
 
     void PositionClamp()
     {
         Vector3 modifiedPosition;
-        modifiedPosition.x = Mathf.Clamp(this.transform.position.x, minPosi.x, maxPosi.x);
-        modifiedPosition.y = Mathf.Clamp(this.transform.position.y, minPosi.y, maxPosi.y);
-        modifiedPosition.z = Mathf.Clamp(this.transform.position.z, minPosi.z, maxPosi.z);
+        modifiedPosition.x = Mathf.Clamp(tf.position.x, positionMin.x, positionMax.x);
+        modifiedPosition.y = Mathf.Clamp(tf.position.y, positionMin.y, positionMax.y);
+        modifiedPosition.z = Mathf.Clamp(tf.position.z, positionMin.z, positionMax.z);
 
-        if (modifiedPosition != this.transform.position)
+        if (modifiedPosition != tf.position)
         {
-            this.transform.position = modifiedPosition;
+            tf.position = modifiedPosition;
             rbody.velocity = Vector3.zero;
         }
     }
 
-    float[] AttitudeControl()
+    float TargetPitchAngle(float inputMagnitude, bool isBacking, float inner)
     {
-        float[] controlPower = new float[BladeNum];
+        float horizontalForwardSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.forward);
+        float targetAngle;
+        if (inputMagnitude > 0.1f)
+        {
+            float targetSPD = baseSpeed * inputMagnitude;
+            if (isBoosting) targetSPD *= 2f;
+            if (isBacking) targetSPD *= -1;
+            float difference = (targetSPD - horizontalForwardSPD) / baseSpeed;//目標速度までの差の指標
+            targetAngle = 90f * -difference * Mathf.Abs(inner);
+        }
+        else
+        {
+            //前後方向自動ブレーキ
+            targetAngle = (isHovering)? 45f * horizontalForwardSPD / baseSpeed : 0f;
+        }
 
-        FwdY[1] = this.transform.forward.y;
-        RgtY[1] = this.transform.right.y;
+        return targetAngle;
+    }
 
-        targetFwdAngle = Mathf.Clamp(targetFwdAngle, -60f, 60f);
-        float targetFwd = Mathf.Sin(targetFwdAngle * Mathf.Deg2Rad);    //ピッチ姿勢制御
-        float pitchControlPOW = Kp * (FwdY[1] - targetFwd) + 0.3f * decay * (FwdY[1] - FwdY[0]) / Time.deltaTime;
+    float TargetRollAngle()
+    {
+        float horizontalRightSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.right);
+        //左右方向自動ブレーキ
+        float targetAngle = (isHovering) ? 60f * horizontalRightSPD / baseSpeed : 0f;
 
-        targetRgtAngle = Mathf.Clamp(targetRgtAngle, -60f, 60f);
-        float targetRgt = Mathf.Sin(targetRgtAngle * Mathf.Deg2Rad);    //ロール姿勢制御
-        float rollControlPOW = Kp * (RgtY[1] - targetRgt) + 0.3f * decay * (RgtY[1] - RgtY[0]) / Time.deltaTime;
+        if (isBoosting) targetAngle *= 0.2f; //加速時はブレーキ弱める
 
-        controlPower[0] = - pitchControlPOW + rollControlPOW;
-        controlPower[1] = pitchControlPOW + rollControlPOW;
-        controlPower[2] = pitchControlPOW - rollControlPOW;
-        controlPower[3] = - pitchControlPOW - rollControlPOW;
+        return targetAngle;
+    }
+
+    (float, float) AttitudeControl(float inputMagnitude, float hoveringPower, bool isBacking, float inner)
+    {
+        FwdY[1] = tf.forward.y;
+        RgtY[1] = tf.right.y;
+
+        //Debug.Log(hoveringPower);
+        
+        float tagretPitchAngle = Mathf.Clamp(TargetPitchAngle(inputMagnitude, isBacking, inner), -60f, 60f);
+        tagretPitchAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
+        float targetPitch = Mathf.Sin(tagretPitchAngle * Mathf.Deg2Rad);    //ピッチ姿勢制御
+        float pitchControlPOW = Kp * (FwdY[1] - targetPitch) + 0.3f * decay * (FwdY[1] - FwdY[0]) / Time.deltaTime;
+
+        float targetRollAngle = Mathf.Clamp(TargetRollAngle(), -60f, 60f);
+        targetRollAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
+        float targetRoll = Mathf.Sin(targetRollAngle * Mathf.Deg2Rad);    //ロール姿勢制御
+        float rollControlPOW = Kp * (RgtY[1] - targetRoll) + 0.3f * decay * (RgtY[1] - RgtY[0]) / Time.deltaTime;
 
         FwdY[0] = FwdY[1];
         RgtY[0] = RgtY[1];
 
-        return controlPower;
+        return (pitchControlPOW, rollControlPOW);
 
     }
 
-    public void Up()
-    {
-        //if (Input.GetKey(KeyCode.LeftShift))   //上昇
+    //public void Up()   //上昇
+    //{
+    //    for (int i = 0; i < BladeNum; i++)
+    //    {
+    //        Blade[i].power += 1;
+    //    }
+        
+    //    targetHeight = height + 1.0f;
 
-        for (int i = 0; i < BladeNum; i++)
-        {
-            Blade[i].power += 1;
-        }
+    //}
 
-        heightHOV = height + 1.0f;
+    //public void Down()   //下降
+    //{
+    //    for (int i = 0; i < BladeNum; i++)
+    //    {
+    //        Blade[i].power -= 1;
+    //    }
 
-    }
+    //    targetHeight = height - 0.5f;
 
-    public void Down()
-    {
-        //else if (Input.GetKey(KeyCode.LeftControl))   //下降
-        for (int i = 0; i < BladeNum; i++)
-        {
-            Blade[i].power -= 1;
-        }
+    //}
 
-        heightHOV = height - 0.5f;
+    //public void Brake()
+    //{
+    //    //ブレーキ
+    //    targetFwdAngle = 60f * horizontalForwardSPD / baseSpeed;
+    //    targetRgtAngle = 60f * horizontalRightSPD / baseSpeed;
 
-    }
-
-    public void Brake()
-    {
-        //ブレーキ
-        targetFwdAngle = 60f * horizontalForwardSPD / baseSpeed;
-        targetRgtAngle = 60f * horizontalRightSPD / baseSpeed;
-
-    }
+    //}
 
     float CalcHorizontalSpeed(Vector3 velocity3D, Vector3 direction)
     {
@@ -328,25 +345,19 @@ public class DroneMove : MonoBehaviour
         return HorizontalSpeed;
     }
 
-    public void SwitchHovering()
+    public void SwitchHovering(bool flag)
     {
-        heightHOV = height;
-        isHovering = !isHovering;
-        hoveringTextObj.SetActive(isHovering);
+        targetHeight = tf.position.y;
+        isHovering = flag;
+        hoveringTextObj.SetActive(flag);
     }
 
-    public void DisableHovering()
-    {
-        isHovering = false;
-        hoveringTextObj.SetActive(false);
-    }
-
-    public void HeavyRotate()
-    {
-        for (int i = 0; i < BladeNum; i++)
-        {
-            Blade[i].power += 100f * Blade[i].sign;
-        }
-    }
+    //public void HeavyRotate()
+    //{
+    //    foreach (Blade blade in bladeArray)
+    //    {
+    //        blade.HeavyRotate();
+    //    }
+    //}
 
 }

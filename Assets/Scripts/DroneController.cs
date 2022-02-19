@@ -2,33 +2,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ドローン（自機）の操縦を行うスクリプト
+//キーボード入力を受け付け、それに応じてDroneMoveクラス（コンポーネント）のpublic変数を更新する
+
 public class DroneController : MonoBehaviour
 {
     DroneMove DM;
+
+    GameObject barrierObj;
+    GameObject magnetObj;
+
+    Transform cameraTf;
 
     // Start is called before the first frame update
     void Start()
     {
         DM = this.GetComponent<DroneMove>();
+
+        barrierObj = this.transform.Find("Barrier").gameObject;
+        magnetObj = this.transform.Find("MagneticField").gameObject;
+
+        cameraTf = GameObject.Find("Main Camera").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        DM.inputForward = Input.GetAxis("W-S");
-        DM.inputSide = Input.GetAxis("D-A");
+        float inputForward = Input.GetAxis("W-S");
+        float inputSide = Input.GetAxis("D-A");
+        Vector3 cameraFwd = cameraTf.forward;
+        Vector3 cameraRgt = cameraTf.right;
+        Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
+        Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
+        DM.targetVector = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
+
         DM.isBoosting = Input.GetKey(KeyCode.Q);   //加速フラグ
 
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            DM.Up();   //上昇
-        }
-        else if (Input.GetKey(KeyCode.LeftControl))
-        {
-            DM.Down();   //下降
-        }
+        DM.inputVertical = Input.GetAxis("Ctrl-Shift_Left");
 
-        if (Input.GetKeyDown(KeyCode.C)) DM.SwitchHovering();
-        if (Input.GetKey(KeyCode.X)) DM.HeavyRotate();
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    DM.Up();   //上昇
+        //}
+        //else if (Input.GetKey(KeyCode.LeftControl))
+        //{
+        //    DM.Down();   //下降
+        //}
+
+        if (Input.GetKeyDown(KeyCode.C)) DM.SwitchHovering(!DM.isHovering);
+
+        if (Input.GetKeyDown(KeyCode.E)) magnetObj.SetActive(!magnetObj.activeSelf);
+
+        //if (Input.GetKey(KeyCode.X)) DM.HeavyRotate();
+        barrierObj.SetActive(Input.GetKey(KeyCode.X));
+
     }
+
 }

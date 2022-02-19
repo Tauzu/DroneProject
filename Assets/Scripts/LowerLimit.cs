@@ -17,7 +17,7 @@ public class LowerLimit : MonoBehaviour
     void Update()
     {
         if(rbody.position.y < -1){
-            DMScript.DisableHovering();
+            DMScript.SwitchHovering(false);
             rbody.AddForce(Vector3.up * 1000f);
         }
     }

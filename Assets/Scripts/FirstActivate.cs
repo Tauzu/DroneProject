@@ -6,11 +6,15 @@ public class FirstActivate : MonoBehaviour
 {
     public GameObject[] activationObj;
 
+    //public GameObject PlayerPrefab;
+    //public int numClone;
+
     FPS_counter FPS_script;
     GameObject startButton;
 
     public AudioSource audioSrc;
     public AudioClip titleBGM;
+
 
     void Start()
     {
@@ -42,6 +46,14 @@ public class FirstActivate : MonoBehaviour
         {
             activationObj[i].SetActive(true);
         }
+
+        //for (int i = 0; i < numClone; i++)
+        //{
+        //    GameObject clone = Instantiate(PlayerPrefab);
+        //    clone.transform.position += 2*(i+1)*Vector3.forward;
+
+        //}
+
 
         //DMScript.enabled = true;
         //playerObj.SetActive(true);

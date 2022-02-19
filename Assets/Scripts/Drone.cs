@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneMove : MonoBehaviour
+public class Drone : MonoBehaviour
 {
     //publicだがインスペクター上には表示しない
     [System.NonSerialized]

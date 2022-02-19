@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class DroneController : MonoBehaviour
 {
-    DroneMove DM;
+    Drone drone;
 
     GameObject barrierObj;
     GameObject magnetObj;
@@ -17,7 +17,7 @@ public class DroneController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DM = this.GetComponent<DroneMove>();
+        drone = this.GetComponent<Drone>();
 
         barrierObj = this.transform.Find("Barrier").gameObject;
         magnetObj = this.transform.Find("MagneticField").gameObject;
@@ -34,11 +34,11 @@ public class DroneController : MonoBehaviour
         Vector3 cameraRgt = cameraTf.right;
         Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
         Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
-        DM.targetVector = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
+        drone.targetVector = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
 
-        DM.isBoosting = Input.GetKey(KeyCode.Q);   //加速フラグ
+        drone.isBoosting = Input.GetKey(KeyCode.Q);   //加速フラグ
 
-        DM.inputVertical = Input.GetAxis("Ctrl-Shift_Left");
+        drone.inputVertical = Input.GetAxis("Ctrl-Shift_Left");
 
         //if (Input.GetKey(KeyCode.LeftShift))
         //{
@@ -49,7 +49,7 @@ public class DroneController : MonoBehaviour
         //    DM.Down();   //下降
         //}
 
-        if (Input.GetKeyDown(KeyCode.C)) DM.SwitchHovering(!DM.isHovering);
+        if (Input.GetKeyDown(KeyCode.C)) drone.SwitchHovering(!drone.isHovering);
 
         if (Input.GetKeyDown(KeyCode.E)) magnetObj.SetActive(!magnetObj.activeSelf);
 

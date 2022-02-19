@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ChildDroneController : MonoBehaviour
 {
-    List<DroneMove> dmList = new List<DroneMove>();
-    DroneMove mainDM;
+    List<Drone> dmList = new List<Drone>();
+    Drone mainDrone;
     GameObject dronePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        mainDM = this.GetComponent<DroneMove>();
+        mainDrone = this.GetComponent<Drone>();
         dronePrefab = (GameObject)Resources.Load("Drone");
     }
 
@@ -24,14 +24,14 @@ public class ChildDroneController : MonoBehaviour
             clone.transform.position = this.transform.position + 4f * new Vector3(
                 Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)
                 );
-            dmList.Add(clone.GetComponent<DroneMove>());
+            dmList.Add(clone.GetComponent<Drone>());
         }
 
-        foreach (DroneMove drone in dmList)
+        foreach (Drone drone in dmList)
         {
             Vector2 targetVector = new Vector2(
-                mainDM.transform.position.x - drone.transform.position.x,
-                mainDM.transform.position.z - drone.transform.position.z
+                mainDrone.transform.position.x - drone.transform.position.x,
+                mainDrone.transform.position.z - drone.transform.position.z
                 );
             if (targetVector.magnitude < 4f)
             {
@@ -43,9 +43,9 @@ public class ChildDroneController : MonoBehaviour
             }
             
             drone.targetVector = targetVector;
-            drone.targetHeight = mainDM.transform.position.y;
-            drone.isHovering = mainDM.isHovering;
-            drone.isBoosting = mainDM.isBoosting;
+            drone.targetHeight = mainDrone.transform.position.y;
+            drone.isHovering = mainDrone.isHovering;
+            drone.isBoosting = mainDrone.isBoosting;
         }
         
     }

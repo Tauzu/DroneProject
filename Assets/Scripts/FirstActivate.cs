@@ -19,7 +19,7 @@ public class FirstActivate : MonoBehaviour
     void Start()
     {
         //playerObj = GameObject.Find("Player");
-        // DMScript.enabled = false;   //ドローン制御をオフにする(処理が安定するのを待つ)
+        // drone.enabled = false;   //ドローン制御をオフにする(処理が安定するのを待つ)
 
         FPS_script = GameObject.Find("GameController").GetComponent<FPS_counter>();
 
@@ -55,7 +55,7 @@ public class FirstActivate : MonoBehaviour
         //}
 
 
-        //DMScript.enabled = true;
+        //drone.enabled = true;
         //playerObj.SetActive(true);
 
         Destroy(this.gameObject);

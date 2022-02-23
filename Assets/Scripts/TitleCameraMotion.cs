@@ -10,6 +10,7 @@ public class TitleCameraMotion : MonoBehaviour
     void Start()
     {
         center = centerObj.transform.position;
+        this.transform.LookAt(center);
     }
 
     // Update is called once per frame
@@ -18,7 +19,7 @@ public class TitleCameraMotion : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         transform.RotateAround(center, Vector3.down, -0.1f);
 

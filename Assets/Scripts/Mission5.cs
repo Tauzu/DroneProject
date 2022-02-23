@@ -74,7 +74,6 @@ public class Mission5 : MonoBehaviour
             dLight.color = defaultLightColor;
             dLight.intensity = defaultLightIntensity;
 
-            message.text = "";
             CP.ClearNotify();
         }
 

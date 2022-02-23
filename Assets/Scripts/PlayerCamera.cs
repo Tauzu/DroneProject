@@ -2,27 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMove : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
-    Transform targetTf;
+    public GameObject playerObj;
+    Transform playerTf;
+    Shooting shooting;
 
     public GameObject AimObj;
 
-    private Camera cam;
+    Camera cam;
 
-    private Vector3 back_direction;
-    private Vector3 targetPosition;
-    private Vector3 direction;
-    private Vector3 relation;
-    //private Vector3 relationIni;
+    Vector3 back_direction;
+    Vector3 direction;
+    Vector3 relation;
 
-    private float xzOffset;
-    private float yOffset;
-    //private float distanceIni;
-    private float signSide;
-    private float signTop;
-
-    //int doubleDownCount = 0;
+    float xzOffset;
+    float yOffset;
+    float signSide;
+    float signTop;
 
     struct PolarCoordinates
     {
@@ -31,66 +28,65 @@ public class CameraMove : MonoBehaviour
         public float phi;
     };
 
-    private PolarCoordinates cameraPCDN;
+    PolarCoordinates PCDN;
 
     //private Vector3 axis;
     public float speed = 2;
 
     public bool Reverce;
 
-    [System.NonSerialized]  //publicだがインスペクター上には表示しない
-    public bool isFPS;
+    bool isFPS;
 
-    private float normalDistance;
-    private float defaultFOV;
+    float lastDistance;
+    float defaultFOV;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        targetTf = GameObject.Find("Player").transform;
+        playerTf = playerObj.transform;
+        shooting = playerObj.GetComponent<Shooting>();
+
         cam = GetComponent<Camera>();
         defaultFOV = cam.fieldOfView;
 
-        relation = this.transform.position - targetTf.position;
+        relation = this.transform.position - playerTf.position;
         xzOffset = new Vector2(relation.x, relation.z).magnitude;
         yOffset = relation.y;
 
-        cameraPCDN = Rect2Polar(relation);
+        PCDN = Rect2Polar(relation);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        targetPosition = targetTf.position;
-
         signSide = Input.GetAxis ("Horizontal");
         if(!isFPS){
             signSide *= (Reverce)? -1 : 1;
         }
-        cameraPCDN.phi -= 0.01f * speed * signSide;
+        PCDN.phi -= 0.01f * speed * signSide;
 
         signTop = Input.GetAxis ("Vertical");
         //axis = this.transform.right;
-        cameraPCDN.theta -= 0.01f * speed * signTop;
-        cameraPCDN.theta = Mathf.Clamp(cameraPCDN.theta, 0.1f, 0.9f*Mathf.PI);
+        PCDN.theta -= 0.01f * speed * signTop;
+        PCDN.theta = Mathf.Clamp(PCDN.theta, 0.1f, 0.9f*Mathf.PI);
 
 
         if(Input.GetKey(KeyCode.L))
         {
             if(!(isFPS))
             {
-                back_direction = - targetTf.forward;
+                back_direction = - playerTf.forward;
                 relation = new Vector3(back_direction.x, 0, back_direction.z);
                 relation = relation.normalized * xzOffset + new Vector3(0, yOffset, 0);
-                cameraPCDN = Rect2Polar(relation);
+                PCDN = Rect2Polar(relation);
                 // this.transform.rotation = Quaternion.Euler(60,Target.transform.localEulerAngles.y,0);
             }
             else
             {
-                relation = targetTf.forward;
-                cameraPCDN = Rect2Polar(relation);
+                relation = playerTf.forward;
+                PCDN = Rect2Polar(relation);
             }
             
         }
@@ -106,16 +102,18 @@ public class CameraMove : MonoBehaviour
         if(isFPS){
             float view = cam.fieldOfView - 0.5f*Input.GetAxis("Ctrl-Shift_Right");
             cam.fieldOfView = Mathf.Clamp(value : view, min : 1f, max : 90f);
+
+            shooting.direction = this.transform.forward;
         }
         else{
-            cameraPCDN.r -= 0.5f*Input.GetAxis("Ctrl-Shift_Right");
-            cameraPCDN.r = Mathf.Clamp(cameraPCDN.r, 0.5f, 100f);
+            PCDN.r -= 0.5f*Input.GetAxis("Ctrl-Shift_Right");
+            PCDN.r = Mathf.Clamp(PCDN.r, 0.5f, 100f);
         }
 
-        relation = Polar2Rect(cameraPCDN);
+        relation = Polar2Rect(PCDN);
         // Debug.Log(relation);
 
-        this.transform.position = targetPosition + relation;
+        this.transform.position = playerTf.position + relation;
         direction = (isFPS)? relation : -relation;
         this.transform.rotation = Quaternion.LookRotation(direction);    //向きベクトルを与えて回転
 
@@ -149,14 +147,27 @@ public class CameraMove : MonoBehaviour
         //doubleDownCount = 0;
         //if(!switchFlag) { return; }
 
-        isFPS = (isFPS)? false : true;
-        Vector3 lastRelation = this.transform.position - targetPosition;
-        relation = (isFPS)? -lastRelation.normalized : -normalDistance*lastRelation;
-        if(isFPS) normalDistance = lastRelation.magnitude;//FPS切替時、切替前の距離を記憶しておく
-        cameraPCDN = Rect2Polar(relation);
+        isFPS = ! isFPS;
+        Vector3 lastRelation = this.transform.position - playerTf.position;
+
+        if (isFPS)
+        {
+            relation = - lastRelation.normalized;
+            lastDistance = lastRelation.magnitude;//FPS切替時、切替前の距離を記憶しておく
+            shooting.freeDirection = false;
+            AimObj.SetActive(true);
+        }
+        else
+        {
+            relation = - lastDistance * lastRelation;
+            shooting.freeDirection = true;
+            AimObj.SetActive(false);
+        }
+        
+        PCDN = Rect2Polar(relation);
 
         cam.fieldOfView = defaultFOV;
 
-        AimObj.SetActive(isFPS);
+        
     }
 }

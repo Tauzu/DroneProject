@@ -9,7 +9,7 @@ public class DroneController : MonoBehaviour
 {
     Drone drone;
 
-    GameObject barrierObj;
+    //GameObject barrierObj;
     GameObject magnetObj;
 
     Transform cameraTf;
@@ -19,7 +19,7 @@ public class DroneController : MonoBehaviour
     {
         drone = this.GetComponent<Drone>();
 
-        barrierObj = this.transform.Find("Barrier").gameObject;
+        //barrierObj = this.transform.Find("Barrier").gameObject;
         magnetObj = this.transform.Find("MagneticField").gameObject;
 
         cameraTf = GameObject.Find("Main Camera").transform;
@@ -29,6 +29,7 @@ public class DroneController : MonoBehaviour
     void Update()
     {
         float inputForward = Input.GetAxis("W-S");
+        //Debug.Log(inputForward);
         float inputSide = Input.GetAxis("D-A");
         Vector3 cameraFwd = cameraTf.forward;
         Vector3 cameraRgt = cameraTf.right;
@@ -54,7 +55,7 @@ public class DroneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E)) magnetObj.SetActive(!magnetObj.activeSelf);
 
         //if (Input.GetKey(KeyCode.X)) DM.HeavyRotate();
-        barrierObj.SetActive(Input.GetKey(KeyCode.X));
+        //barrierObj.SetActive(Input.GetKey(KeyCode.X));
 
     }
 

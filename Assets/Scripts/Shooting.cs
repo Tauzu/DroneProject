@@ -16,21 +16,20 @@ public class Shooting : MonoBehaviour
 
     [System.NonSerialized]  //publicだがインスペクター上には表示しない
     public bool isCharging;
-
     [System.NonSerialized]  //publicだがインスペクター上には表示しない
     public float gradLocation;
 
-    GameObject cameraObj;
-    CameraMove CMscript;
-
-    private Rigidbody thisRbody;
+    Rigidbody thisRbody;
 
     public GameObject simulatorObj; // 弾道予測オブジェクト
-    private BallSimulator _ballSimurator; // 弾道予測線
+    BallSimulator _ballSimurator; // 弾道予測線
 
     Renderer rend;
     Color defaultColor;
     Gradient grad = new Gradient();
+
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
+    public bool isSpecial = false;
 
     GameObject SAParticle;
     float specialTimeLimit;
@@ -38,10 +37,13 @@ public class Shooting : MonoBehaviour
     AudioSource audioSrc;
     public AudioClip shotSE;
 
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
+    public bool freeDirection = true;
+    [System.NonSerialized]  //publicだがインスペクター上には表示しない
+    public Vector3 direction;
+
     // Use this for initialization
     void Start () {
-		cameraObj = GameObject.Find("Main Camera");
-        CMscript = cameraObj.GetComponent<CameraMove>();
         thisRbody = this.GetComponent<Rigidbody>();
 
         audioSrc = this.GetComponent<AudioSource>();
@@ -72,8 +74,9 @@ public class Shooting : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        Vector3 direction = (CMscript.isFPS)? cameraObj.transform.forward : this.transform.forward;
-        Vector3 shotVelocity = (SAParticle == null)? direction * targetSpeed : direction * targetSpeed*2f;
+        if (freeDirection) { direction = this.transform.forward; }
+
+        Vector3 shotVelocity = (! isSpecial)? direction * targetSpeed : direction * targetSpeed*2f;
         gradLocation = (targetSpeed - defaultSpeed) / (maxSpeed - defaultSpeed);
         // if(CMscript.isFPS) _ballSimurator.Simulate(this.transform.position , shotVelocity);
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
@@ -81,8 +84,7 @@ public class Shooting : MonoBehaviour
         // キーから指を離した時
         if (Input.GetKeyUp(KeyCode.Z)){
             // 弾丸の複製
-            GameObject clone = (SAParticle == null)?  Instantiate(bullet) as GameObject
-                 : Instantiate(specialBullet) as GameObject;
+            GameObject clone = (! isSpecial)?  Instantiate(bullet) : Instantiate(specialBullet);
 
             clone.transform.position = this.transform.position + direction;
 
@@ -113,14 +115,19 @@ public class Shooting : MonoBehaviour
 
         }
 
-        if (SAParticle != null){
+        if (isSpecial){
             specialTimeLimit -= Time.deltaTime;
             // Debug.Log(specialTimeLimit);
-            if(specialTimeLimit < 0f) Destroy(SAParticle);
+            if (specialTimeLimit < 0f)
+            {
+                isSpecial = false;
+                Destroy(SAParticle);
+            }
         }
 		
 	}
 
+    //SpecialAmezonParticleが子オブジェクトにあるかどうか1秒ごとにチェックする
     IEnumerator CheckSpecial()
     {
         while (true) {
@@ -129,10 +136,11 @@ public class Shooting : MonoBehaviour
             if (SAParticleTf != null && SAParticle == null)//検索に成功し、かつ現在Particleを参照できていない場合
             {
                 SAParticle = SAParticleTf.gameObject;
+                isSpecial = true;
                 specialTimeLimit = 30f;
             }
 
-            //待機
+            //1秒ごとにチェック
             yield return new WaitForSeconds(1f);
 
         }

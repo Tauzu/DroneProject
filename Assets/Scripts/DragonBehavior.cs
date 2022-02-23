@@ -157,6 +157,7 @@ public class DragonBehavior : MonoBehaviour
         HP -= damage;
         slider.value = (float)HP / (float)100;
         rbody.velocity = Vector3.zero;
+        rbody.angularVelocity = Vector3.zero;
 
         if (HP > 0)
         {

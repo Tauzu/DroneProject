@@ -4,14 +4,46 @@ using UnityEngine;
 
 public class ChildDroneController : MonoBehaviour
 {
-    List<Drone> dmList = new List<Drone>();
+    //List<Drone> dmList = new List<Drone>();
     Drone mainDrone;
+    Shooting mainShooting;
     GameObject dronePrefab;
+
+    struct ChildDrone
+    {
+        public Drone drone;
+        public Shooting shooting;
+        Vector3 initialPosition;
+
+        public ChildDrone(Drone drone, Shooting shooting, Vector3 initialPosition, Vector3 parentPosition)
+        {
+            this.drone = drone;
+            this.shooting = shooting;
+            this.shooting.freeDirection = false;
+            this.initialPosition = initialPosition;
+            this.drone.transform.position = initialPosition + parentPosition;
+        }
+
+        public Vector3 GetTargetVector3D(Vector3 parentPosition)
+        {
+            return this.initialPosition + parentPosition - this.drone.transform.position;
+        }
+    };
+
+    List<ChildDrone> cdList = new List<ChildDrone>();
+
+    Vector3[] initialArray = new Vector3[] {
+        new Vector3(-1f, 0f, -1f),
+        new Vector3(1f, 0f, -1f),
+        new Vector3(-1f, 0f, 1f),
+        new Vector3(1f, 0f, 1f)
+    };
 
     // Start is called before the first frame update
     void Start()
     {
         mainDrone = this.GetComponent<Drone>();
+        mainShooting = this.GetComponent<Shooting>();
         dronePrefab = (GameObject)Resources.Load("Drone");
     }
 
@@ -21,31 +53,41 @@ public class ChildDroneController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             GameObject clone = Instantiate(dronePrefab);
-            clone.transform.position = this.transform.position + 4f * new Vector3(
-                Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)
+
+            int numChild = cdList.Count;
+
+            Vector3 initialPosition = 2 * (numChild / 4 + 1) * initialArray[numChild % 4];
+
+            //dmList.Add(clone.GetComponent<Drone>());
+            cdList.Add(
+                new ChildDrone(
+                    clone.GetComponent<Drone>(),
+                    clone.GetComponent<Shooting>(), 
+                    initialPosition, mainDrone.transform.position
+                    )
                 );
-            dmList.Add(clone.GetComponent<Drone>());
+
         }
 
-        foreach (Drone drone in dmList)
+        //foreach (Drone drone in dmList)
+        foreach (ChildDrone child in cdList)
         {
-            Vector2 targetVector = new Vector2(
-                mainDrone.transform.position.x - drone.transform.position.x,
-                mainDrone.transform.position.z - drone.transform.position.z
-                );
-            if (targetVector.magnitude < 4f)
+            Vector3 targetVector3D = child.GetTargetVector3D(mainDrone.transform.position);
+            Vector2 targetVector = new Vector2(targetVector3D.x, targetVector3D.z);
+            float distance = targetVector.magnitude;
+
+            targetVector = targetVector.normalized;
+            if (distance < 5f)
             {
-                targetVector = Vector2.zero;
-            }
-            else
-            {
-                targetVector = targetVector.normalized;
+                targetVector = targetVector*(distance/5f);
             }
             
-            drone.targetVector = targetVector;
-            drone.targetHeight = mainDrone.transform.position.y;
-            drone.isHovering = mainDrone.isHovering;
-            drone.isBoosting = mainDrone.isBoosting;
+            child.drone.targetVector = targetVector;
+            child.drone.targetHeight = mainDrone.transform.position.y;
+            child.drone.isHovering = mainDrone.isHovering;
+            child.drone.isBoosting = mainDrone.isBoosting;
+
+            child.shooting.direction = mainShooting.direction;
         }
         
     }

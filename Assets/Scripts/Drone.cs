@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ドローンクラス
+
+//操縦は外部スクリプト（DroneController.cs）から、public変数にアクセスして行う。
+//FixedUpdateメソッド内で、public変数（コントローラーからの入力）に応じた物理演算を行って移動する。
+
 public class Drone : MonoBehaviour
 {
     //publicだがインスペクター上には表示しない
@@ -18,6 +23,7 @@ public class Drone : MonoBehaviour
 
     //=================================================================
 
+    //privateだがインスペクター上に表示
     [SerializeField]
     TextMesh faceText;
 
@@ -26,6 +32,9 @@ public class Drone : MonoBehaviour
 
     [SerializeField]
     Renderer bodyRenderer;
+
+    [SerializeField]
+    GameObject barrierObj;
 
     Transform tf;
     Rigidbody rbody;
@@ -58,10 +67,6 @@ public class Drone : MonoBehaviour
             return hoveringPow + this.pitchSign * pitchCtrlPow + this.rollSign * rollCtrlPow;
         }
 
-        //public void HeavyRotate()
-        //{
-        //    this.power += 100f * this.pitchSign;
-        //}
 
     };
 
@@ -69,10 +74,8 @@ public class Drone : MonoBehaviour
 
     Blade[] bladeArray = new Blade[numBlade];
 
-    float[] FwdY = new float[2];
-    float[] RgtY = new float[2];
-
-    float yaw;
+    float pitch_pre;
+    float roll_pre;
 
     Color defaultColor;
 
@@ -84,8 +87,8 @@ public class Drone : MonoBehaviour
     const float Kp = 5f;
     const float decay = 1f;
 
-    Vector3 positionMin = new Vector3(-200f, -10f, -200f);
-    Vector3 positionMax = new Vector3(200f, 10000f, 200f);
+    Vector3 positionMin = new Vector3(-100f, -10f, -100f);
+    Vector3 positionMax = new Vector3(200f, 900f, 300f);
 
     // Start is called before the first frame update
     void Start()
@@ -96,15 +99,14 @@ public class Drone : MonoBehaviour
         rbody.centerOfMass = Vector3.zero; //BodyBoxの中心を全体の重心とする（ブレードの質量は無視）
         // rbody = tf.Find("BodyMesh").gameObject.GetComponent<Rigidbody>();
 
-        bladeArray[0] = new Blade(tf.Find("blade1"), -1, 1);
-        bladeArray[1] = new Blade(tf.Find("blade2"), 1, 1);
-        bladeArray[2] = new Blade(tf.Find("blade3"), 1, -1);
-        bladeArray[3] = new Blade(tf.Find("blade4"), -1, -1);
+        bladeArray[0] = new Blade(tf.Find("blade1"), -1, -1);
+        bladeArray[1] = new Blade(tf.Find("blade2"), 1, -1);
+        bladeArray[2] = new Blade(tf.Find("blade3"), 1, 1);
+        bladeArray[3] = new Blade(tf.Find("blade4"), -1, 1);
 
         //faceText = tf.Find("PlayerTextFace").gameObject.GetComponent<TextMesh>();
 
-        FwdY[0] = tf.forward.y;
-        RgtY[0] = tf.right.y;
+        (pitch_pre, roll_pre) = this.GetAttitude();
 
         //rend = tf.Find("BodyMesh").gameObject.GetComponent<Renderer>();
         defaultColor = bodyRenderer.material.color;
@@ -134,6 +136,8 @@ public class Drone : MonoBehaviour
         //    bladeArray[i].SetPower(hoveringPower, pitchCtrlPower, rollCtrlPower);
         //}
 
+        barrierObj.SetActive(Input.GetKey(KeyCode.X));
+
         PositionClamp();
 
         BoostingChange();
@@ -143,13 +147,13 @@ public class Drone : MonoBehaviour
     {
         float inputMagnitude = targetVector.magnitude;
 
-        (bool isBacking, float directionCosine) = CalculateYaw(inputMagnitude);
+        (float yaw, bool isBacking, float directionCosine) = CalculateYaw(inputMagnitude);
 
         float hoveringPower = HoveringPower();
 
         (float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
             inputMagnitude, hoveringPower, isBacking, directionCosine
-            );
+        );
 
         float power;
         float maxPow = 0f;
@@ -175,11 +179,13 @@ public class Drone : MonoBehaviour
         Quaternion rot = Quaternion.AngleAxis(10f * yaw, tf.up);
         tf.rotation *= rot;
 
+        if (Input.GetKey(KeyCode.X)) { rbody.AddTorque(-1000f*tf.right); }
+
         targetHeight += 0.01f * (tf.position.y - targetHeight); //目標高さを、自分の高さに少し近づける（安定化のため）
 
     }
 
-    (bool, float) CalculateYaw(float inputMagnitude)
+    (float, bool, float) CalculateYaw(float inputMagnitude)
     {
         Vector2 forwardXZ = new Vector2(tf.forward.x, tf.forward.z).normalized;
         Vector2 rightXZ = new Vector2(tf.right.x, tf.right.z).normalized;
@@ -188,12 +194,12 @@ public class Drone : MonoBehaviour
         bool isBacking = (inner < -0.1f) ? true : false;
 
         //ヨー回転要求量
-        yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
+        float yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
                              : inputMagnitude * Mathf.Abs(1f - inner);     //前進時
         if (Vector2.Dot(rightXZ, targetVector) < 0f) yaw *= -1f;    //回転方向
         if (isBacking) yaw *= -1f;    //バック時は回転方向がさらに逆になる
 
-        return (isBacking, inner);
+        return (yaw, isBacking, inner);
 
     }
 
@@ -223,7 +229,7 @@ public class Drone : MonoBehaviour
             targetHeight += 0.2f*inputVertical;
             //targetHeight += Mathf.Max(0.5f*inputVertical, -0.2f);
 
-            power = -Kp * (tf.position.y - targetHeight) - decay * this.rbody.velocity.y;
+            power = Kp * (targetHeight - tf.position.y) - decay * this.rbody.velocity.y;
 
         }
         else    //ホバリングOFF時
@@ -262,12 +268,14 @@ public class Drone : MonoBehaviour
             if (isBoosting) targetSPD *= 2f;
             if (isBacking) targetSPD *= -1;
             float difference = (targetSPD - horizontalForwardSPD) / baseSpeed;//目標速度までの差の指標
-            targetAngle = 90f * -difference * Mathf.Abs(inner);
+            targetAngle = 90f * difference * Mathf.Abs(inner);
+            //Debug.Log("ON");
         }
         else
         {
             //前後方向自動ブレーキ
-            targetAngle = (isHovering)? 45f * horizontalForwardSPD / baseSpeed : 0f;
+            targetAngle = (isHovering)? - 45f * horizontalForwardSPD / baseSpeed : 0f;
+            //Debug.Log("OFF");
         }
 
         return targetAngle;
@@ -286,26 +294,37 @@ public class Drone : MonoBehaviour
 
     (float, float) AttitudeControl(float inputMagnitude, float hoveringPower, bool isBacking, float inner)
     {
-        FwdY[1] = tf.forward.y;
-        RgtY[1] = tf.right.y;
+        //pitch[1] = tf.forward.y;
+        //roll[1] = tf.right.y;
+        (float pitch, float roll) = this.GetAttitude();
 
-        //Debug.Log(hoveringPower);
-        
-        float tagretPitchAngle = Mathf.Clamp(TargetPitchAngle(inputMagnitude, isBacking, inner), -60f, 60f);
-        tagretPitchAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
-        float targetPitch = Mathf.Sin(tagretPitchAngle * Mathf.Deg2Rad);    //ピッチ姿勢制御
-        float pitchControlPOW = Kp * (FwdY[1] - targetPitch) + 0.3f * decay * (FwdY[1] - FwdY[0]) / Time.deltaTime;
+        float targetPitchAngle = Mathf.Clamp(TargetPitchAngle(inputMagnitude, isBacking, inner), -60f, 60f);
+        targetPitchAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
+        float targetPitch = targetPitchAngle * Mathf.Deg2Rad;    //ピッチ姿勢制御
+        float pitchControlPOW = Kp * (targetPitch - pitch) - 0.3f * decay * (pitch - pitch_pre) / Time.deltaTime;
+        //pitchControlPOW *= 0.1f;
+        //Debug.Log(pitch);
 
         float targetRollAngle = Mathf.Clamp(TargetRollAngle(), -60f, 60f);
         targetRollAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
-        float targetRoll = Mathf.Sin(targetRollAngle * Mathf.Deg2Rad);    //ロール姿勢制御
-        float rollControlPOW = Kp * (RgtY[1] - targetRoll) + 0.3f * decay * (RgtY[1] - RgtY[0]) / Time.deltaTime;
+        float targetRoll = targetRollAngle * Mathf.Deg2Rad;    //ロール姿勢制御
+        float rollControlPOW = Kp * (targetRoll - roll) - 0.3f * decay * (roll - roll_pre) / Time.deltaTime;
 
-        FwdY[0] = FwdY[1];
-        RgtY[0] = RgtY[1];
+        pitch_pre = pitch;
+        roll_pre = roll;
 
         return (pitchControlPOW, rollControlPOW);
 
+    }
+
+
+    (float, float) GetAttitude()
+    {
+        //0～360°のオイラー角を、-180～+180°に換算する
+        float pitch = (Mathf.Repeat(tf.rotation.eulerAngles.x + 180, 360) - 180) * Mathf.Deg2Rad;
+        float roll = (Mathf.Repeat(tf.rotation.eulerAngles.z + 180, 360) - 180) * Mathf.Deg2Rad;
+
+        return (pitch, roll);
     }
 
     //public void Up()   //上昇

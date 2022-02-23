@@ -10,7 +10,7 @@ public class StatusText : MonoBehaviour
     private float speed;
     private Rigidbody rbody;
     private Text statusText;
-    // DroneMove DMscript;
+    // DroneMove drone;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class StatusText : MonoBehaviour
         gameOB = GameObject.Find("Player");
         rbody = gameOB.GetComponent<Rigidbody>();
         statusText = this.GetComponent<Text>();
-        // DMscript = gameOB.GetComponent<DroneMove>();
+        // drone = gameOB.GetComponent<DroneMove>();
     }
 
     // Update is called once per frame
@@ -32,9 +32,9 @@ public class StatusText : MonoBehaviour
         statusText.text += speed.ToString("0.0") + " km/h\n";
         // statusText.text += "時速" + string.Format("{0,6D1}", speed) + " km/h\n";
 
-        // for(int i=0; i<DMscript.BladeNum; i++)
+        // for(int i=0; i<drone.BladeNum; i++)
         // {
-        //     statusText.text += DMscript.Blade[i].power.ToString("0.00") + "\n";
+        //     statusText.text += drone.Blade[i].power.ToString("0.00") + "\n";
         // }
         
     }

@@ -84,7 +84,11 @@ public class ClearProcess : MonoBehaviour
 
         CameraShift();
         clearText.text = "";
-        Destroy(GameObject.Find("MessageWindow"));
+
+        Text message = GameObject.Find("MessageText").GetComponent<Text>();
+        message.text = "オールクリアおめでとう！\nあとはご自由にどうぞ。\nあなたが守った町です。";
+        Destroy(GameObject.Find("MessageWindow"), 10f);
+
         Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
 
     }

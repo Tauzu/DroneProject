@@ -1030,6 +1030,7 @@ MonoBehaviour:
   faceText: {fileID: 7428779443717387206}
   hoveringTextObj: {fileID: 7428779443129532163}
   bodyRenderer: {fileID: 1546006935520925940}
+  barrierObj: {fileID: 1546006935972355928}
 --- !u!114 &7428779442376501500
 MonoBehaviour:
   m_ObjectHideFlags: 0

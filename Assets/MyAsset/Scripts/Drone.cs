@@ -21,6 +21,9 @@ public class Drone : MonoBehaviour
     [System.NonSerialized]
     public bool isBoosting = false;
 
+    public GameObject barrierObj;
+    public GameObject magnetObj;
+
     //=================================================================
 
     //privateだがインスペクター上に表示
@@ -32,9 +35,6 @@ public class Drone : MonoBehaviour
 
     [SerializeField]
     Renderer bodyRenderer;
-
-    [SerializeField]
-    GameObject barrierObj;
 
     Transform tf;
     Rigidbody rbody;
@@ -136,8 +136,6 @@ public class Drone : MonoBehaviour
         //    bladeArray[i].SetPower(hoveringPower, pitchCtrlPower, rollCtrlPower);
         //}
 
-        barrierObj.SetActive(Input.GetKey(KeyCode.X));
-
         PositionClamp();
 
         BoostingChange();
@@ -155,12 +153,11 @@ public class Drone : MonoBehaviour
             inputMagnitude, hoveringPower, isBacking, directionCosine
         );
 
-        float power;
         float maxPow = 0f;
         foreach (Blade blade in bladeArray)
         {
             //Debug.Log(blade.GetPower());
-            power = blade.GetPower(hoveringPower, pitchCtrlPower, rollCtrlPower);
+            float power = blade.GetPower(hoveringPower, pitchCtrlPower, rollCtrlPower);
 
             rbody.AddForceAtPosition(tf.up * coeff * power, blade.Position());
 

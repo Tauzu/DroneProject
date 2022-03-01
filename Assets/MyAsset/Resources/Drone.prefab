@@ -1027,10 +1027,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8471eeef3734e1e46acd2c295d798679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  barrierObj: {fileID: 1546006935972355928}
+  magnetObj: {fileID: 1546006934503056675}
   faceText: {fileID: 7428779443717387206}
   hoveringTextObj: {fileID: 7428779443129532163}
   bodyRenderer: {fileID: 1546006935520925940}
-  barrierObj: {fileID: 1546006935972355928}
 --- !u!114 &7428779442376501500
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -88,6 +88,9 @@ public class ChildDroneController : MonoBehaviour
             child.drone.isHovering = mainDrone.isHovering;
             child.drone.isBoosting = mainDrone.isBoosting;
 
+            child.drone.barrierObj.SetActive(mainDrone.barrierObj.activeSelf);
+            child.drone.magnetObj.SetActive(mainDrone.magnetObj.activeSelf);
+
             child.shooting.direction = mainShooting.direction;
         }
         

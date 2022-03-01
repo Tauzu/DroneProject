@@ -9,18 +9,12 @@ public class DroneController : MonoBehaviour
 {
     Drone drone;
 
-    //GameObject barrierObj;
-    GameObject magnetObj;
-
     Transform cameraTf;
 
     // Start is called before the first frame update
     void Start()
     {
         drone = this.GetComponent<Drone>();
-
-        //barrierObj = this.transform.Find("Barrier").gameObject;
-        magnetObj = this.transform.Find("MagneticField").gameObject;
 
         cameraTf = GameObject.Find("Main Camera").transform;
     }
@@ -52,10 +46,9 @@ public class DroneController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C)) drone.SwitchHovering(!drone.isHovering);
 
-        if (Input.GetKeyDown(KeyCode.E)) magnetObj.SetActive(!magnetObj.activeSelf);
+        if (Input.GetKeyDown(KeyCode.E)) drone.magnetObj.SetActive(!drone.magnetObj.activeSelf);
 
-        //if (Input.GetKey(KeyCode.X)) DM.HeavyRotate();
-        //barrierObj.SetActive(Input.GetKey(KeyCode.X));
+        drone.barrierObj.SetActive(Input.GetKey(KeyCode.X));
 
     }
 

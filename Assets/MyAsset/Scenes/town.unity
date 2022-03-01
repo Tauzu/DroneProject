@@ -41015,7 +41015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationObj:
-  - {fileID: 1276375942}
+  - {fileID: 1788252637}
   - {fileID: 1361079514}
   - {fileID: 1023335737}
   - {fileID: 302464132}
@@ -45126,7 +45126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249338911219049212, guid: e226cf60df1eb7e42a245b0a40767751, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7444406970927933955, guid: e226cf60df1eb7e42a245b0a40767751, type: 3}
       propertyPath: NextMission

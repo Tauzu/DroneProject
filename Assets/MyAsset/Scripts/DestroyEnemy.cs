@@ -6,17 +6,8 @@ using UnityEngine;
 //スコア加算と破片飛散演出
 
 
-public class DestroyEnemy : MonoBehaviour
+public class DestroyEnemy : DestroyScatter
 {
-    private Rigidbody rbody;
-
-    public string[] destroyTag = { "bullet" };
-
-    public GameObject Obj;
-    public int numObj = 10;
-    public float range = 1f;
-
-    public GameObject scorePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +28,7 @@ public class DestroyEnemy : MonoBehaviour
             if (other.gameObject.tag == tag)
             {
                 Destroy(other.gameObject);
-                ScatterAndDestroy();
+                Defeat();
             }
         }
 
@@ -49,13 +40,12 @@ public class DestroyEnemy : MonoBehaviour
         {
             if (other.gameObject.tag == tag)
             {
-                // Destroy(other.gameObject);
-                ScatterAndDestroy();
+                Defeat();
             }
         }
     }
 
-    void popupScore()
+    void PopupScore()
     {
         GameObject cameraObj = GameObject.Find("Main Camera");
         Vector3 direction = this.transform.position - cameraObj.transform.position;
@@ -63,29 +53,16 @@ public class DestroyEnemy : MonoBehaviour
         int score = (int)(distance * distance / 1000f) * 100;
         score = Mathf.Clamp(score, 100, score);
 
-        GameObject clone = Instantiate(scorePrefab) as GameObject;
-        clone.GetComponent<PopupScore>().SetScore(score, this.transform.position + Vector3.up);
+        GameObject scoreObj = Instantiate((GameObject)Resources.Load("Score3DText"));
+        scoreObj.GetComponent<PopupScore>().SetScore(score, this.transform.position + Vector3.up);
 
     }
 
-    void ScatterAndDestroy()
+    void Defeat()
     {
-        float delta = range / numObj;
-        for(int i=0; i<numObj; i++)
-        {
-            GameObject clone = Instantiate(Obj);
-            clone.transform.position = this.transform.position + new Vector3(Random.Range(-1f, 1f), delta*i, Random.Range(-1f, 1f));
-            rbody = clone.GetComponent<Rigidbody>();
-            rbody.isKinematic = false;
-            var vect = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 2f), Random.Range(-1f, 1f));
-            rbody.AddForce(10f*vect, ForceMode.VelocityChange);
-            rbody.AddTorque(1000f*vect, ForceMode.VelocityChange);
-
-            Destroy(clone, 5.0f);
-        }
-
-        popupScore();
-        Destroy(this.gameObject);
+        PopupScore();
+        ScatterAndDestroy();
     }
+
 
 }

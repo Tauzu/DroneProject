@@ -9,7 +9,7 @@ public class FirstActivate : MonoBehaviour
     //public GameObject PlayerPrefab;
     //public int numClone;
 
-    FPS_counter FPS_script;
+    public FPS_counter fps_counter;
     GameObject startButton;
 
     public AudioSource audioSrc;
@@ -21,15 +21,13 @@ public class FirstActivate : MonoBehaviour
         //playerObj = GameObject.Find("Player");
         // drone.enabled = false;   //ドローン制御をオフにする(処理が安定するのを待つ)
 
-        FPS_script = GameObject.Find("GameController").GetComponent<FPS_counter>();
-
         startButton = transform.Find("TitleCanvas/StartButton").gameObject;
 
     }
 
     void Update()
     {
-        if(FPS_script.fps > 45f && !startButton.activeSelf)
+        if(fps_counter.get_FPS() > 45f && !startButton.activeSelf)
         {
             startButton.SetActive(true);   //FPSが45を超えたらスタートボタン表示
 

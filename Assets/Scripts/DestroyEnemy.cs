@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//敵に弾丸が当たった時の処理。
+//スコア加算と破片飛散演出
+
+
 public class DestroyEnemy : MonoBehaviour
 {
     private Rigidbody rbody;

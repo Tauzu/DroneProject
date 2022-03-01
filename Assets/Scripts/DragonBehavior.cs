@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.Rendering;    //Rendering用
 using UnityEngine.UI;   //Slider用
 
+//ドラゴンの挙動制御クラス
+//Unityアセットストアの「FreeDragons」のプレハブを使用する。
+//プレハブ内のアニメーターを適宜切り替える。
+//基本的にRigidBodyの物理演算で動く（重力無視）。
+
 public class DragonBehavior : MonoBehaviour
 {
     Animator animator;

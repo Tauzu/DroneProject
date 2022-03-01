@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // <--忘れがち
 
+//ミッションクリア時の演出を行う。
+
 public class ClearProcess : MonoBehaviour
 {
     public GameObject fireworkPrefab;

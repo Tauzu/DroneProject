@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;   //Slider用
 
+//弾丸のチャージ具合をスライダーで表現する。
+
 public class ChargeSliderManager : MonoBehaviour
 {
     Shooting shootingScript;

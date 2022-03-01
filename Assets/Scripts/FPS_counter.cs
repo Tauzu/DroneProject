@@ -8,8 +8,7 @@ public class FPS_counter : MonoBehaviour
     int frameCount;
     float prevTime;
     
-    [System.NonSerialized]  //publicだがインスペクター上には表示しない
-    public float fps;
+    float fps;
 
     // 初期化処理
     void Start()
@@ -33,6 +32,11 @@ public class FPS_counter : MonoBehaviour
             prevTime = Time.realtimeSinceStartup;
         }
 
+    }
+
+    public float get_FPS()
+    {
+        return fps;
     }
 
     // 表示処理

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//宅配物（AmezonBox）クラス
+//町の建物の中からひとつランダムに選び、そこを目的地とする。
+
 public class AmezonBoxBehavior : MonoBehaviour
 {
-    private GameObject targetObj;
+    GameObject targetObj;
 
-    public GameObject targetEffect;
-    private GameObject effectClone;
+    GameObject effectClone;
     Transform playerTf;
     public GameObject scorePrefab;
 
@@ -16,6 +18,8 @@ public class AmezonBoxBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //目的地にパーティクル（目印かつ当たり判定）を配置する。
+        GameObject targetEffect = (GameObject)Resources.Load("TargetParticle");
         effectClone = Instantiate(targetEffect);
         // effectClone.transform.parent = this.transform;
 

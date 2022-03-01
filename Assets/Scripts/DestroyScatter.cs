@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//破壊可能なゲームオブジェクトの破壊処理。
+//指定されたオブジェクトをばらまき、自身は消滅する。
+
 public class DestroyScatter : MonoBehaviour
 {
     private Rigidbody rbody;

@@ -6,6 +6,7 @@ public class GameOver : MonoBehaviour
 {
     public GameObject missionObj;
     public Light directionalLight;
+    public AudioSource audioSrc;
 
     // Start is called before the first frame update
     void Start()
@@ -13,6 +14,7 @@ public class GameOver : MonoBehaviour
         directionalLight.color = Color.red;
         Destroy(missionObj);
         Camera.main.enabled = false;
+        audioSrc.Stop();
     }
 
     // Update is called once per frame

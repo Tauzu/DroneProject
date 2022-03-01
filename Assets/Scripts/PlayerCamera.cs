@@ -33,7 +33,7 @@ public class PlayerCamera : MonoBehaviour
     //private Vector3 axis;
     public float speed = 2;
 
-    public bool Reverce;
+    public bool reverce = false;
 
     bool isFPS;
 
@@ -63,7 +63,7 @@ public class PlayerCamera : MonoBehaviour
     {
         signSide = Input.GetAxis ("Horizontal");
         if(!isFPS){
-            signSide *= (Reverce)? -1 : 1;
+            signSide *= (reverce)? -1 : 1;
         }
         PCDN.phi -= 0.01f * speed * signSide;
 

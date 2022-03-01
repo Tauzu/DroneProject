@@ -12,12 +12,12 @@ public class ScoreManager : MonoBehaviour
 
     public GameObject gameOverObj;
 
-    ReloadScene reload;
+    //ReloadScene reload;
 
     // Start is called before the first frame update
     void Start()
     {
-        reload = GetComponent<ReloadScene>();
+        //reload = GetComponent<ReloadScene>();
     }
 
     // Update is called once per frame

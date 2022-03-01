@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 敵を出現させる（コルーチン使用）
+
 public class CreateEnemy : MonoBehaviour
 {
     public GameObject EnemyPrefab;

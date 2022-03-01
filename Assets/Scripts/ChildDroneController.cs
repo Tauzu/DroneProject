@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//子ドローンを生成する。ただのおまけ要素です。
 public class ChildDroneController : MonoBehaviour
 {
     //List<Drone> dmList = new List<Drone>();

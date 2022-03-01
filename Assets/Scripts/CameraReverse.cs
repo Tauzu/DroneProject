@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//カメラのリバースを切り替える。
+
 public class CameraReverse : MonoBehaviour
 {
     PlayerCamera playerCamera;
@@ -30,8 +32,7 @@ public class CameraReverse : MonoBehaviour
 
         }
 
-        timer -= Time.deltaTime;
-        if (timer < 0f) noticeReset();
+        if (timer > 0f) { timer -= Time.deltaTime; } else { noticeReset(); }
     }
 
     void noticeReset()

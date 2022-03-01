@@ -7,9 +7,8 @@ using UnityEngine;
 
 public class BallSimulator : MonoBehaviour {
 
-    private const int SIMULATE_COUNT = 25; // シュミレート点数
+    private const int SIMULATE_COUNT = 25; // シュミレートする点の個数
 
-    // private List<GameObject> simuratePointArray; // シュミレートするゲームオブジェクトリスト
     Vector3[] simuratePointArray; // シュミレートするpoint_array
 
     LineRenderer lineRenderer;
@@ -33,6 +32,8 @@ public class BallSimulator : MonoBehaviour {
 
     }
 
+    //外部スクリプト（Shooting.cs）からこの関数を呼び出して使う
+    //引数は、弾の初期位置と初速度、およびレンダリングの色の度合い
     public void Simulate(Vector3 initialPosition , Vector3 initialVelocity, float gradLocation)
     {
         //軌道を2次曲線として描く。

@@ -7,8 +7,6 @@ using UnityEngine;
 
 public class DestroyScatter : MonoBehaviour
 {
-    private Rigidbody rbody;
-
     public string[] destroyTag = { "bullet" };
 
     public GameObject Obj;
@@ -54,11 +52,11 @@ public class DestroyScatter : MonoBehaviour
     void ScatterAndDestroy()
     {
         float delta = range / numObj;
-        for(int i=0; i<numObj; i++)
+        for (int i=0; i<numObj; i++)
         {
             GameObject clone = Instantiate(Obj);
             clone.transform.position = this.transform.position + new Vector3(Random.Range(-1f, 1f), delta*i, Random.Range(-1f, 1f));
-            rbody = clone.GetComponent<Rigidbody>();
+            Rigidbody rbody = clone.GetComponent<Rigidbody>();
             rbody.isKinematic = false;
             var vect = new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 2f), Random.Range(-1f, 1f));
             rbody.AddForce(10f*vect, ForceMode.VelocityChange);

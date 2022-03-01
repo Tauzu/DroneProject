@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ゲームオーバー時の処理
 public class GameOver : MonoBehaviour
 {
     public GameObject missionObj;

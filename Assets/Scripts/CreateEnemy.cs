@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 敵を出現させる（コルーチン使用）
+// 敵を周期的に出現させる（コルーチン使用）
 
 public class CreateEnemy : MonoBehaviour
 {

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレーヤー追従カメラの挙動。
+//極座標を用いてプレーヤーの周囲の座標を決定する。
+
 public class PlayerCamera : MonoBehaviour
 {
     public GameObject playerObj;
@@ -12,20 +15,44 @@ public class PlayerCamera : MonoBehaviour
 
     Camera cam;
 
-    Vector3 back_direction;
-    Vector3 direction;
-    Vector3 relation;
-
     float xzOffset;
     float yOffset;
-    float signSide;
-    float signTop;
 
+    //極座標構造体
     struct PolarCoordinates
     {
-        public float r;
-        public float theta;
-        public float phi;
+        float theta;
+        float phi;
+        float r;
+
+        public PolarCoordinates(Vector3 rectangular)
+        {
+            this.theta = Mathf.Acos(rectangular.y / rectangular.magnitude);
+            this.phi = Mathf.Atan2(rectangular.z, rectangular.x); //xがゼロの場合も考慮するArcTangent
+            this.r = rectangular.magnitude;
+        }
+
+        public PolarCoordinates Delta(float dtheta, float dphi, float dr)
+        {
+            PolarCoordinates polar;
+
+            polar.theta = Mathf.Clamp(this.theta + dtheta, 0.1f, 0.9f * Mathf.PI);
+            polar.phi = this.phi + dphi;
+            polar.r = Mathf.Clamp(this.r + dr, 0.5f, 100f); 
+
+            return polar;
+        }
+
+        public Vector3 Rectagular()
+        {
+            Vector3 rectangular;
+
+            rectangular.y = this.r * Mathf.Cos(this.theta);
+            rectangular.x = this.r * Mathf.Sin(this.theta) * Mathf.Cos(this.phi);
+            rectangular.z = this.r * Mathf.Sin(this.theta) * Mathf.Sin(this.phi);
+
+            return rectangular;
+        }
     };
 
     PolarCoordinates PCDN;
@@ -35,11 +62,10 @@ public class PlayerCamera : MonoBehaviour
 
     public bool reverce = false;
 
-    bool isFPS;
+    bool isFPS = false;
 
     float lastDistance;
     float defaultFOV;
-
 
     // Start is called before the first frame update
     void Start()
@@ -50,45 +76,66 @@ public class PlayerCamera : MonoBehaviour
         cam = GetComponent<Camera>();
         defaultFOV = cam.fieldOfView;
 
-        relation = this.transform.position - playerTf.position;
+        Vector3 relation = this.transform.position - playerTf.position;
         xzOffset = new Vector2(relation.x, relation.z).magnitude;
         yOffset = relation.y;
 
-        PCDN = Rect2Polar(relation);
+        PCDN = new PolarCoordinates(relation);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        signSide = Input.GetAxis ("Horizontal");
-        if(!isFPS){
-            signSide *= (reverce)? -1 : 1;
-        }
-        PCDN.phi -= 0.01f * speed * signSide;
+        Vector3 relation;
 
-        signTop = Input.GetAxis ("Vertical");
-        //axis = this.transform.right;
-        PCDN.theta -= 0.01f * speed * signTop;
-        PCDN.theta = Mathf.Clamp(PCDN.theta, 0.1f, 0.9f*Mathf.PI);
-
-
-        if(Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.L))
         {
-            if(!(isFPS))
+
+            if (!(isFPS))
             {
-                back_direction = - playerTf.forward;
+                Vector3 back_direction = - playerTf.forward;
                 relation = new Vector3(back_direction.x, 0, back_direction.z);
                 relation = relation.normalized * xzOffset + new Vector3(0, yOffset, 0);
-                PCDN = Rect2Polar(relation);
+
                 // this.transform.rotation = Quaternion.Euler(60,Target.transform.localEulerAngles.y,0);
             }
             else
             {
                 relation = playerTf.forward;
-                PCDN = Rect2Polar(relation);
+
             }
-            
+
+            PCDN = new PolarCoordinates(relation);
+
+        }
+        else
+        {
+            float dphi = -0.01f * speed * Input.GetAxis("Horizontal");
+            if (!isFPS && reverce) dphi *= -1f;
+
+            float dtheta = -0.01f * speed * Input.GetAxis("Vertical");
+
+            float dr;
+            float inputZoom = Input.GetAxis("Ctrl-Shift_Right");
+            if (isFPS)
+            {
+                float view = cam.fieldOfView - 0.5f * inputZoom;
+                cam.fieldOfView = Mathf.Clamp(value: view, min: 1f, max: 90f);
+
+                shooting.direction = this.transform.forward;
+
+                dr = 0f;
+            }
+            else
+            {
+                dr = -0.5f * inputZoom;
+            }
+
+            PCDN = PCDN.Delta(dtheta, dphi, dr);
+
+            relation = PCDN.Rectagular();
+
         }
 
         if (Input.GetKeyDown(KeyCode.Return)) SwitchFPS();  //Return:EnterKey
@@ -99,47 +146,14 @@ public class PlayerCamera : MonoBehaviour
         //    Invoke("SwitchFPS",0.3f);
         //}
 
-        if(isFPS){
-            float view = cam.fieldOfView - 0.5f*Input.GetAxis("Ctrl-Shift_Right");
-            cam.fieldOfView = Mathf.Clamp(value : view, min : 1f, max : 90f);
-
-            shooting.direction = this.transform.forward;
-        }
-        else{
-            PCDN.r -= 0.5f*Input.GetAxis("Ctrl-Shift_Right");
-            PCDN.r = Mathf.Clamp(PCDN.r, 0.5f, 100f);
-        }
-
-        relation = Polar2Rect(PCDN);
         // Debug.Log(relation);
 
         this.transform.position = playerTf.position + relation;
-        direction = (isFPS)? relation : -relation;
-        this.transform.rotation = Quaternion.LookRotation(direction);    //向きベクトルを与えて回転
+        Vector3 direction = (isFPS)? relation : -relation;
+        this.transform.rotation = Quaternion.LookRotation(direction);
 
     }
 
-    PolarCoordinates Rect2Polar(Vector3 rectangular)
-    {
-        PolarCoordinates polar;
-
-        polar.theta = Mathf.Acos(rectangular.y / rectangular.magnitude);
-        polar.phi = Mathf.Atan2(rectangular.z, rectangular.x); //xがゼロの場合も考慮するArcTangent
-        polar.r = rectangular.magnitude;
-
-        return polar;
-    }
-
-    Vector3 Polar2Rect(PolarCoordinates polar)
-    {
-        Vector3 rectangular;
-
-        rectangular.y = polar.r * Mathf.Cos(polar.theta);
-        rectangular.x = polar.r * Mathf.Sin(polar.theta) * Mathf.Cos(polar.phi);
-        rectangular.z = polar.r * Mathf.Sin(polar.theta) * Mathf.Sin(polar.phi);
-
-        return rectangular;
-    }
 
     void SwitchFPS()
     {
@@ -150,6 +164,7 @@ public class PlayerCamera : MonoBehaviour
         isFPS = ! isFPS;
         Vector3 lastRelation = this.transform.position - playerTf.position;
 
+        Vector3 relation;
         if (isFPS)
         {
             relation = - lastRelation.normalized;
@@ -164,7 +179,7 @@ public class PlayerCamera : MonoBehaviour
             AimObj.SetActive(false);
         }
         
-        PCDN = Rect2Polar(relation);
+        PCDN = new PolarCoordinates(relation);
 
         cam.fieldOfView = defaultFOV;
 

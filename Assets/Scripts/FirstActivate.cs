@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ゲーム開始（Startボタンクリック）時に指定ゲームオブジェクトをActivateする
+
 public class FirstActivate : MonoBehaviour
 {
     public GameObject[] activationObj;

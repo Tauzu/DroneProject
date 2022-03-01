@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//爆弾を投下する。敵の挙動スクリプト。
+
 public class DropBomb : MonoBehaviour
 {
     public GameObject BombPrefab;

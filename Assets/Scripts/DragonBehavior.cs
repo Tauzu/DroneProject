@@ -5,7 +5,7 @@ using UnityEngine.Rendering;    //Rendering用
 using UnityEngine.UI;   //Slider用
 
 //ドラゴンの挙動制御クラス
-//Unityアセットストアの「FreeDragons」のプレハブを使用する。
+//Unityアセットストアの「FreeDragons」を借用している。
 //プレハブ内のアニメーターを適宜切り替える。
 //基本的にRigidBodyの物理演算で動く（重力無視）。
 
@@ -29,8 +29,7 @@ public class DragonBehavior : MonoBehaviour
     bool isFloating;
 
     public float speed = 10f;
-    Vector3 targetVelocity;
-    Vector3 relation;
+
     SphereCollider sphereCollider;
     Transform pelvisTf;
 
@@ -69,34 +68,6 @@ public class DragonBehavior : MonoBehaviour
 
         sphereCollider.center = pelvisTf.localPosition + Vector3.forward;
 
-        if (targetObj == null)
-        {
-            // targetObj = GameObject.FindWithTag("Building");
-            GameObject[] Buildings = GameObject.FindGameObjectsWithTag("Building");
-
-            if (Buildings.Length > 0)
-            {
-                targetObj = Buildings[Random.Range(0, Buildings.Length)];
-                //GameObject clone = Instantiate(particleObj);
-                //clone.transform.position = targetObj.transform.position;
-            }
-
-
-        }
-        else
-        {
-            // ターゲット方向のベクトルを取得
-            relation = new Vector3(targetObj.transform.position.x, 10f, targetObj.transform.position.z) 
-                - this.transform.position;
-            Vector3 direction = relation - 30f * new Vector3(relation.x, 0f, relation.z).normalized;
-
-            float targetSpeed = Mathf.Clamp(direction.magnitude, 0f, speed);
-            targetVelocity = targetSpeed * direction.normalized;
-
-            //this.transform.LookAt(targetObj.transform);    //向きベクトルを与えて回転
-
-        }
-
         hitLimit -= Time.deltaTime;
 
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f));//回転をy軸に限定
@@ -106,16 +77,40 @@ public class DragonBehavior : MonoBehaviour
     {
         if (isFloating)
         {
-            //this.transform.Rotate(new Vector3(0f, 0.1f, 0f));
+            if (targetObj == null)
+            {
+                // targetObj = GameObject.FindWithTag("Building");
+                GameObject[] Buildings = GameObject.FindGameObjectsWithTag("Building");
 
-            //Debug.Log(relativePos.magnitude);
-            //this.transform.position += this.transform.forward * Mathf.Clamp(relativePos.magnitude - 30f, -0.1f, 0.1f);
-            rbody.AddForce(0.1f*(targetVelocity - rbody.velocity), ForceMode.Acceleration);
+                if (Buildings.Length > 0)
+                {
+                    targetObj = Buildings[Random.Range(0, Buildings.Length)];
+                    //GameObject clone = Instantiate(particleObj);
+                    //clone.transform.position = targetObj.transform.position;
+                }
 
-            // 方向を、回転情報に変換
-            Quaternion rotation = Quaternion.LookRotation(relation.normalized);
-            // 現在の回転情報と、ターゲット方向の回転情報を補完する
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, 0.01f);
+
+            }
+            else
+            {
+                // ターゲット方向のベクトルを取得
+                Vector3 relation = new Vector3(targetObj.transform.position.x, 10f, targetObj.transform.position.z)
+                    - this.transform.position;
+                Vector3 direction = relation - 30f * new Vector3(relation.x, 0f, relation.z).normalized;
+
+                float targetSpeed = Mathf.Clamp(direction.magnitude, 0f, speed);
+                Vector3 targetVelocity = targetSpeed * direction.normalized;
+
+                //Debug.Log(relativePos.magnitude);
+                //this.transform.position += this.transform.forward * Mathf.Clamp(relativePos.magnitude - 30f, -0.1f, 0.1f);
+                rbody.AddForce(0.1f * (targetVelocity - rbody.velocity), ForceMode.Acceleration);
+
+                // 方向を、回転情報に変換
+                Quaternion rotation = Quaternion.LookRotation(relation.normalized);
+                // 現在の回転情報と、ターゲット方向の回転情報を補完する
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, 0.01f);
+
+            }
 
         }
 

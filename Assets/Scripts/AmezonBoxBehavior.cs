@@ -69,6 +69,7 @@ public class AmezonBoxBehavior : MonoBehaviour
 
     }
 
+    //目的地に触れた（宅配完了）時の処理
     void Success()
     {
         GameObject clone = Instantiate(scorePrefab) as GameObject;

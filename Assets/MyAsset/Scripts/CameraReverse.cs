@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//ƒJƒƒ‰‚ÌƒŠƒo[ƒX‚ğØ‚è‘Ö‚¦‚éB
+//ã‚«ãƒ¡ãƒ©ã®ãƒªãƒãƒ¼ã‚¹ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã€‚
 
 public class CameraReverse : MonoBehaviour
 {
@@ -26,7 +26,7 @@ public class CameraReverse : MonoBehaviour
             playerCamera.reverce = !playerCamera.reverce;
 
             noticeText.text = (playerCamera.reverce) ? 
-                "ƒJƒƒ‰ƒŠƒo[ƒX‚ª ON ‚É‚È‚è‚Ü‚µ‚½I" : "ƒJƒƒ‰ƒŠƒo[ƒX‚ª OFF ‚É‚È‚è‚Ü‚µ‚½I";
+                "ã‚«ãƒ¡ãƒ©ãƒªãƒãƒ¼ã‚¹ãŒ ON ã«ãªã‚Šã¾ã—ãŸï¼" : "ã‚«ãƒ¡ãƒ©ãƒªãƒãƒ¼ã‚¹ãŒ OFF ã«ãªã‚Šã¾ã—ãŸï¼";
 
             timer = 3f;
 

@@ -1,8 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//qƒIƒuƒWƒFƒNƒg‚ª‚È‚­‚È‚Á‚½‚ç©•ª‚àÁ‚¦‚é
+//å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒãªããªã£ãŸã‚‰è‡ªåˆ†ã‚‚æ¶ˆãˆã‚‹
 
 public class DieWithChildren : MonoBehaviour
 {

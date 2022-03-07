@@ -1,7 +1,7 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--–Y‚ê‚ª‚¿
+using UnityEngine.UI; // <--å¿˜ã‚ŒãŒã¡
 
 public class ScoreUI : MonoBehaviour
 {

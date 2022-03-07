@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//¥—ÍêƒNƒ‰ƒXB
-//ˆê’è”ÍˆÍ“à‚Ìƒ^ƒO•t‚«ƒIƒuƒWƒFƒNƒg‚ğæ“¾‚µA‹——£‚É‰‚¶‚½¥—Í‚ğ—^‚¦‚éB
+//ç£åŠ›å ´ã‚¯ãƒ©ã‚¹ã€‚
+//ä¸€å®šç¯„å›²å†…ã®ã‚¿ã‚°ä»˜ãã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å–å¾—ã—ã€è·é›¢ã«å¿œã˜ãŸç£åŠ›ã‚’ä¸ãˆã‚‹ã€‚
 
 public class MagneticField : MonoBehaviour
 {

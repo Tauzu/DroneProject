@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;   //Slider—p
+using UnityEngine.UI;   //Sliderç”¨
 
-//’eŠÛ‚Ìƒ`ƒƒ[ƒW‹ï‡‚ğƒXƒ‰ƒCƒ_[‚Å•\Œ»‚·‚éB
+//å¼¾ä¸¸ã®ãƒãƒ£ãƒ¼ã‚¸å…·åˆã‚’ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã§è¡¨ç¾ã™ã‚‹ã€‚
 
 public class ChargeSliderManager : MonoBehaviour
 {

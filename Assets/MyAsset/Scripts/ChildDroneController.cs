@@ -1,8 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//qƒhƒ[ƒ“‚ğ¶¬‚·‚éB‚½‚¾‚Ì‚¨‚Ü‚¯—v‘f‚Å‚·B
+//å­ãƒ‰ãƒ­ãƒ¼ãƒ³ã‚’ç”Ÿæˆã™ã‚‹ã€‚ãŸã ã®ãŠã¾ã‘è¦ç´ ã§ã™ã€‚
 public class ChildDroneController : MonoBehaviour
 {
     //List<Drone> dmList = new List<Drone>();

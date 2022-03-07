@@ -1,9 +1,9 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ƒhƒ[ƒ“i©‹@j‚Ì‘€c‚ğs‚¤ƒXƒNƒŠƒvƒg
-//ƒL[ƒ{[ƒh“ü—Í‚ğó‚¯•t‚¯A‚»‚ê‚É‰‚¶‚ÄDroneMoveƒNƒ‰ƒXiƒRƒ“ƒ|[ƒlƒ“ƒgj‚Ìpublic•Ï”‚ğXV‚·‚é
+//ãƒ‰ãƒ­ãƒ¼ãƒ³ï¼ˆè‡ªæ©Ÿï¼‰ã®æ“ç¸¦ã‚’è¡Œã†ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+//ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›ã‚’å—ã‘ä»˜ã‘ã€ãã‚Œã«å¿œã˜ã¦DroneMoveã‚¯ãƒ©ã‚¹ï¼ˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆï¼‰ã®publicå¤‰æ•°ã‚’æ›´æ–°ã™ã‚‹
 
 public class DroneController : MonoBehaviour
 {
@@ -31,17 +31,17 @@ public class DroneController : MonoBehaviour
         drone.targetVector = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
         //Debug.Log(drone.targetVector);
 
-        drone.isBoosting = Input.GetKey(KeyCode.Q);   //‰Á‘¬ƒtƒ‰ƒO
+        drone.isBoosting = Input.GetKey(KeyCode.Q);   //åŠ é€Ÿãƒ•ãƒ©ã‚°
 
         drone.inputVertical = Input.GetAxis("Ctrl-Shift_Left");
 
         //if (Input.GetKey(KeyCode.LeftShift))
         //{
-        //    DM.Up();   //ã¸
+        //    DM.Up();   //ä¸Šæ˜‡
         //}
         //else if (Input.GetKey(KeyCode.LeftControl))
         //{
-        //    DM.Down();   //‰º~
+        //    DM.Down();   //ä¸‹é™
         //}
 
         if (Input.GetKeyDown(KeyCode.C)) drone.SwitchHovering(!drone.isHovering);

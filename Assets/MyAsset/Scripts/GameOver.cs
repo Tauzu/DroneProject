@@ -1,8 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ƒQ[ƒ€ƒI[ƒo[‚Ìˆ—
+//ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®å‡¦ç†
 public class GameOver : MonoBehaviour
 {
     public GameObject missionObj;

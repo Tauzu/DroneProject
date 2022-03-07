@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ƒhƒ[ƒ“•¨—‰‰ZƒNƒ‰ƒX
+//ãƒ‰ãƒ­ãƒ¼ãƒ³ç‰©ç†æ¼”ç®—ã‚¯ãƒ©ã‚¹
 
-//‘€c‚ÍŠO•”ƒXƒNƒŠƒvƒgiDroneController.csj‚©‚çApublic•Ï”‚ÉƒAƒNƒZƒX‚µ‚Äs‚¤B
-//ƒRƒ“ƒgƒ[ƒ‰[‚©‚ç‚Ì“ü—Í‚É‰‚¶‚½•¨—‰‰Z‚ğs‚Á‚ÄˆÚ“®‚·‚éB
+//æ“ç¸¦ã¯å¤–éƒ¨ã‚¹ã‚¯ãƒªãƒ—ãƒˆï¼ˆDroneController.csï¼‰ã‹ã‚‰ã€publicå¤‰æ•°ã«ã‚¢ã‚¯ã‚»ã‚¹ã—ã¦è¡Œã†ã€‚
+//ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼ã‹ã‚‰ã®å…¥åŠ›ã«å¿œã˜ãŸç‰©ç†æ¼”ç®—ã‚’è¡Œã£ã¦ç§»å‹•ã™ã‚‹ã€‚
 
 public class DronePhysics : MonoBehaviour
 {
@@ -68,13 +68,13 @@ public class DronePhysics : MonoBehaviour
     float maxPower;
 
     // Start is called before the first frame update
-    // StartAUpdateŠÖ”‚È‚Ç‚ÍAŒp³‚³‚ê‚é‚Æ©“®“I‚ÉƒI[ƒo[ƒ‰ƒCƒh‚³‚ê‚é
+    // Startã€Updateé–¢æ•°ãªã©ã¯ã€ç¶™æ‰¿ã•ã‚Œã‚‹ã¨è‡ªå‹•çš„ã«ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã•ã‚Œã‚‹
     protected void InitPhysics()
     {
         tf = this.transform;
 
         rbody = this.GetComponent<Rigidbody>();
-        rbody.centerOfMass = Vector3.zero; //BodyBox‚Ì’†S‚ğ‘S‘Ì‚ÌdS‚Æ‚·‚éiƒuƒŒ[ƒh‚Ì¿—Ê‚Í–³‹j
+        rbody.centerOfMass = Vector3.zero; //BodyBoxã®ä¸­å¿ƒã‚’å…¨ä½“ã®é‡å¿ƒã¨ã™ã‚‹ï¼ˆãƒ–ãƒ¬ãƒ¼ãƒ‰ã®è³ªé‡ã¯ç„¡è¦–ï¼‰
         // rbody = tf.Find("BodyMesh").gameObject.GetComponent<Rigidbody>();
 
         bladeArray[0] = new Blade(tf.Find("blade1"), -1, -1);
@@ -118,13 +118,13 @@ public class DronePhysics : MonoBehaviour
 
         }
 
-        // ‹@‘Ìƒˆ[‰ñ“]
+        // æ©Ÿä½“ãƒ¨ãƒ¼å›è»¢
         Quaternion rot = Quaternion.AngleAxis(10f * yaw, tf.up);
         tf.rotation *= rot;
 
         if (Input.GetKey(KeyCode.X)) { rbody.AddTorque(-1000f * tf.right); }
 
-        targetHeight += 0.01f * (tf.position.y - targetHeight); //–Ú•W‚‚³‚ğA©•ª‚Ì‚‚³‚É­‚µ‹ß‚Ã‚¯‚éiˆÀ’è‰»‚Ì‚½‚ßj
+        targetHeight += 0.01f * (tf.position.y - targetHeight); //ç›®æ¨™é«˜ã•ã‚’ã€è‡ªåˆ†ã®é«˜ã•ã«å°‘ã—è¿‘ã¥ã‘ã‚‹ï¼ˆå®‰å®šåŒ–ã®ãŸã‚ï¼‰
 
     }
 
@@ -133,14 +133,14 @@ public class DronePhysics : MonoBehaviour
         Vector2 forwardXZ = new Vector2(tf.forward.x, tf.forward.z).normalized;
         Vector2 rightXZ = new Vector2(tf.right.x, tf.right.z).normalized;
 
-        float inner = Vector2.Dot(forwardXZ, targetVector.normalized); //Œ»İ‚Ì•ûŒüƒxƒNƒgƒ‹‚ÆA–Ú•W•ûŒüƒxƒNƒgƒ‹‚Æ‚Ì“àÏ
+        float inner = Vector2.Dot(forwardXZ, targetVector.normalized); //ç¾åœ¨ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã¨ã€ç›®æ¨™æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã¨ã®å†…ç©
         bool isBacking = (inner < -0.1f) ? true : false;
 
-        //ƒˆ[‰ñ“]—v‹—Ê
-        float yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //ƒoƒbƒN(“àÏ‚ª-1‚É‚È‚é‚±‚Æ‚ğ–Úw‚·)
-                             : inputMagnitude * Mathf.Abs(1f - inner);     //‘Oi
-        if (Vector2.Dot(rightXZ, targetVector) < 0f) yaw *= -1f;    //‰ñ“]•ûŒü
-        if (isBacking) yaw *= -1f;    //ƒoƒbƒN‚Í‰ñ“]•ûŒü‚ª‚³‚ç‚É‹t‚É‚È‚é
+        //ãƒ¨ãƒ¼å›è»¢è¦æ±‚é‡
+        float yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //ãƒãƒƒã‚¯æ™‚(å†…ç©ãŒ-1ã«ãªã‚‹ã“ã¨ã‚’ç›®æŒ‡ã™)
+                             : inputMagnitude * Mathf.Abs(1f - inner);     //å‰é€²æ™‚
+        if (Vector2.Dot(rightXZ, targetVector) < 0f) yaw *= -1f;    //å›è»¢æ–¹å‘
+        if (isBacking) yaw *= -1f;    //ãƒãƒƒã‚¯æ™‚ã¯å›è»¢æ–¹å‘ãŒã•ã‚‰ã«é€†ã«ãªã‚‹
 
         return (yaw, isBacking, inner);
 
@@ -149,7 +149,7 @@ public class DronePhysics : MonoBehaviour
     float HoveringPower(float inputVertical)
     {
         float power;
-        if (isHovering && (tf.up.y > 0f))   //ƒzƒoƒŠƒ“ƒOˆ—
+        if (isHovering && (tf.up.y > 0f))   //ãƒ›ãƒãƒªãƒ³ã‚°å‡¦ç†
         {
             targetHeight += 0.2f * inputVertical;
             //targetHeight += Mathf.Max(0.5f*inputVertical, -0.2f);
@@ -157,7 +157,7 @@ public class DronePhysics : MonoBehaviour
             power = Kp * (targetHeight - tf.position.y) - decay * this.rbody.velocity.y;
 
         }
-        else    //ƒzƒoƒŠƒ“ƒOOFF
+        else    //ãƒ›ãƒãƒªãƒ³ã‚°OFFæ™‚
         {
             power = inputVertical;
 
@@ -192,13 +192,13 @@ public class DronePhysics : MonoBehaviour
             float targetSPD = baseSpeed * inputMagnitude;
             if (isBoosting) targetSPD *= 2f;
             if (isBacking) targetSPD *= -1;
-            float difference = (targetSPD - horizontalForwardSPD) / baseSpeed;//–Ú•W‘¬“x‚Ü‚Å‚Ì·‚Ìw•W
+            float difference = (targetSPD - horizontalForwardSPD) / baseSpeed;//ç›®æ¨™é€Ÿåº¦ã¾ã§ã®å·®ã®æŒ‡æ¨™
             targetAngle = 90f * difference * Mathf.Abs(inner);
             //Debug.Log("ON");
         }
         else
         {
-            //‘OŒã•ûŒü©“®ƒuƒŒ[ƒL
+            //å‰å¾Œæ–¹å‘è‡ªå‹•ãƒ–ãƒ¬ãƒ¼ã‚­
             targetAngle = (isHovering) ? -45f * horizontalForwardSPD / baseSpeed : 0f;
             //Debug.Log("OFF");
         }
@@ -209,10 +209,10 @@ public class DronePhysics : MonoBehaviour
     float TargetRollAngle()
     {
         float horizontalRightSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.right);
-        //¶‰E•ûŒü©“®ƒuƒŒ[ƒL
+        //å·¦å³æ–¹å‘è‡ªå‹•ãƒ–ãƒ¬ãƒ¼ã‚­
         float targetAngle = (isHovering) ? 60f * horizontalRightSPD / baseSpeed : 0f;
 
-        if (isBoosting) targetAngle *= 0.2f; //‰Á‘¬‚ÍƒuƒŒ[ƒLã‚ß‚é
+        if (isBoosting) targetAngle *= 0.2f; //åŠ é€Ÿæ™‚ã¯ãƒ–ãƒ¬ãƒ¼ã‚­å¼±ã‚ã‚‹
 
         return targetAngle;
     }
@@ -224,15 +224,15 @@ public class DronePhysics : MonoBehaviour
         (float pitch, float roll) = this.GetAttitude();
 
         float targetPitchAngle = Mathf.Clamp(TargetPitchAngle(inputMagnitude, isBacking, inner), -60f, 60f);
-        targetPitchAngle *= Mathf.Sign(hoveringPower); // ã¸’†‚Æ‰º~’†‚ÅŒX‚¯‚é‚×‚«Œü‚«‚ª‹t‚É‚È‚é
-        float targetPitch = targetPitchAngle * Mathf.Deg2Rad;    //ƒsƒbƒ`p¨§Œä
+        targetPitchAngle *= Mathf.Sign(hoveringPower); // ä¸Šæ˜‡ä¸­ã¨ä¸‹é™ä¸­ã§å‚¾ã‘ã‚‹ã¹ãå‘ããŒé€†ã«ãªã‚‹
+        float targetPitch = targetPitchAngle * Mathf.Deg2Rad;    //ãƒ”ãƒƒãƒå§¿å‹¢åˆ¶å¾¡
         float pitchControlPOW = Kp * (targetPitch - pitch) - 0.3f * decay * (pitch - pitch_pre) / Time.deltaTime;
         //pitchControlPOW *= 0.1f;
         //Debug.Log(pitch);
 
         float targetRollAngle = Mathf.Clamp(TargetRollAngle(), -60f, 60f);
-        targetRollAngle *= Mathf.Sign(hoveringPower); // ã¸’†‚Æ‰º~’†‚ÅŒX‚¯‚é‚×‚«Œü‚«‚ª‹t‚É‚È‚é
-        float targetRoll = targetRollAngle * Mathf.Deg2Rad;    //ƒ[ƒ‹p¨§Œä
+        targetRollAngle *= Mathf.Sign(hoveringPower); // ä¸Šæ˜‡ä¸­ã¨ä¸‹é™ä¸­ã§å‚¾ã‘ã‚‹ã¹ãå‘ããŒé€†ã«ãªã‚‹
+        float targetRoll = targetRollAngle * Mathf.Deg2Rad;    //ãƒ­ãƒ¼ãƒ«å§¿å‹¢åˆ¶å¾¡
         float rollControlPOW = Kp * (targetRoll - roll) - 0.3f * decay * (roll - roll_pre) / Time.deltaTime;
 
         pitch_pre = pitch;
@@ -245,7 +245,7 @@ public class DronePhysics : MonoBehaviour
 
     (float, float) GetAttitude()
     {
-        //0`360‹‚ÌƒIƒCƒ‰[Šp‚ğA-180`+180‹‚ÉŠ·Z‚·‚é
+        //0ï½360Â°ã®ã‚ªã‚¤ãƒ©ãƒ¼è§’ã‚’ã€-180ï½+180Â°ã«æ›ç®—ã™ã‚‹
         float pitch = (Mathf.Repeat(tf.rotation.eulerAngles.x + 180, 360) - 180) * Mathf.Deg2Rad;
         float roll = (Mathf.Repeat(tf.rotation.eulerAngles.z + 180, 360) - 180) * Mathf.Deg2Rad;
 

@@ -23,13 +23,13 @@ public class DroneController : MonoBehaviour
     void Update()
     {
         float inputForward = Input.GetAxis("W-S");
-        //Debug.Log(inputForward);
         float inputSide = Input.GetAxis("D-A");
         Vector3 cameraFwd = cameraTf.forward;
         Vector3 cameraRgt = cameraTf.right;
         Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
         Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
         drone.targetVector = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
+        //Debug.Log(drone.targetVector);
 
         drone.isBoosting = Input.GetKey(KeyCode.Q);   //‰Á‘¬ƒtƒ‰ƒO
 

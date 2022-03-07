@@ -5,7 +5,7 @@ using UnityEngine;
 //磁力場クラス。
 //一定範囲内のタグ付きオブジェクトを取得し、距離に応じた磁力を与える。
 
-public class ElectroMagnet : MonoBehaviour
+public class MagneticField : MonoBehaviour
 {
     Rigidbody rbody;
     List<Rigidbody> magneticList;

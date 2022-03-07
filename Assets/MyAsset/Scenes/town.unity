@@ -35081,7 +35081,7 @@ MonoBehaviour:
   playerObj: {fileID: 1023335737}
   AimObj: {fileID: 1289102384}
   speed: 2
-  reverce: 0
+  reverce: 1
 --- !u!20 &1361079518
 Camera:
   m_ObjectHideFlags: 0
@@ -41015,7 +41015,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activationObj:
-  - {fileID: 1788252637}
+  - {fileID: 789516863}
   - {fileID: 1361079514}
   - {fileID: 1023335737}
   - {fileID: 302464132}

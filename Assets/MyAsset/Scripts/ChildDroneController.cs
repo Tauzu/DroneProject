@@ -92,6 +92,7 @@ public class ChildDroneController : MonoBehaviour
             child.drone.magnetObj.SetActive(mainDrone.magnetObj.activeSelf);
 
             child.shooting.direction = mainShooting.direction;
+            child.shooting.isSpecial = mainShooting.isSpecial;
         }
         
     }

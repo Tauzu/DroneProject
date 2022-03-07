@@ -14,6 +14,8 @@ public class BallSimulator : MonoBehaviour {
     LineRenderer lineRenderer;
     public Gradient grad;
 
+    float timer = 0f;
+
     void Start () {
 
         simuratePointArray = new Vector3[SIMULATE_COUNT];
@@ -29,13 +31,15 @@ public class BallSimulator : MonoBehaviour {
     }
 	
     void Update () {
-
+        if(timer > 0f) { timer -= Time.deltaTime; } else { lineRenderer.enabled = false; }
     }
 
     //外部スクリプト（Shooting.cs）からこの関数を呼び出して使う
     //引数は、弾の初期位置と初速度、およびレンダリングの色の度合い
     public void Simulate(Vector3 initialPosition , Vector3 initialVelocity, float gradLocation)
     {
+        lineRenderer.enabled = true;
+
         //軌道を2次曲線として描く。
         for (int i = 0; i < SIMULATE_COUNT; i++)
         {
@@ -60,6 +64,8 @@ public class BallSimulator : MonoBehaviour {
         // float speed = initialVelocity.magnitude;
         // lineRenderer.startWidth = speed * 0.01f;
         // lineRenderer.endWidth = speed*speed * 0.0001f;
+
+        timer = 10f;
 
     }
 }

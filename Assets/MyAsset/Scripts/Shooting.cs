@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 弾丸発射クラス
 
 public class Shooting : MonoBehaviour
 {
@@ -21,8 +22,7 @@ public class Shooting : MonoBehaviour
 
     Rigidbody thisRbody;
 
-    public GameObject simulatorObj; // 弾道予測オブジェクト
-    BallSimulator _ballSimurator; // 弾道予測線
+    public BallSimulator ballSimurator; // 弾道予測線
 
     Renderer rend;
     Color defaultColor;
@@ -47,9 +47,6 @@ public class Shooting : MonoBehaviour
         thisRbody = this.GetComponent<Rigidbody>();
 
         audioSrc = this.GetComponent<AudioSource>();
-
-        _ballSimurator = simulatorObj.GetComponent<BallSimulator>();
-
 
         targetSpeed = defaultSpeed;
 
@@ -82,33 +79,14 @@ public class Shooting : MonoBehaviour
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
 
         // キーから指を離した時
-        if (Input.GetKeyUp(KeyCode.Z)){
-            // 弾丸の複製
-            GameObject clone = (! isSpecial)?  Instantiate(bullet) : Instantiate(specialBullet);
-
-            clone.transform.position = this.transform.position + direction;
-
-            clone.GetComponent<Rigidbody>().velocity = shotVelocity;
-
-            //反動
-            thisRbody.AddForce(-direction*targetSpeed*targetSpeed*0.0002f, ForceMode.Impulse);
- 
-            //発射されてから3秒後に銃弾のオブジェクトを破壊する.
-            Destroy(clone, 5.0f);
-
-            targetSpeed = defaultSpeed;
-
-            audioSrc.PlayOneShot(shotSE, Mathf.Max(Mathf.Sqrt(gradLocation), 0.3f));
-
-            isCharging = false;
-        }
+        if (Input.GetKeyUp(KeyCode.Z)){ Shot(shotVelocity); }
 
         if (Input.GetKey(KeyCode.Z))
         {
             isCharging = true;
 
             rend.material.color = grad.Evaluate(gradLocation);
-            _ballSimurator.Simulate(this.transform.position + direction, shotVelocity, gradLocation);
+            ballSimurator.Simulate(this.transform.position + direction, shotVelocity, gradLocation);
 
             targetSpeed += 1f;
             targetSpeed = Mathf.Min(targetSpeed, maxSpeed);
@@ -126,6 +104,28 @@ public class Shooting : MonoBehaviour
         }
 		
 	}
+
+    void Shot(Vector3 shotVelocity)
+    {
+        // 弾丸の複製
+        GameObject clone = (!isSpecial) ? Instantiate(bullet) : Instantiate(specialBullet);
+
+        clone.transform.position = this.transform.position + direction;
+
+        clone.GetComponent<Rigidbody>().velocity = shotVelocity;
+
+        //反動
+        thisRbody.AddForce(-direction * targetSpeed * targetSpeed * 0.0002f, ForceMode.Impulse);
+
+        //発射されてから3秒後に銃弾のオブジェクトを破壊する.
+        Destroy(clone, 5.0f);
+
+        targetSpeed = defaultSpeed;
+
+        audioSrc.PlayOneShot(shotSE, Mathf.Max(Mathf.Sqrt(gradLocation), 0.3f));
+
+        isCharging = false;
+    }
 
     //SpecialAmezonParticleが子オブジェクトにあるかどうか1秒ごとにチェックする
     IEnumerator CheckSpecial()

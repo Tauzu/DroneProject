@@ -1030,7 +1030,7 @@ MonoBehaviour:
   barrierObj: {fileID: 1546006935972355928}
   magnetObj: {fileID: 1546006934503056675}
   faceText: {fileID: 7428779443717387206}
-  hoveringTextObj: {fileID: 7428779443129532163}
+  hoveringRenderer: {fileID: 7428779443129532160}
   bodyRenderer: {fileID: 1546006935520925940}
 --- !u!114 &7428779442376501500
 MonoBehaviour:
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   specialBullet: {fileID: 9115657538321532158, guid: 8469c67d80132c6479c9f6d21695c3d3, type: 3}
   defaultSpeed: 50
   maxSpeed: 300
-  simulatorObj: {fileID: 1546006934858579470}
+  ballSimurator: {fileID: 1546006934858579471}
   shotSE: {fileID: 8300000, guid: 338b143a01c08ca47912f0a733b97145, type: 3}
 --- !u!114 &7428779442376501491
 MonoBehaviour:
@@ -1175,7 +1175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7428779443129532162
 Transform:
   m_ObjectHideFlags: 0
@@ -1197,7 +1197,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7428779443129532163}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

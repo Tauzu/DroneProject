@@ -51,7 +51,7 @@ public class DragonBehavior : MonoBehaviour
         dragonRend = this.transform.Find("DragonSoulEater").GetComponent<SkinnedMeshRenderer>();
         defaultColor = dragonRend.material.color;
 
-        coroutine = breathCoroutine();
+        coroutine = BreathCoroutine();
         StartCoroutine(coroutine);
 
         //particleObj = (GameObject)Resources.Load("TargetParticle");
@@ -116,14 +116,14 @@ public class DragonBehavior : MonoBehaviour
 
     }
 
-    IEnumerator breathCoroutine()
+    IEnumerator BreathCoroutine()
     {
         while (true) {
 
             if (isFloating)
             {
                 animator.SetTrigger("Fire");
-                StartCoroutine(fireCoroutine());
+                StartCoroutine(FireCoroutine());
             }
 
             //待機
@@ -133,7 +133,7 @@ public class DragonBehavior : MonoBehaviour
 
     }
 
-    IEnumerator fireCoroutine()
+    IEnumerator FireCoroutine()
     {
         yield return new WaitForSeconds(1.2f);
         Vector3 direction = new Vector3(jawTf.forward.x, 0f, jawTf.forward.z);
@@ -191,7 +191,7 @@ public class DragonBehavior : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        while(dragonRend.material.color.a > 0f){
+        while (dragonRend.material.color.a > 0f){
             dragonRend.material.color -= new Color(0, 0, 0, 0.02f);
             yield return new WaitForSeconds(0.1f);
         }

@@ -1,29 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
 
-public class Mission2 : MonoBehaviour
+public class Mission2 : Mission
 {
-    Text message;
-    ClearProcess CP;
-
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "空中で[C]を押し、ホバリング。\n [WASD]で移動してコインを\n集めよう！";
+        base.Start();
 
-        CP = this.GetComponent<ClearProcess>();
+        message.text = "空中で[C]を押し、ホバリング。\n [WASD]で移動してコインを\n集めよう！";
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if(GameObject.FindGameObjectsWithTag("coin").Length == 0){
-            message.text = "";
-            CP.ClearNotify();
-        }
+        base.Update();
+        if (GameObject.FindGameObjectsWithTag("coin").Length == 0){ complete = true; }
     }
 }

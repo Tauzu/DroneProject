@@ -1,24 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
 
-public class Mission3 : MonoBehaviour
+public class Mission3 : Mission
 {
-    Text message;
-    ClearProcess CP;
     public GameObject amezonPrefab;
     GameObject amezonClone;
     ScoreManager ScoreMan;
     Transform playerTf;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "[E]を押すと磁場発生。\n 宅配物を届けよう！\n目標SCORE:6000";
+        base.Start();
 
-        CP = this.GetComponent<ClearProcess>();
+        message.text = "[E]を押すと磁場発生。\n 宅配物を届けよう！\n目標SCORE:6000";
 
         playerTf = GameObject.Find("Player").transform;
 
@@ -27,13 +23,13 @@ public class Mission3 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
 
         if (ScoreMan.score >= 6000)
         {
-            message.text = "";
-            CP.ClearNotify();
+            complete = true;
         }
         else
         {

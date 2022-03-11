@@ -1,39 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
 
-public class Mission1 : MonoBehaviour
+//ミッション1
+//ただ上昇するだけ
+
+public class Mission1 : Mission
 {
-    Text message;
     GameObject coinObj;
-    ClearProcess CP;
-
-    public AudioSource audioSrc;
-    public AudioClip missionBGM;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        message = GameObject.Find("MessageText").GetComponent<Text>();
+        base.Start();
+        
         message.text = "[Shit(左)]長押しで上昇せよ！";
 
         coinObj = this.transform.Find("Coin").gameObject;
 
-        CP = this.GetComponent<ClearProcess>();
-
-        audioSrc.clip = missionBGM;
-        audioSrc.Play();
-
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        if(coinObj == null){
-            message.text = "";
-            CP.ClearNotify();
-        }
+        base.Update();
+        if (coinObj == null){ complete = true; }
     }
     
 }

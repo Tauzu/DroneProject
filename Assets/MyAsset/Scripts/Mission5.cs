@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
 
-public class Mission5 : MonoBehaviour
+public class Mission5 : Mission
 {
-    Text message;
-    ClearProcess CP;
     public GameObject specialAmezonPrefab;
     GameObject specialAmezonClone;
 
@@ -20,23 +17,16 @@ public class Mission5 : MonoBehaviour
     Material defaultSky;
     public Material nightSky;
 
-    public AudioSource audioSrc;
-    public AudioClip bossBGM;
-
     IEnumerator enumerator;
 
     bool defeatFlag = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        audioSrc.clip = bossBGM;
-        audioSrc.Play();
+        base.Start();
 
-        message = GameObject.Find("MessageText").GetComponent<Text>();
         message.text = "ドラゴン襲来！\nどうにかして倒そう！";
-
-        CP = this.GetComponent<ClearProcess>();
 
         playerTf = GameObject.Find("Player").transform;
 
@@ -59,8 +49,9 @@ public class Mission5 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
 
         if (dragonObj == null && !defeatFlag)
         {
@@ -74,7 +65,7 @@ public class Mission5 : MonoBehaviour
             dLight.color = defaultLightColor;
             dLight.intensity = defaultLightIntensity;
 
-            CP.ClearNotify();
+            complete = true;
         }
 
         // if(GameObject.FindGameObjectsWithTag("coin").Length == 0){

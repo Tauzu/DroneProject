@@ -304,12 +304,12 @@ GameObject:
   - component: {fileID: 626370144835912093}
   - component: {fileID: 7444406970927933955}
   m_Layer: 0
-  m_Name: Mission
+  m_Name: CompleteEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &626370144835912093
 Transform:
   m_ObjectHideFlags: 0
@@ -339,4 +339,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireworkPrefab: {fileID: 4583648027752145887, guid: c1836060ddcdd184fb62a47f2d1fa21a, type: 3}
-  NextMission: {fileID: 0}

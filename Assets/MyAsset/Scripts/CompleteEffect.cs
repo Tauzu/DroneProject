@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
+using UnityEngine.UI; // <--これがないとTextクラスを扱えない
 
 //ミッションクリア時の演出を行う。
 
-public class ClearProcess : MonoBehaviour
+public class CompleteEffect : MonoBehaviour
 {
     public GameObject fireworkPrefab;
     GameObject mainCameraObj;
     GameObject subCameraObj;
-    public GameObject NextMission;
+
     Transform playerTf;
-    bool clearFlag = false;
+
+    [System.NonSerialized]    //publicだがインスペクター上には表示しない
+    public bool start = false;
+    [System.NonSerialized]    //publicだがインスペクター上には表示しない
+    public bool finish = false;
+
     Text clearText;
 
     // Start is called before the first frame update
@@ -32,39 +37,42 @@ public class ClearProcess : MonoBehaviour
         
     }
 
-    public void ClearNotify()
+    public void StartEffect()
     {
-        if(!clearFlag){
-            if (NextMission != null) { StartCoroutine(CelebrateAndSetNextMission()); }
-            else
-            {
+        StartCoroutine(CelebrateProcess());
 
-                StartCoroutine(FinalCelebration());
-            }
-
-            clearFlag = true;
-        }
+        start = true;
 
     }
 
-    IEnumerator CelebrateAndSetNextMission()
+    public void StartFinalEffect()
     {
+        StartCoroutine(FinalCelebrateProcess());
+
+        start = true;
+
+    }
+
+    IEnumerator CelebrateProcess()
+    {
+        SetSubCameraTarget(new Vector3(-40f, 30f, -50f), GameObject.Find("Player").transform);
+
         Celebration();
 
         yield return new WaitForSeconds(3f);                    //待機
 
-        CameraShift();
+        SubCameraSwitch(false);
+
         clearText.text = "";
 
-        //subCameraObj.GetComponent<SubCameraMotion>().Deactivate();
-        NextMission.SetActive(true);    //次のミッション起動前にはカメラはメインに戻っていなくてはならない
-
-        Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
+        finish = true;
 
     }
 
-    IEnumerator FinalCelebration()
+    IEnumerator FinalCelebrateProcess()
     {
+        SetSubCameraTarget(new Vector3(42f, 100f, -100f), GameObject.Find("Center").transform);
+
         Celebration();
         //subCameraObj.GetComponent<SubCameraMotion>().lookingTf = GameObject.Find("Center").transform;
 
@@ -84,20 +92,20 @@ public class ClearProcess : MonoBehaviour
 
         }
 
-        CameraShift();
+        SubCameraSwitch(false);
         clearText.text = "";
 
         Text message = GameObject.Find("MessageText").GetComponent<Text>();
         message.text = "オールクリアおめでとう！\nあとはご自由にどうぞ。\nあなたが守った町です。";
         Destroy(GameObject.Find("MessageWindow"), 10f);
 
-        Destroy(this.gameObject);   //Destroy(this)だと、このスクリプト(class)を削除するだけで、ゲームオブジェクトは消えない
+        finish = true;
 
     }
 
     void Celebration()
     {
-        CameraShift();
+        SubCameraSwitch(true);
         StartCoroutine(ClearMessage());
 
         Vector3[] posisionArray = {
@@ -132,15 +140,22 @@ public class ClearProcess : MonoBehaviour
 
     }
 
-    void CameraShift()
+    void SubCameraSwitch(bool flag)
     {
-        mainCameraObj.SetActive(!mainCameraObj.activeSelf);
-        subCameraObj.SetActive(!subCameraObj.activeSelf);
+        mainCameraObj.SetActive(!flag);
+        subCameraObj.SetActive(flag);
 
-        if (subCameraObj.activeSelf)
+        if (flag)
         {
             subCameraObj.transform.position = mainCameraObj.transform.position;
             subCameraObj.transform.rotation = mainCameraObj.transform.rotation;
         }
+    }
+
+    void SetSubCameraTarget(Vector3 targetPosition, Transform lookingTf)
+    {
+        SubCameraMotion scMotion = subCameraObj.GetComponent<SubCameraMotion>();
+        scMotion.lookingTf = lookingTf;
+        scMotion.targetPosition = targetPosition;
     }
 }

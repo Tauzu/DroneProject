@@ -1,26 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // <--忘れがち
 
-public class Mission4 : MonoBehaviour
+public class Mission4 : Mission
 {
-    Text message;
-    ClearProcess CP;
     GameObject firstEnemy;
     GameObject enemyShip;
-
-    public AudioSource audioSrc;
 
     int phase = 0;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        message = GameObject.Find("MessageText").GetComponent<Text>();
-        message.text = "上空に敵出現！\n[Enter]で視点切替。\n[Z]で弾丸発射。";
+        base.Start();
 
-        CP = this.GetComponent<ClearProcess>();
+        message.text = "上空に敵出現！\n[Enter]で視点切替。\n[Z]で弾丸発射。";
 
         firstEnemy = transform.Find("FirstEnemy").gameObject;
         firstEnemy.SetActive(true);
@@ -33,9 +27,9 @@ public class Mission4 : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-
+        base.Update();
         if (firstEnemy == null && phase == 1)
         {
             enemyShip.SetActive(true);
@@ -43,11 +37,7 @@ public class Mission4 : MonoBehaviour
             phase = 2;
 
         }
-        else if(enemyShip == null && phase == 2)
-        {
-            message.text = "";
-            CP.ClearNotify();
-        }
+        else if(enemyShip == null && phase == 2){ complete = true; }
 
     }
 }

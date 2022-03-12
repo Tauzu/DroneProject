@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //ドローン（自機）の操縦を行うスクリプト
-//キーボード入力を受け付け、それに応じてDroneMoveクラス（コンポーネント）のpublic変数を更新する
+//キーボード入力を受け付け、それに応じてDroneクラス（コンポーネント）のpublic変数を更新する
 
 public class DroneController : MonoBehaviour
 {

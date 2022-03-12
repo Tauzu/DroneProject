@@ -14,7 +14,7 @@ public class Mission4 : Mission
     {
         base.Start();
 
-        message.text = "上空に敵出現！\n[Enter]で視点切替。\n[Z]で弾丸発射。";
+        message.text = "上空に敵出現！\n[Enter]で視点切替。\n[Space]で弾丸発射。";
 
         firstEnemy = transform.Find("FirstEnemy").gameObject;
         firstEnemy.SetActive(true);

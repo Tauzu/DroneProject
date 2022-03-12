@@ -4,8 +4,7 @@ using UnityEngine;
 
 //ドローン物理演算クラス
 
-//操縦は外部スクリプト（DroneController.cs）から、public変数にアクセスして行う。
-//コントローラーからの入力に応じた物理演算を行って移動する。
+//ドローンクラスに継承される想定
 
 public class DronePhysics : MonoBehaviour
 {
@@ -68,8 +67,8 @@ public class DronePhysics : MonoBehaviour
     float maxPower;
 
     // Start is called before the first frame update
-    // Start、Update関数などは、継承されると自動的にオーバーライドされる
-    protected void InitPhysics()
+    // このStart関数は、継承先にオーバーライドされてから呼び出される
+    protected virtual void Start()
     {
         tf = this.transform;
 
@@ -89,19 +88,20 @@ public class DronePhysics : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PositionClamp();
+
     }
 
+    // 物理演算メソッド
+    // 継承先のFixedUpdateから呼ばれることを想定
+    // ホバリングおよび姿勢制御に必要な力を算出し、RigidBodyに加える
     protected void PhysicalCalculation(Vector2 targetVector, float inputVertical)
     {
-        float inputMagnitude = targetVector.magnitude;
-
-        (float yaw, bool isBacking, float directionCosine) = CalculateYaw(targetVector, inputMagnitude);
+        (float yaw, bool isBacking, float directionCosine) = CalculateYaw(targetVector);
 
         float hoveringPower = HoveringPower(inputVertical);
 
         (float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
-            inputMagnitude, hoveringPower, isBacking, directionCosine
+            targetVector.magnitude, hoveringPower, isBacking, directionCosine
         );
 
         maxPower = 0f;
@@ -128,7 +128,8 @@ public class DronePhysics : MonoBehaviour
 
     }
 
-    (float, bool, float) CalculateYaw(Vector2 targetVector, float inputMagnitude)
+    // キー入力の向きと、自分との向きから、回転すべき量を算出
+    (float, bool, float) CalculateYaw(Vector2 targetVector)
     {
         Vector2 forwardXZ = new Vector2(tf.forward.x, tf.forward.z).normalized;
         Vector2 rightXZ = new Vector2(tf.right.x, tf.right.z).normalized;
@@ -136,9 +137,10 @@ public class DronePhysics : MonoBehaviour
         float inner = Vector2.Dot(forwardXZ, targetVector.normalized); //現在の方向ベクトルと、目標方向ベクトルとの内積
         bool isBacking = (inner < -0.1f) ? true : false;
 
+        float inputMagnitude = targetVector.magnitude;
         //ヨー回転要求量
         float yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
-                             : inputMagnitude * Mathf.Abs(1f - inner);     //前進時
+                             : inputMagnitude * Mathf.Abs(1f - inner);     //前進時(内積が1になることを目指す)
         if (Vector2.Dot(rightXZ, targetVector) < 0f) yaw *= -1f;    //回転方向
         if (isBacking) yaw *= -1f;    //バック時は回転方向がさらに逆になる
 
@@ -146,6 +148,8 @@ public class DronePhysics : MonoBehaviour
 
     }
 
+    // ホバリングに必要なパワーを算出
+    // 目標高さに追従するようにPD制御
     float HoveringPower(float inputVertical)
     {
         float power;
@@ -183,6 +187,7 @@ public class DronePhysics : MonoBehaviour
         }
     }
 
+    //ピッチ目標角度を算出
     float TargetPitchAngle(float inputMagnitude, bool isBacking, float inner)
     {
         float horizontalForwardSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.forward);
@@ -206,6 +211,7 @@ public class DronePhysics : MonoBehaviour
         return targetAngle;
     }
 
+    //ロー目標角度を算出
     float TargetRollAngle()
     {
         float horizontalRightSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.right);
@@ -217,6 +223,7 @@ public class DronePhysics : MonoBehaviour
         return targetAngle;
     }
 
+    //ピッチおよびローの目標角度へ追従するようPD制御を行い、必要な力を算出
     (float, float) AttitudeControl(float inputMagnitude, float hoveringPower, bool isBacking, float inner)
     {
         //pitch[1] = tf.forward.y;
@@ -245,13 +252,14 @@ public class DronePhysics : MonoBehaviour
 
     (float, float) GetAttitude()
     {
-        //0～360°のオイラー角を、-180～+180°に換算する
+        //0～360°のオイラー角を、-180～+180°に換算し、ラジアンに変換
         float pitch = (Mathf.Repeat(tf.rotation.eulerAngles.x + 180, 360) - 180) * Mathf.Deg2Rad;
         float roll = (Mathf.Repeat(tf.rotation.eulerAngles.z + 180, 360) - 180) * Mathf.Deg2Rad;
 
         return (pitch, roll);
     }
 
+    // 水平方向の移動速度を算出
     float CalcHorizontalSpeed(Vector3 velocity3D, Vector3 direction)
     {
         Vector3 HorizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;

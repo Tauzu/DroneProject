@@ -9,6 +9,8 @@ public class Mission3 : Mission
     ScoreManager ScoreMan;
     Transform playerTf;
 
+    IEnumerator enumerator;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -20,6 +22,9 @@ public class Mission3 : Mission
 
         ScoreMan = GameObject.Find("GameController").GetComponent<ScoreManager>();
 
+        enumerator = MainCoroutine();
+        StartCoroutine(enumerator);
+
     }
 
     // Update is called once per frame
@@ -27,23 +32,34 @@ public class Mission3 : Mission
     {
         base.Update();
 
-        if (ScoreMan.score >= 6000)
-        {
+        if (ScoreMan.score >= 6000) {
+            StopCoroutine(enumerator);
             complete = true;
         }
-        else
+
+    }
+
+    IEnumerator MainCoroutine()
+    {
+        while (true)
         {
-            if(amezonClone == null){
+            if (amezonClone == null)
+            {
+                yield return new WaitForSeconds(1f);
                 amezonClone = Instantiate(amezonPrefab);
                 amezonClone.transform.position
-                    = playerTf.position + 2f*playerTf.forward + 5f*Vector3.up;
+                    = playerTf.position + 2f * playerTf.forward + 5f * Vector3.up;
 
-            }else if(amezonClone.transform.position.y < -1f){
+            }
+            else if (amezonClone.transform.position.y < -1f)
+            {
                 Destroy(amezonClone);
             }
+
+            yield return new WaitForSeconds(1f);
+
         }
-        // if(GameObject.FindGameObjectsWithTag("coin").Length == 0){
-        //     CP.ClearNotify();
-        // }
+
     }
+
 }

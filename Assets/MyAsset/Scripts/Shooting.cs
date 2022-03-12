@@ -79,9 +79,9 @@ public class Shooting : MonoBehaviour
         // _ballSimurator.Simulate(this.transform.position , shotVelocity);
 
         // キーから指を離した時
-        if (Input.GetKeyUp(KeyCode.Z)){ Shot(shotVelocity); }
+        if (Input.GetKeyUp(KeyCode.Space)){ Shot(shotVelocity); }
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.Space))
         {
             isCharging = true;
 

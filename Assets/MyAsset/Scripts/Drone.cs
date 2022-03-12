@@ -33,9 +33,9 @@ public class Drone : DronePhysics
     //public AudioClip bladeSE;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        InitPhysics();
+        base.Start();    // 継承元のStart関数
 
         //rend = tf.Find("BodyMesh").gameObject.GetComponent<Renderer>();
         defaultColor = bodyRenderer.material.color;

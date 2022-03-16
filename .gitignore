@@ -63,3 +63,6 @@ crashlytics-build.properties
 
 # for VisualStudio
 .vsconfig
+
+# Recordings
+/Recordings/

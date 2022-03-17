@@ -5,7 +5,6 @@ using UnityEngine;
 //子ドローンを生成する。ただのおまけ要素です。
 public class ChildDroneController : MonoBehaviour
 {
-    //List<Drone> dmList = new List<Drone>();
     Drone mainDrone;
     Shooting mainShooting;
     GameObject dronePrefab;
@@ -83,10 +82,8 @@ public class ChildDroneController : MonoBehaviour
                 targetVector = targetVector*(distance/5f);
             }
             
-            child.drone.targetVector = targetVector;
-            child.drone.targetHeight = mainDrone.transform.position.y;
-            child.drone.isHovering = mainDrone.isHovering;
-            child.drone.isBoosting = mainDrone.isBoosting;
+            child.drone.SetTargetVector(targetVector);
+            child.drone.SpecifyStatus(mainDrone.transform.position.y, mainDrone.IsHovering(), mainDrone.IsBoosting());
 
             child.drone.barrierObj.SetActive(mainDrone.barrierObj.activeSelf);
             child.drone.magnetObj.SetActive(mainDrone.magnetObj.activeSelf);

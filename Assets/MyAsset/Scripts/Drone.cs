@@ -10,11 +10,8 @@ using UnityEngine;
 
 public class Drone : DronePhysics
 {
-    //publicだがインスペクター上には表示しない
-    [System.NonSerialized]
-    public Vector2 targetVector;    //目標ベクトル（水平面における）
-    [System.NonSerialized]
-    public float inputVertical;     //鉛直方向の入力（上下どちらへ行きたいか）
+    Vector2 targetVector;    //目標ベクトル（水平面における）
+    float targetVertical;     //上下どちらへ行きたいか
 
     public GameObject barrierObj;
     public GameObject magnetObj;
@@ -49,12 +46,12 @@ public class Drone : DronePhysics
     {
         PositionClamp();
         BoostingChange();
-        hoveringRenderer.enabled = isHovering;
+        hoveringRenderer.enabled = IsHovering();
     }
 
     void FixedUpdate()
     {
-        PhysicalCalculation(targetVector, inputVertical); //物理演算
+        PhysicalCalculation(targetVector, targetVertical); //物理演算
 
         //ブレード効果音
         float bladePower = GetMaxPower();
@@ -65,7 +62,7 @@ public class Drone : DronePhysics
 
     void BoostingChange()
     {
-        if (isBoosting)    //加速時色変化
+        if (IsBoosting())    //加速時色変化
         {
             bodyRenderer.material.color = Color.red;
 
@@ -80,6 +77,15 @@ public class Drone : DronePhysics
             faceText.text = "'~'";
             faceText.color = Color.blue;
         }
+    }
+
+    public void SetTargetVector(Vector2 targetVector)
+    {
+        this.targetVector = targetVector;
+    }
+    public void SetTargetVeritical(float inputVertical)
+    {
+        this.targetVertical = inputVertical;
     }
 
 }

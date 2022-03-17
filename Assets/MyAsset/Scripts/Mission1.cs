@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//ミッション1
-//ただ上昇するだけ
+//最初のミッション
+//上昇してコインを獲得すればクリア
 
 public class Mission1 : Mission
 {

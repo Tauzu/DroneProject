@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //ドローン（自機）の操縦を行うスクリプト
-//キーボード入力を受け付け、それに応じてDroneクラス（コンポーネント）のpublic変数を更新する
+//キーボード入力を受け付け、それに応じてDroneクラス（コンポーネント）のpublic関数を呼び出す
 
 public class DroneController : MonoBehaviour
 {
@@ -28,23 +28,14 @@ public class DroneController : MonoBehaviour
         Vector3 cameraRgt = cameraTf.right;
         Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
         Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
-        drone.targetVector = (inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized;
+        drone.SetTargetVector((inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized);
         //Debug.Log(drone.targetVector);
 
-        drone.isBoosting = Input.GetKey(KeyCode.Q);   //加速フラグ
+        drone.SetBoosting(Input.GetKey(KeyCode.Q));
 
-        drone.inputVertical = Input.GetAxis("Ctrl-Shift_Left");
+        drone.SetTargetVeritical(Input.GetAxis("Ctrl-Shift_Left"));
 
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    DM.Up();   //上昇
-        //}
-        //else if (Input.GetKey(KeyCode.LeftControl))
-        //{
-        //    DM.Down();   //下降
-        //}
-
-        if (Input.GetKeyDown(KeyCode.C)) drone.SwitchHovering(!drone.isHovering);
+        if (Input.GetKeyDown(KeyCode.C)) drone.SwitchHovering(!drone.IsHovering());
 
         if (Input.GetKeyDown(KeyCode.E)) drone.magnetObj.SetActive(!drone.magnetObj.activeSelf);
 

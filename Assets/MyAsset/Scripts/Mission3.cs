@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//宅配物を届けるミッション
+//ひとつ届けると1000点獲得。累計スコア6000点でクリア
+//ミッション中、宅配物を定期的に発生させる
+
 public class Mission3 : Mission
 {
     public GameObject amezonPrefab;
@@ -39,6 +43,7 @@ public class Mission3 : Mission
 
     }
 
+    //宅配物を定期的に発生させるコルーチン
     IEnumerator MainCoroutine()
     {
         while (true)

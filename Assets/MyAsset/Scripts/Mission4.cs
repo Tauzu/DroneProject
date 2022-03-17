@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//敵を倒すミッション
+//フェーズ1：1体の敵を倒す
+//フェーズ2：敵発生装置が出現し、そこから敵が発生し続ける。敵全滅でクリア
+
 public class Mission4 : Mission
 {
     GameObject firstEnemy;

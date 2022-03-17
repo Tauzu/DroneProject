@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//ドラゴンを倒すミッション
+//ミッション中は、スペシャル宅配物を定期的に発生させる
+//スペシャル宅配物を届けることで、ドローンが強化される
+
 public class Mission5 : Mission
 {
     public GameObject specialAmezonPrefab;
@@ -73,21 +77,23 @@ public class Mission5 : Mission
         // }
     }
 
+    //スペシャル宅配物を定期的に発生させるコルーチン
     IEnumerator MainCoroutine()
     {
         while (true) {
 
-            if(specialAmezonClone == null)
+            if(specialAmezonClone == null)  //スペシャル宅配物が存在しない場合
             {
                 specialAmezonClone = Instantiate(specialAmezonPrefab);
                 specialAmezonClone.transform.position
                     = playerTf.position + 2f*playerTf.forward + 5f*Vector3.up;
             }
-            else if (specialAmezonClone.transform.position.y < -1f)
+            else if (specialAmezonClone.transform.position.y < -1f) //ある高さ以下になればオブジェクト破壊
             {
                 Destroy(specialAmezonClone);
             }
-            //待機
+
+            //10秒待機
             yield return new WaitForSeconds(10f);
 
         }

@@ -3,26 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //ドローン物理演算クラス
-
-//ドローンクラスに継承される想定
+//ドローンクラスに継承されたのち、継承先のFixedUpdate内で物理演算メソッドが呼び出される
 
 public class DronePhysics : MonoBehaviour
 {
-    [System.NonSerialized]
-    public float targetHeight;
-    [System.NonSerialized]
-    public bool isHovering = false;
-    [System.NonSerialized]
-    public bool isBoosting = false;
+    float targetHeight;  //目標高度
+    bool isHovering; //ホバリング中か否か
+    bool isBoosting; //高速モードか否か
 
     Transform tf;
     Rigidbody rbody;
 
+    //プロペラブレード構造体
     struct Blade
     {
-        Transform tf;
-        int pitchSign;
-        int rollSign;
+        Transform tf;       //Transform
+        int pitchSign;      //ピッチ方向に傾けたいときの出力向き
+        int rollSign;       //ロール方向に傾けたいときの出力向き
 
         public Blade(Transform tf, int pitchSign, int rollSign)
         {
@@ -33,25 +30,24 @@ public class DronePhysics : MonoBehaviour
 
         public void Rotate(float power)
         {
-            this.tf.Rotate(new Vector3(0, 100 * power * this.pitchSign, 0));
+            tf.Rotate(new Vector3(0, 100 * power * this.pitchSign, 0));
         }
 
         public Vector3 Position()
         {
-            return this.tf.position;
+            return tf.position;
         }
 
         public float GetPower(float hoveringPow, float pitchCtrlPow, float rollCtrlPow)
         {
-            return hoveringPow + this.pitchSign * pitchCtrlPow + this.rollSign * rollCtrlPow;
+            return hoveringPow + pitchSign * pitchCtrlPow + rollSign * rollCtrlPow;
         }
 
 
     };
 
-    const int numBlade = 4;
-
-    Blade[] bladeArray = new Blade[numBlade];
+    const int numBlade = 4;     //ブレード数
+    Blade[] bladeArray = new Blade[numBlade];   //ブレード構造体配列
 
     float pitch_pre;
     float roll_pre;
@@ -94,11 +90,11 @@ public class DronePhysics : MonoBehaviour
     // 物理演算メソッド
     // 継承先のFixedUpdateから呼ばれることを想定
     // ホバリングおよび姿勢制御に必要な力を算出し、RigidBodyに加える
-    protected void PhysicalCalculation(Vector2 targetVector, float inputVertical)
+    protected void PhysicalCalculation(Vector2 targetVector, float targetVertical)
     {
         (float yaw, bool isBacking, float directionCosine) = CalculateYaw(targetVector);
 
-        float hoveringPower = HoveringPower(inputVertical);
+        float hoveringPower = HoveringPower(targetVertical);
 
         (float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
             targetVector.magnitude, hoveringPower, isBacking, directionCosine
@@ -150,12 +146,12 @@ public class DronePhysics : MonoBehaviour
 
     // ホバリングに必要なパワーを算出
     // 目標高さに追従するようにPD制御
-    float HoveringPower(float inputVertical)
+    float HoveringPower(float targetVertical)
     {
         float power;
         if (isHovering && (tf.up.y > 0f))   //ホバリング処理
         {
-            targetHeight += 0.2f * inputVertical;
+            targetHeight += 0.2f * targetVertical;
             //targetHeight += Mathf.Max(0.5f*inputVertical, -0.2f);
 
             power = Kp * (targetHeight - tf.position.y) - decay * this.rbody.velocity.y;
@@ -163,7 +159,7 @@ public class DronePhysics : MonoBehaviour
         }
         else    //ホバリングOFF時
         {
-            power = inputVertical;
+            power = targetVertical;
 
         }
 
@@ -271,6 +267,28 @@ public class DronePhysics : MonoBehaviour
     {
         targetHeight = tf.position.y;
         isHovering = flag;
+    }
+
+    public bool IsHovering()
+    {
+        return isHovering;
+    }
+
+    public void SetBoosting(bool isBoosting)
+    {
+        this.isBoosting = isBoosting;
+    }
+
+    public bool IsBoosting()
+    {
+        return isBoosting;
+    }
+
+    public void SpecifyStatus(float targetHeight, bool isHovering, bool isBoosting)
+    {
+        this.targetHeight = targetHeight;
+        this.isHovering = isHovering;
+        this.isBoosting = isBoosting;
     }
 
     public float GetMaxPower()

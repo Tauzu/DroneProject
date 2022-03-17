@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//コインを集めるミッション
+//全て集めるとクリア
+
 public class Mission2 : Mission
 {
     // Start is called before the first frame update

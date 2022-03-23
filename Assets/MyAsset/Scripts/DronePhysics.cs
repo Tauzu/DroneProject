@@ -2,25 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//ドローン物理演算クラス
-//ドローンクラスに継承されたのち、継承先のFixedUpdate内で物理演算メソッドが呼び出される
-
+/// <summary>
+/// ドローン物理演算クラス
+/// ドローンクラスに継承されたのち、継承先のFixedUpdate内で物理演算メソッドが呼び出される
+/// </summary>
 public class DronePhysics : MonoBehaviour
 {
     float targetHeight;  //目標高度
     bool isHovering; //ホバリング中か否か
     bool isBoosting; //高速モードか否か
 
-    Transform tf;
-    Rigidbody rbody;
+    Transform tf;       //ドローン本体のTransform
+    Rigidbody rbody;       //ドローン本体のRigidBody
 
-    //プロペラブレード構造体
+    float pitch_pre;    //前ステップにおけるピッチ角
+    float roll_pre;    //前ステップにおけるロール角
+
+    const float baseSpeed = 10f;    //基準スピード
+    const float coeff = 10f;        //プロペラの出力係数
+    const float Kp = 5f;            //応答の速さ（PD制御におけるPゲイン）
+    const float decay = 1f;         //振動減衰の強さ（PD制御におけるDゲイン）
+
+    Vector3 positionMin = new Vector3(-100f, -10f, -100f);  //行動範囲の下限
+    Vector3 positionMax = new Vector3(200f, 900f, 300f);  //行動範囲の上限
+
+    /// <summary>
+    /// プロペラブレード構造体。
+    /// プロペラの位置を格納するほか、位置ごとに必要な出力を計算する。
+    /// </summary>
     struct Blade
     {
         Transform tf;       //Transform
         int pitchSign;      //ピッチ方向に傾けたいときの出力向き
         int rollSign;       //ロール方向に傾けたいときの出力向き
 
+        /// <Summary>
+        /// コンストラクタ。
+        /// </Summary>
+        /// <param name="tf">ブレードのTransform</param>
+        /// <param name="pitchSign">ブレードの出力向き（ピッチ）</param>
+        /// <param name="rollSign">ブレードの出力向き（ロール）</param>
         public Blade(Transform tf, int pitchSign, int rollSign)
         {
             this.tf = tf;
@@ -28,16 +49,31 @@ public class DronePhysics : MonoBehaviour
             this.rollSign = rollSign;
         }
 
+        /// <Summary>
+        /// ブレードの回転を行います。
+        /// </Summary>
+        /// <param name="power">回転強さ</param>
         public void Rotate(float power)
         {
             tf.Rotate(new Vector3(0, 100 * power * this.pitchSign, 0));
         }
 
+        /// <summary>
+        /// ブレードの座標を返します。
+        /// </summary>
+        /// <returns>ブレード座標</returns>
         public Vector3 Position()
         {
             return tf.position;
         }
 
+        /// <summary>
+        /// ブレードの出力を算出します。
+        /// </summary>
+        /// <param name="hoveringPow">ホバリング要求量</param>
+        /// <param name="pitchCtrlPow">ピッチ回転要求量</param>
+        /// <param name="rollCtrlPow">ロール回転要求量</param>
+        /// <returns>ブレード出力</returns>
         public float GetPower(float hoveringPow, float pitchCtrlPow, float rollCtrlPow)
         {
             return hoveringPow + pitchSign * pitchCtrlPow + rollSign * rollCtrlPow;
@@ -49,18 +85,7 @@ public class DronePhysics : MonoBehaviour
     const int numBlade = 4;     //ブレード数
     Blade[] bladeArray = new Blade[numBlade];   //ブレード構造体配列
 
-    float pitch_pre;
-    float roll_pre;
-
-    const float baseSpeed = 10f;
-    const float coeff = 10f;
-    const float Kp = 5f;
-    const float decay = 1f;
-
-    Vector3 positionMin = new Vector3(-100f, -10f, -100f);
-    Vector3 positionMax = new Vector3(200f, 900f, 300f);
-
-    float maxPower;
+    float maxPower; //4枚のブレードの出力の最大値
 
     // Start is called before the first frame update
     // このStart関数は、継承先にオーバーライドされてから呼び出される
@@ -87,9 +112,13 @@ public class DronePhysics : MonoBehaviour
 
     }
 
-    // 物理演算メソッド
-    // 継承先のFixedUpdateから呼ばれることを想定
-    // ホバリングおよび姿勢制御に必要な力を算出し、RigidBodyに加える
+    /// <summary>
+    /// 物理演算メソッド。
+    /// 継承先のFixedUpdateから呼ばれることを想定。
+    /// ホバリングおよび姿勢制御に必要な力を算出し、ドローン本体のRigidBodyに加える。
+    /// </summary>
+    /// <param name="targetVector">目標方向ベクトル</param>
+    /// <param name="targetVertical">目標上下移動量</param>
     protected void PhysicalCalculation(Vector2 targetVector, float targetVertical)
     {
         (float yaw, bool isBacking, float directionCosine) = CalculateYaw(targetVector);
@@ -110,11 +139,11 @@ public class DronePhysics : MonoBehaviour
 
             blade.Rotate(power);
 
-            maxPower = Mathf.Max(maxPower, Mathf.Abs(power));
+            maxPower = Mathf.Max(maxPower, Mathf.Abs(power));   //ブレードの出力の最大値を取得しておく
 
         }
 
-        // 機体ヨー回転
+        // 機体ヨー回転は、クオータニオンを直接操作
         Quaternion rot = Quaternion.AngleAxis(10f * yaw, tf.up);
         tf.rotation *= rot;
 
@@ -124,7 +153,11 @@ public class DronePhysics : MonoBehaviour
 
     }
 
-    // キー入力の向きと、自分との向きから、回転すべき量を算出
+    /// <summary>
+    /// キー入力の向きと、自分との向きから、回転すべき量を算出します。
+    /// </summary>
+    /// <param name="targetVector">目標方向ベクトル</param>
+    /// <returns>ヨー回転要求量、バックフラグ、目標ベクトルと現在ベクトルの内積</returns>
     (float, bool, float) CalculateYaw(Vector2 targetVector)
     {
         Vector2 forwardXZ = new Vector2(tf.forward.x, tf.forward.z).normalized;
@@ -144,8 +177,12 @@ public class DronePhysics : MonoBehaviour
 
     }
 
-    // ホバリングに必要なパワーを算出
-    // 目標高さに追従するようにPD制御
+    /// <summary>
+    /// ホバリングに必要なパワーを算出します。
+    /// 目標高さに追従するようにPD制御を行います。
+    /// </summary>
+    /// <param name="targetVertical">目標方向ベクトル</param>
+    /// <returns>ホバリング要求量</returns>
     float HoveringPower(float targetVertical)
     {
         float power;
@@ -169,6 +206,10 @@ public class DronePhysics : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// ドローンを行動範囲内にとどめる処理。
+    /// 行動限界に到達した場合、速度をゼロにする。
+    /// </summary>
     protected void PositionClamp()
     {
         Vector3 modifiedPosition;
@@ -183,12 +224,19 @@ public class DronePhysics : MonoBehaviour
         }
     }
 
-    //ピッチ目標角度を算出
+    /// <summary>
+    /// ピッチ目標角度を算出します。
+    /// キーボード入力がある場合は行きたい方向に傾けようとするが、ない場合はブレーキがかかるように計算。
+    /// </summary>
+    /// <param name="inputMagnitude">キーボード入力の強さ</param>
+    /// <param name="isBacking">バック中か否か</param>
+    /// <param name="inner">目標ベクトルと現在ベクトルの内積</param>
+    /// <returns>ピッチ目標角度</returns>
     float TargetPitchAngle(float inputMagnitude, bool isBacking, float inner)
     {
         float horizontalForwardSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.forward);
         float targetAngle;
-        if (inputMagnitude > 0.1f)
+        if (inputMagnitude > 0.2f)
         {
             float targetSPD = baseSpeed * inputMagnitude;
             if (isBoosting) targetSPD *= 2f;
@@ -207,7 +255,11 @@ public class DronePhysics : MonoBehaviour
         return targetAngle;
     }
 
-    //ロー目標角度を算出
+    /// <summary>
+    /// ロー目標角度を算出します。
+    /// 左右方向にはブレーキがかかるように計算。
+    /// </summary>
+    /// <returns>ロール目標角度</returns>
     float TargetRollAngle()
     {
         float horizontalRightSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.right);
@@ -219,7 +271,14 @@ public class DronePhysics : MonoBehaviour
         return targetAngle;
     }
 
-    //ピッチおよびローの目標角度へ追従するようPD制御を行い、必要な力を算出
+    /// <summary>
+    /// ピッチおよびローの目標角度へ追従するようPD制御を行い、必要な力を算出。
+    /// </summary>
+    /// <param name="inputMagnitude">キーボード入力の強さ</param>
+    /// <param name="hoveringPower">ホバリング要求量</param>
+    /// <param name="isBacking">バック中か否か</param>
+    /// <param name="inner">目標ベクトルと現在ベクトルの内積</param>
+    /// <returns>ピッチ回転要求量、ロール回転要求量</returns>
     (float, float) AttitudeControl(float inputMagnitude, float hoveringPower, bool isBacking, float inner)
     {
         //pitch[1] = tf.forward.y;
@@ -245,17 +304,25 @@ public class DronePhysics : MonoBehaviour
 
     }
 
-
+    /// <summary>
+    /// 0～360°のオイラー角を、-180～+180°に換算し、ラジアンに変換。
+    /// </summary>
+    /// <returns>ピッチ角度、ロール角度</returns>
     (float, float) GetAttitude()
     {
-        //0～360°のオイラー角を、-180～+180°に換算し、ラジアンに変換
+        //
         float pitch = (Mathf.Repeat(tf.rotation.eulerAngles.x + 180, 360) - 180) * Mathf.Deg2Rad;
         float roll = (Mathf.Repeat(tf.rotation.eulerAngles.z + 180, 360) - 180) * Mathf.Deg2Rad;
 
         return (pitch, roll);
     }
 
-    // 水平方向の移動速度を算出
+    /// <summary>
+    /// 水平方向の移動速さを算出
+    /// </summary>
+    /// <param name="velocity3D">速度ベクトル</param>
+    /// <param name="direction">任意の方向ベクトル</param>
+    /// <returns>水平速さ</returns>
     float CalcHorizontalSpeed(Vector3 velocity3D, Vector3 direction)
     {
         Vector3 HorizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
@@ -263,27 +330,50 @@ public class DronePhysics : MonoBehaviour
         return HorizontalSpeed;
     }
 
+    /// <summary>
+    /// ホバリング状態を切り替える。
+    /// </summary>
+    /// <param name="flag">切り替え先</param>
     public void SwitchHovering(bool flag)
     {
         targetHeight = tf.position.y;
         isHovering = flag;
     }
 
+    /// <summary>
+    /// ホバリング中か否かを取得
+    /// </summary>
+    /// <returns>ホバリング中か否か</returns>
     public bool IsHovering()
     {
         return isHovering;
     }
 
+    /// <summary>
+    /// 高速モードを指定して切り替える。
+    /// </summary>
+    /// <param name="isBoosting">切り替え先</param>
     public void SetBoosting(bool isBoosting)
     {
         this.isBoosting = isBoosting;
     }
 
+    /// <summary>
+    /// 高速モードか否かを取得
+    /// </summary>
+    /// <returns>高速モードか否か</returns>
     public bool IsBoosting()
     {
         return isBoosting;
     }
 
+    /// <summary>
+    /// ドローンの状態を強制的に指定する。
+    /// ChildDroneを操作する時にしか使わない。
+    /// </summary>
+    /// <param name="targetHeight">目標高度</param>
+    /// <param name="isHovering">ホバリング状態</param>
+    /// <param name="isBoosting">高速モード</param>
     public void SpecifyStatus(float targetHeight, bool isHovering, bool isBoosting)
     {
         this.targetHeight = targetHeight;
@@ -291,7 +381,11 @@ public class DronePhysics : MonoBehaviour
         this.isBoosting = isBoosting;
     }
 
-    public float GetMaxPower()
+    /// <summary>
+    /// ブレードの出力の最大値を取得
+    /// </summary>
+    /// <returns>ブレードの出力の最大値</returns>
+    protected float GetMaxPower()
     {
         return maxPower;
     }

@@ -2,19 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//子ドローンを生成する。ただのおまけ要素です。
+/// <summary>
+/// 子ドローンを生成し、操作するクラス。
+/// ただのおまけ要素。
+/// </summary>
 public class ChildDroneController : MonoBehaviour
 {
     Drone mainDrone;
     Shooting mainShooting;
     GameObject dronePrefab;
 
+    /// <summary>
+    /// 子ドローン構造体。
+    /// ドローンクラスとシューティングクラス、初期位置を格納。
+    /// </summary>
     struct ChildDrone
     {
         public Drone drone;
         public Shooting shooting;
         Vector3 initialPosition;
 
+        /// <Summary>
+        /// コンストラクタ。
+        /// </Summary>
+        /// <param name="drone">ドローンクラス</param>
+        /// <param name="shooting">シューティングクラス</param>
+        /// <param name="initialPosition">初期位置</param>
+        /// <param name="parentPosition">親ドローンの位置</param>
         public ChildDrone(Drone drone, Shooting shooting, Vector3 initialPosition, Vector3 parentPosition)
         {
             this.drone = drone;
@@ -24,6 +38,11 @@ public class ChildDroneController : MonoBehaviour
             this.drone.transform.position = initialPosition + parentPosition;
         }
 
+        /// <Summary>
+        /// 目標方向ベクトルの算出。
+        /// </Summary>
+        /// <param name="parentPosition">親ドローンの位置</param>
+        /// <returns>目標方向ベクトル</returns>
         public Vector3 GetTargetVector3D(Vector3 parentPosition)
         {
             return this.initialPosition + parentPosition - this.drone.transform.position;
@@ -50,24 +69,7 @@ public class ChildDroneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GameObject clone = Instantiate(dronePrefab);
-
-            int numChild = cdList.Count;
-
-            Vector3 initialPosition = 2 * (numChild / 4 + 1) * initialArray[numChild % 4];
-
-            //dmList.Add(clone.GetComponent<Drone>());
-            cdList.Add(
-                new ChildDrone(
-                    clone.GetComponent<Drone>(),
-                    clone.GetComponent<Shooting>(), 
-                    initialPosition, mainDrone.transform.position
-                    )
-                );
-
-        }
+        if (Input.GetKeyDown(KeyCode.G)) { AddChildDrone(); }
 
         //foreach (Drone drone in dmList)
         foreach (ChildDrone child in cdList)
@@ -77,9 +79,9 @@ public class ChildDroneController : MonoBehaviour
             float distance = targetVector.magnitude;
 
             targetVector = targetVector.normalized;
-            if (distance < 5f)
+            if (distance < 10f)
             {
-                targetVector = targetVector*(distance/5f);
+                targetVector = targetVector*(distance/10f);
             }
             
             child.drone.SetTargetVector(targetVector);
@@ -92,5 +94,26 @@ public class ChildDroneController : MonoBehaviour
             child.shooting.isSpecial = mainShooting.isSpecial;
         }
         
+    }
+
+    /// <summary>
+    /// 子ドローンを追加する。
+    /// </summary>
+    void AddChildDrone()
+    {
+        GameObject clone = Instantiate(dronePrefab);
+
+        int numChild = cdList.Count;
+
+        Vector3 initialPosition = 2 * (numChild / 4 + 1) * initialArray[numChild % 4];
+
+        //dmList.Add(clone.GetComponent<Drone>());
+        cdList.Add(
+            new ChildDrone(
+                clone.GetComponent<Drone>(),
+                clone.GetComponent<Shooting>(),
+                initialPosition, mainDrone.transform.position
+                )
+            );
     }
 }

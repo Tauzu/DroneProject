@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//ドローンクラス（ドローン物理演算クラスを継承）
-
-//操縦は外部スクリプト（DroneController.cs）から、public変数にアクセスして行う。
-//物理演算はFixedUpdateメソッド内で行う
-
-
+/// <summary>
+/// ドローンクラス（ドローン物理演算クラスを継承）。
+/// 操縦は外部スクリプト（DroneController.cs）から、public変数にアクセスして行う。
+/// 物理演算はFixedUpdateメソッド内で行う。
+/// </summary>
 public class Drone : DronePhysics
 {
     Vector2 targetVector;    //目標ベクトル（水平面における）
@@ -60,6 +59,9 @@ public class Drone : DronePhysics
 
     }
 
+    /// <summary>
+    /// 加速モードかどうかチェックし、それに応じてドローンの顔文字を変更する
+    /// </summary>
     void BoostingChange()
     {
         if (IsBoosting())    //加速時色変化
@@ -79,10 +81,19 @@ public class Drone : DronePhysics
         }
     }
 
+    /// <summary>
+    /// 目標方向ベクトルをセットする。
+    /// </summary>
+    /// <param name="targetVector">目標方向ベクトル</param>
     public void SetTargetVector(Vector2 targetVector)
     {
         this.targetVector = targetVector;
     }
+
+    /// <summary>
+    /// 目標上下方向（上昇したいか下降したいか）をセットする。
+    /// </summary>
+    /// <param name="inputVertical">目標上下方向</param>
     public void SetTargetVeritical(float inputVertical)
     {
         this.targetVertical = inputVertical;

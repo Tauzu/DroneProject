@@ -8,6 +8,7 @@ https://user-images.githubusercontent.com/87505664/158532013-4edd8f36-20cc-439c-
 - ミッションは全部で5つです
 - Unityを使って制作しました
   - 自作のスクリプトは、`Assets/MyAsset/Scripts/`内にあります
+  - シーンは、`Assets/MyAsset/Scenes/town.unity`を読み込んでください。
 
 ## こだわったポイント
 - 物理演算を積極的に使いました

@@ -26,7 +26,6 @@ public class Drone : DronePhysics
     Color defaultColor;
 
     AudioSource audioSource;
-    //public AudioClip bladeSE;
 
     // Start is called before the first frame update
     protected override void Start()

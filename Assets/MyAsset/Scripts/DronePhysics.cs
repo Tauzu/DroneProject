@@ -88,7 +88,10 @@ public class DronePhysics : MonoBehaviour
     float maxPower; //4枚のブレードの出力の最大値
 
     // Start is called before the first frame update
-    // このStart関数は、継承先にオーバーライドされてから呼び出される
+    /// <summary>
+    /// ドローン物理演算用の初期化。
+    /// Rigidbody、４つのプロペラを取得。
+    /// </summary>
     protected virtual void Start()
     {
         tf = this.transform;

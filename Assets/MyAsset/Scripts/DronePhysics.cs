@@ -128,6 +128,7 @@ public class DronePhysics : MonoBehaviour
 
         float hoveringPower = HoveringPower(targetVertical);
 
+        //Debug.Log(targetVector);
         (float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
             targetVector.magnitude, hoveringPower, isBacking, directionCosine
         );
@@ -237,13 +238,17 @@ public class DronePhysics : MonoBehaviour
     /// <returns>ピッチ目標角度</returns>
     float TargetPitchAngle(float inputMagnitude, bool isBacking, float inner)
     {
+        //後退中であればマイナスが返る
         float horizontalForwardSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.forward);
+
+        //Debug.Log(inputMagnitude);
+
         float targetAngle;
         if (inputMagnitude > 0.2f)
         {
             float targetSPD = baseSpeed * inputMagnitude;
             if (isBoosting) targetSPD *= 2f;
-            if (isBacking) targetSPD *= -1;
+            if (isBacking) targetSPD *= -1f;
             float difference = (targetSPD - horizontalForwardSPD) / baseSpeed;//目標速度までの差の指標
             targetAngle = 90f * difference * Mathf.Abs(inner);
             //Debug.Log("ON");
@@ -251,10 +256,11 @@ public class DronePhysics : MonoBehaviour
         else
         {
             //前後方向自動ブレーキ
-            targetAngle = (isHovering) ? -45f * horizontalForwardSPD / baseSpeed : 0f;
-            //Debug.Log("OFF");
+            targetAngle = (isHovering) ? -90f * horizontalForwardSPD / baseSpeed : 0f;
+            //Debug.Log(targetAngle);
         }
 
+        Debug.Log(targetAngle);
         return targetAngle;
     }
 
@@ -267,7 +273,7 @@ public class DronePhysics : MonoBehaviour
     {
         float horizontalRightSPD = CalcHorizontalSpeed(this.rbody.velocity, tf.right);
         //左右方向自動ブレーキ
-        float targetAngle = (isHovering) ? 60f * horizontalRightSPD / baseSpeed : 0f;
+        float targetAngle = (isHovering) ? 90f * horizontalRightSPD / baseSpeed : 0f;
 
         if (isBoosting) targetAngle *= 0.2f; //加速時はブレーキ弱める
 
@@ -326,11 +332,11 @@ public class DronePhysics : MonoBehaviour
     /// <param name="velocity3D">速度ベクトル</param>
     /// <param name="direction">任意の方向ベクトル</param>
     /// <returns>水平速さ</returns>
-    float CalcHorizontalSpeed(Vector3 velocity3D, Vector3 direction)
+    float CalcHorizontalSpeed(Vector3 velocity, Vector3 direction)
     {
-        Vector3 HorizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
-        float HorizontalSpeed = Vector3.Dot(velocity3D, HorizontalDirection);
-        return HorizontalSpeed;
+        Vector3 horizontalDirection = new Vector3(direction.x, 0, direction.z).normalized;
+        float horizontalSpeed = Vector3.Dot(velocity, horizontalDirection);
+        return horizontalSpeed;
     }
 
     /// <summary>

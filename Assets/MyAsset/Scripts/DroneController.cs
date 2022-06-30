@@ -28,7 +28,9 @@ public class DroneController : MonoBehaviour
         Vector3 cameraRgt = cameraTf.right;
         Vector2 cameraFwdXZ = new Vector2(cameraFwd.x, cameraFwd.z).normalized;
         Vector2 cameraRgtXZ = new Vector2(cameraRgt.x, cameraRgt.z).normalized;
-        drone.SetTargetVector((inputForward * cameraFwdXZ + inputSide * cameraRgtXZ).normalized);
+        Vector2 targetVector = inputForward * cameraFwdXZ + inputSide * cameraRgtXZ;
+        if(targetVector.magnitude > 1f) { targetVector = targetVector.normalized; }
+        drone.SetTargetVector(targetVector);
         //Debug.Log(drone.targetVector);
 
         drone.SetBoosting(Input.GetKey(KeyCode.Q));

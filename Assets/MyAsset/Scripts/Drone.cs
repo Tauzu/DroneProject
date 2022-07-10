@@ -42,7 +42,6 @@ public class Drone : DronePhysics
     // Update is called once per frame
     void Update()
     {
-        PositionClamp();
         BoostingChange();
         hoveringRenderer.enabled = IsHovering();
     }

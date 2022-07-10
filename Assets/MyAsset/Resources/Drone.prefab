@@ -952,7 +952,6 @@ GameObject:
   - component: {fileID: 7428779442376501493}
   - component: {fileID: 7428779442376501498}
   - component: {fileID: 7428779442376501500}
-  - component: {fileID: 7428779442376501491}
   - component: {fileID: 7428779442376501488}
   m_Layer: 0
   m_Name: Drone
@@ -993,7 +992,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7428779442376501492}
-  m_Material: {fileID: 13400000, guid: e948d6f1a1216f941aed3f44bef82341, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1050,18 +1049,6 @@ MonoBehaviour:
   maxSpeed: 300
   ballSimurator: {fileID: 1546006934858579471}
   shotSE: {fileID: 8300000, guid: 338b143a01c08ca47912f0a733b97145, type: 3}
---- !u!114 &7428779442376501491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7428779442376501492}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1faaea8898c41994c9a072094718b922, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &7428779442376501488
 AudioSource:
   m_ObjectHideFlags: 0

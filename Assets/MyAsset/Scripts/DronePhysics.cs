@@ -22,9 +22,7 @@ public class DronePhysics : MonoBehaviour
     const float coeff = 10f;        //プロペラの出力係数
     const float Kp = 5f;            //応答の速さ（PD制御におけるPゲイン）
     const float decay = 1f;         //振動減衰の強さ（PD制御におけるDゲイン）
-
-    Vector3 positionMin = new Vector3(-100f, -10f, -100f);  //行動範囲の下限
-    Vector3 positionMax = new Vector3(200f, 900f, 300f);  //行動範囲の上限
+    const float maxAngle = 70f;     //目標角度の上限
 
     /// <summary>
     /// プロペラブレード構造体。
@@ -211,24 +209,6 @@ public class DronePhysics : MonoBehaviour
     }
 
     /// <summary>
-    /// ドローンを行動範囲内にとどめる処理。
-    /// 行動限界に到達した場合、速度をゼロにする。
-    /// </summary>
-    protected void PositionClamp()
-    {
-        Vector3 modifiedPosition;
-        modifiedPosition.x = Mathf.Clamp(tf.position.x, positionMin.x, positionMax.x);
-        modifiedPosition.y = Mathf.Clamp(tf.position.y, positionMin.y, positionMax.y);
-        modifiedPosition.z = Mathf.Clamp(tf.position.z, positionMin.z, positionMax.z);
-
-        if (modifiedPosition != tf.position)
-        {
-            tf.position = modifiedPosition;
-            rbody.velocity = Vector3.zero;
-        }
-    }
-
-    /// <summary>
     /// ピッチ目標角度を算出します。
     /// キーボード入力がある場合は行きたい方向に傾けようとするが、ない場合はブレーキがかかるように計算。
     /// </summary>
@@ -260,7 +240,7 @@ public class DronePhysics : MonoBehaviour
             //Debug.Log(targetAngle);
         }
 
-        Debug.Log(targetAngle);
+        //Debug.Log(targetAngle);
         return targetAngle;
     }
 
@@ -294,14 +274,14 @@ public class DronePhysics : MonoBehaviour
         //roll[1] = tf.right.y;
         (float pitch, float roll) = this.GetAttitude();
 
-        float targetPitchAngle = Mathf.Clamp(TargetPitchAngle(inputMagnitude, isBacking, inner), -60f, 60f);
+        float targetPitchAngle = Mathf.Clamp(TargetPitchAngle(inputMagnitude, isBacking, inner), -maxAngle, maxAngle);
         targetPitchAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
         float targetPitch = targetPitchAngle * Mathf.Deg2Rad;    //ピッチ姿勢制御
         float pitchControlPOW = Kp * (targetPitch - pitch) - 0.3f * decay * (pitch - pitch_pre) / Time.deltaTime;
         //pitchControlPOW *= 0.1f;
         //Debug.Log(pitch);
 
-        float targetRollAngle = Mathf.Clamp(TargetRollAngle(), -60f, 60f);
+        float targetRollAngle = Mathf.Clamp(TargetRollAngle(), -maxAngle, maxAngle);
         targetRollAngle *= Mathf.Sign(hoveringPower); // 上昇中と下降中で傾けるべき向きが逆になる
         float targetRoll = targetRollAngle * Mathf.Deg2Rad;    //ロール姿勢制御
         float rollControlPOW = Kp * (targetRoll - roll) - 0.3f * decay * (roll - roll_pre) / Time.deltaTime;
@@ -314,7 +294,7 @@ public class DronePhysics : MonoBehaviour
     }
 
     /// <summary>
-    /// 0～360°のオイラー角を、-180～+180°に換算し、ラジアンに変換。
+    /// 機体姿勢のオイラー角（0～360°）を、-180～+180°に換算し、ラジアンに変換して返す
     /// </summary>
     /// <returns>ピッチ角度、ロール角度</returns>
     (float, float) GetAttitude()

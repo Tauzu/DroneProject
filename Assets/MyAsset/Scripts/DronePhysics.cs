@@ -148,7 +148,7 @@ public class DronePhysics : MonoBehaviour
         }
 
         // 機体ヨー回転は、クオータニオンを直接操作
-        Quaternion rot = Quaternion.AngleAxis(10f * yaw, tf.up);
+        Quaternion rot = Quaternion.AngleAxis(15f * yaw, tf.up);
         tf.rotation *= rot;
 
         if (Input.GetKey(KeyCode.X)) { rbody.AddTorque(-1000f * tf.right); }

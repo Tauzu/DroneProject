@@ -97,4 +97,13 @@ public class Drone : DronePhysics
         this.targetVertical = inputVertical;
     }
 
+    private void OnDisable()
+    {
+        bodyRenderer.material.color = Color.gray;
+        faceText.text = "´^`";
+        faceText.color = Color.black;
+
+        SwitchHovering(false);
+    }
+
 }

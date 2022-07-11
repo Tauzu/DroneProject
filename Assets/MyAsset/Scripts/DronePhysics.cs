@@ -374,7 +374,7 @@ public class DronePhysics : MonoBehaviour
     /// ブレードの出力の最大値を取得
     /// </summary>
     /// <returns>ブレードの出力の最大値</returns>
-    protected float GetMaxPower()
+    public float GetMaxPower()
     {
         return maxPower;
     }

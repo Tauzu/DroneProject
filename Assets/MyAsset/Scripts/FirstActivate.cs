@@ -29,9 +29,9 @@ public class FirstActivate : MonoBehaviour
 
     void Update()
     {
-        if(fps_counter.get_FPS() > 45f && !startButton.activeSelf)
+        if(fps_counter.get_FPS() > 30f && !startButton.activeSelf)
         {
-            startButton.SetActive(true);   //FPSが45を超えたらスタートボタン表示
+            startButton.SetActive(true);   //FPSが基準値を超えたらスタートボタン表示
 
             audioSrc.clip = titleBGM;
             audioSrc.Play();

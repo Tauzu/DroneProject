@@ -32,7 +32,7 @@ public class Mission5 : Mission
 
         message.text = "ドラゴン襲来！\nどうにかして倒そう！";
 
-        playerTf = GameObject.Find("Player").transform;
+        playerTf = GameObject.Find("PlayerDrone").transform;
 
         dragonObj = this.transform.Find("Dragon").gameObject;
         dragonObj.SetActive(true);

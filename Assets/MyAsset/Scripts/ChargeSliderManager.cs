@@ -17,7 +17,7 @@ public class ChargeSliderManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shootingScript = GameObject.Find("Player").GetComponent<Shooting>();
+        shootingScript = GameObject.Find("PlayerDrone").GetComponent<Shooting>();
         slider = chargeSlider.GetComponent<Slider>();
 
         backgroundImg = chargeSlider.transform.Find("Background").gameObject.GetComponent<Image>();

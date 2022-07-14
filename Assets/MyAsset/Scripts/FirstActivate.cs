@@ -20,7 +20,7 @@ public class FirstActivate : MonoBehaviour
 
     void Start()
     {
-        //playerObj = GameObject.Find("Player");
+        //playerObj = GameObject.Find("PlayerDrone");
         // drone.enabled = false;   //ドローン制御をオフにする(処理が安定するのを待つ)
 
         startButton = transform.Find("TitleCanvas/StartButton").gameObject;

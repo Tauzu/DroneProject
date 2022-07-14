@@ -23,7 +23,7 @@ public class AmezonBoxBehavior : MonoBehaviour
         effectClone = Instantiate(targetEffect);
         // effectClone.transform.parent = this.transform;
 
-        playerTf = GameObject.Find("Player").transform;
+        playerTf = GameObject.Find("PlayerDrone").transform;
     }
 
     // Update is called once per frame
@@ -77,7 +77,7 @@ public class AmezonBoxBehavior : MonoBehaviour
 
         if (special)
         {
-            Transform playerTf = GameObject.Find("Player").transform;
+            Transform playerTf = GameObject.Find("PlayerDrone").transform;
             Transform SAParticleTf = this.transform.Find("SpecialAmezonParticle");
             SAParticleTf.parent = playerTf;
             SAParticleTf.localPosition = Vector3.zero;

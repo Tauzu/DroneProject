@@ -22,7 +22,7 @@ public class Mission3 : Mission
 
         message.text = "[E]を押すと磁場発生。\n 宅配物を届けよう！\n目標SCORE:6000";
 
-        playerTf = GameObject.Find("Player").transform;
+        playerTf = GameObject.Find("PlayerDrone").transform;
 
         ScoreMan = GameObject.Find("GameController").GetComponent<ScoreManager>();
 

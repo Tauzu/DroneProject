@@ -16,7 +16,7 @@ public class DroneController : MonoBehaviour
     {
         drone = this.GetComponent<Drone>();
 
-        cameraTf = GameObject.Find("Main Camera").transform;
+        cameraTf = Camera.main.transform;
     }
 
     // Update is called once per frame

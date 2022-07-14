@@ -47,8 +47,8 @@ public class DestroyEnemy : DestroyScatter
 
     void PopupScore()
     {
-        GameObject cameraObj = GameObject.Find("Main Camera");
-        Vector3 direction = this.transform.position - cameraObj.transform.position;
+        Vector3 camPosition = Camera.main.transform.position;
+        Vector3 direction = this.transform.position - camPosition;
         float distance = direction.magnitude;
         int score = (int)(distance * distance / 1000f) * 100;
         score = Mathf.Clamp(score, 100, score);

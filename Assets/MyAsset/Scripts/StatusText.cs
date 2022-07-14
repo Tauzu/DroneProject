@@ -15,7 +15,7 @@ public class StatusText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameOB = GameObject.Find("Player");
+        gameOB = GameObject.Find("PlayerDrone");
         rbody = gameOB.GetComponent<Rigidbody>();
         statusText = this.GetComponent<Text>();
         // drone = gameOB.GetComponent<DroneMove>();

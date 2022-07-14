@@ -23,10 +23,10 @@ public class CompleteEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerTf = GameObject.Find("Player").transform;
+        playerTf = GameObject.Find("PlayerDrone").transform;
         // subCameraObj = GameObject.Find("SubCamera"); //これだと非アクティブなオブジェクトは取得できない
         subCameraObj = this.transform.Find("SubCamera").gameObject;
-        mainCameraObj = GameObject.Find("Main Camera");
+        mainCameraObj = Camera.main.gameObject;
 
         clearText = this.transform.Find("SubCamCanvas/ClearText").GetComponent<Text>();
     }
@@ -55,7 +55,7 @@ public class CompleteEffect : MonoBehaviour
 
     IEnumerator CelebrateProcess()
     {
-        SetSubCameraTarget(new Vector3(-40f, 30f, -50f), GameObject.Find("Player").transform);
+        SetSubCameraTarget(new Vector3(-40f, 30f, -50f), GameObject.Find("PlayerDrone").transform);
 
         Celebration();
 

@@ -20,9 +20,11 @@ public class DronePhysics : MonoBehaviour
 
     const float baseSpeed = 10f;    //基準スピード
     const float coeff = 10f;        //プロペラの出力係数
-    const float Kp = 5f;            //応答の速さ（PD制御におけるPゲイン）
+    const float Kp = 4f;            //応答の速さ（PD制御におけるPゲイン）
     const float decay = 1f;         //振動減衰の強さ（PD制御におけるDゲイン）
     const float maxAngle = 70f;     //目標角度の上限
+
+    float standardHeight = 0f;
 
     /// <summary>
     /// プロペラブレード構造体。
@@ -122,9 +124,11 @@ public class DronePhysics : MonoBehaviour
     /// <param name="targetVertical">目標上下移動量</param>
     protected void PhysicalCalculation(Vector2 targetVector, float targetVertical)
     {
+        float height = tf.position.y - standardHeight;
+
         (float yaw, bool isBacking, float directionCosine) = CalculateYaw(targetVector);
 
-        float hoveringPower = HoveringPower(targetVertical);
+        float hoveringPower = HoveringPower(targetVertical, height);
 
         //Debug.Log(targetVector);
         (float pitchCtrlPower, float rollCtrlPower) = AttitudeControl(
@@ -151,7 +155,7 @@ public class DronePhysics : MonoBehaviour
 
         if (Input.GetKey(KeyCode.X)) { rbody.AddTorque(-1000f * tf.right); }
 
-        targetHeight += 0.01f * (tf.position.y - targetHeight); //目標高さを、自分の高さに少し近づける（安定化のため）
+        targetHeight += 0.01f * (height - targetHeight); //目標高さを、自分の高さに少し近づける（安定化のため）
 
     }
 
@@ -185,7 +189,7 @@ public class DronePhysics : MonoBehaviour
     /// </summary>
     /// <param name="targetVertical">目標方向ベクトル</param>
     /// <returns>ホバリング要求量</returns>
-    float HoveringPower(float targetVertical)
+    float HoveringPower(float targetVertical, float height)
     {
         float power;
         if (isHovering && (tf.up.y > 0f))   //ホバリング処理
@@ -193,7 +197,9 @@ public class DronePhysics : MonoBehaviour
             targetHeight += 0.2f * targetVertical;
             //targetHeight += Mathf.Max(0.5f*inputVertical, -0.2f);
 
-            power = Kp * (targetHeight - tf.position.y) - decay * this.rbody.velocity.y;
+
+
+            power = Kp * (targetHeight - height) - decay * this.rbody.velocity.y;
 
         }
         else    //ホバリングOFF時
@@ -325,7 +331,7 @@ public class DronePhysics : MonoBehaviour
     /// <param name="flag">切り替え先</param>
     public void SwitchHovering(bool flag)
     {
-        targetHeight = tf.position.y;
+        targetHeight = tf.position.y - standardHeight;
         isHovering = flag;
     }
 
@@ -377,6 +383,15 @@ public class DronePhysics : MonoBehaviour
     public float GetMaxPower()
     {
         return maxPower;
+    }
+
+    /// <summary>
+    /// 基準高さを設定。
+    /// </summary>
+    /// <param name="newStandardHeght">基準高さ</param>
+    public void SetStandardHeight(float newStandardHeght)
+    {
+        standardHeight = newStandardHeght;
     }
 
 }

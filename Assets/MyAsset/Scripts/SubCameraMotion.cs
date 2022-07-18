@@ -16,7 +16,7 @@ public class SubCameraMotion : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         this.transform.LookAt(lookingTf);
     }

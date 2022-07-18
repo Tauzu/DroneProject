@@ -87,10 +87,9 @@ public class PlayerCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 relation;
-
         if (Input.GetKey(KeyCode.L))
         {
+            Vector3 relation;
 
             if (!(isFPS))
             {
@@ -103,7 +102,6 @@ public class PlayerCamera : MonoBehaviour
             else
             {
                 relation = playerTf.forward;
-
             }
 
             PCDN = new PolarCoordinates(relation);
@@ -134,8 +132,6 @@ public class PlayerCamera : MonoBehaviour
 
             PCDN = PCDN.Delta(dtheta, dphi, dr);
 
-            relation = PCDN.Rectagular();
-
         }
 
         if (Input.GetKeyDown(KeyCode.Return)) SwitchFPS();  //Return:EnterKey
@@ -148,10 +144,15 @@ public class PlayerCamera : MonoBehaviour
 
         // Debug.Log(relation);
 
-        this.transform.position = playerTf.position + relation;
-        Vector3 direction = (isFPS)? relation : -relation;
-        this.transform.rotation = Quaternion.LookRotation(direction);
+    }
 
+    // カメラの制御なのでLateUpdate
+    private void LateUpdate()
+    {
+        Vector3 relation = PCDN.Rectagular();
+        this.transform.position = playerTf.position + relation;
+        Vector3 direction = (isFPS) ? relation : -relation;
+        this.transform.rotation = Quaternion.LookRotation(direction);
     }
 
 

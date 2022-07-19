@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec982073af3d764caaa1e1b803f2bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delta: 0.3
+  delta: 0.5
 --- !u!1001 &129846126
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -244,6 +244,10 @@ PrefabInstance:
     - target: {fileID: 4010254225437643846, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010254225437643846, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: maxEnergy
+      value: 10000
       objectReference: {fileID: 0}
     - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
       propertyPath: m_Enabled

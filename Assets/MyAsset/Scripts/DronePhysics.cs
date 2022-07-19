@@ -86,7 +86,7 @@ public class DronePhysics : MonoBehaviour
     const int numBlade = 4;     //ブレード数
     Blade[] bladeArray = new Blade[numBlade];   //ブレード構造体配列
 
-    float maxPower; //4枚のブレードの出力の最大値
+    float totalPower; //4枚のブレードの出力の合計値
 
     // Start is called before the first frame update
     /// <summary>
@@ -136,7 +136,7 @@ public class DronePhysics : MonoBehaviour
             targetVector.magnitude, hoveringPower, isBacking, directionCosine
         );
 
-        maxPower = 0f;
+        totalPower = 0f;
         foreach (Blade blade in bladeArray)
         {
             //Debug.Log(blade.GetPower());
@@ -146,7 +146,7 @@ public class DronePhysics : MonoBehaviour
 
             blade.Rotate(power);
 
-            maxPower = Mathf.Max(maxPower, Mathf.Abs(power));   //ブレードの出力の最大値を取得しておく
+            totalPower += Mathf.Abs(power);   //ブレードの出力値を加算
 
         }
 
@@ -171,14 +171,15 @@ public class DronePhysics : MonoBehaviour
         Vector2 rightXZ = new Vector2(tf.right.x, tf.right.z).normalized;
 
         float inner = Vector2.Dot(forwardXZ, targetVector.normalized); //現在の方向ベクトルと、目標方向ベクトルとの内積
-        bool isBacking = (inner < -0.1f) ? true : false;
+        bool isBacking = (inner < -0.1f);
 
         float inputMagnitude = targetVector.magnitude;
         //ヨー回転要求量
         float yaw = (isBacking) ? inputMagnitude * Mathf.Abs(-1f - inner)      //バック時(内積が-1になることを目指す)
                              : inputMagnitude * Mathf.Abs(1f - inner);     //前進時(内積が1になることを目指す)
-        if (Vector2.Dot(rightXZ, targetVector) < 0f) yaw *= -1f;    //回転方向
-        if (isBacking) yaw *= -1f;    //バック時は回転方向がさらに逆になる
+
+        //目標方向に応じて回転向きを変える。バック時は回転方向がさらに逆になる
+        if ((Vector2.Dot(rightXZ, targetVector)) < 0f ^ isBacking) yaw *= -1f;
 
         return (yaw, isBacking, inner);
 
@@ -305,7 +306,6 @@ public class DronePhysics : MonoBehaviour
     /// <returns>ピッチ角度、ロール角度</returns>
     (float, float) GetAttitude()
     {
-        //
         float pitch = (Mathf.Repeat(tf.rotation.eulerAngles.x + 180, 360) - 180) * Mathf.Deg2Rad;
         float roll = (Mathf.Repeat(tf.rotation.eulerAngles.z + 180, 360) - 180) * Mathf.Deg2Rad;
 
@@ -380,9 +380,9 @@ public class DronePhysics : MonoBehaviour
     /// ブレードの出力の最大値を取得
     /// </summary>
     /// <returns>ブレードの出力の最大値</returns>
-    public float GetMaxPower()
+    public float GetTotalPower()
     {
-        return maxPower;
+        return totalPower;
     }
 
     /// <summary>
@@ -395,7 +395,7 @@ public class DronePhysics : MonoBehaviour
         bool isCloseToGround = (flyingHeight < 10f);
         standardHeight = (isCloseToGround) ? terrainHeight : 0f;
 
-        if (isCloseToGround ^ isTerrainMode)
+        if (isCloseToGround != isTerrainMode)
         {
             isTerrainMode = isCloseToGround;
 

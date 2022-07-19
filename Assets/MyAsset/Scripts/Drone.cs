@@ -51,7 +51,7 @@ public class Drone : DronePhysics
         PhysicalCalculation(targetVector, targetVertical); //物理演算
 
         //ブレード効果音
-        float bladePower = GetMaxPower();
+        float bladePower = GetTotalPower();
         audioSource.volume = Mathf.Clamp(2f * bladePower, 0f, 1f);
         audioSource.pitch = (bladePower - 1f) * 0.1f + 1f;
 

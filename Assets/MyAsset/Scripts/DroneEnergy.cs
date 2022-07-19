@@ -33,7 +33,7 @@ public class DroneEnergy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        energy -= drone.GetMaxPower();
+        energy -= drone.GetTotalPower();
     }
 
     public void addFuel(float addEnergy)

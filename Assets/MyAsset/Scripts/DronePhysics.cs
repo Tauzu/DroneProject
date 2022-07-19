@@ -25,6 +25,7 @@ public class DronePhysics : MonoBehaviour
     const float maxAngle = 70f;     //目標角度の上限
 
     float standardHeight = 0f;
+    bool isTerrainMode = true;
 
     /// <summary>
     /// プロペラブレード構造体。
@@ -110,10 +111,10 @@ public class DronePhysics : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
+    //}
 
     /// <summary>
     /// 物理演算メソッド。
@@ -197,10 +198,9 @@ public class DronePhysics : MonoBehaviour
             targetHeight += 0.2f * targetVertical;
             //targetHeight += Mathf.Max(0.5f*inputVertical, -0.2f);
 
-
-
             power = Kp * (targetHeight - height) - decay * this.rbody.velocity.y;
 
+            Debug.Log((targetHeight, height));
         }
         else    //ホバリングOFF時
         {
@@ -386,12 +386,23 @@ public class DronePhysics : MonoBehaviour
     }
 
     /// <summary>
-    /// 基準高さを設定。
+    /// 飛行情報の通知。
     /// </summary>
-    /// <param name="newStandardHeght">基準高さ</param>
-    public void SetStandardHeight(float newStandardHeght)
+    /// <param name="terrainHeight">真下の地形の標高</param>
+    /// <param name="flyingHeight">飛行高度（地表距離）</param>
+    public void NoticeFlyingHeight(float terrainHeight, float flyingHeight)
     {
-        standardHeight = newStandardHeght;
+        bool isCloseToGround = (flyingHeight < 10f);
+        standardHeight = (isCloseToGround) ? terrainHeight : 0f;
+
+        if (isCloseToGround ^ isTerrainMode)
+        {
+            isTerrainMode = isCloseToGround;
+
+            //モードが変わると基準高さが急変するので、それに順応するために目標高度を上書き
+            targetHeight = tf.position.y - standardHeight;
+        }
+
     }
 
 }

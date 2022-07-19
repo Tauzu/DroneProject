@@ -243,10 +243,30 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4010254225437643846, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: positionMax.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: positionMax.z
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: positionMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: positionMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010254225437643847, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: positionMin.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9216504485135988334, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
@@ -305,6 +325,10 @@ PrefabInstance:
       propertyPath: noticeText
       value: 
       objectReference: {fileID: 1425065439}
+    - target: {fileID: 9216504486659172940, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9216504487099010806, guid: 62945da0e36be0d4aa9b2c3c0c93c053, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

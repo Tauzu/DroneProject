@@ -6,7 +6,7 @@ public class TerrainSensor : MonoBehaviour
 {
     public float delta;
 
-    DronePhysics drone;
+    Drone drone;
     Transform tf;
     Rigidbody rb;
 
@@ -40,9 +40,11 @@ public class TerrainSensor : MonoBehaviour
         float height2 = GetTerrainHeight(position_pred.x, position_pred.z);
         samplingTf2.position = new Vector3(position_pred.x, height2, position_pred.z);
 
-        drone.SetStandardHeight((height1+height2)*0.5f);
+        float referenceHeight = (height1 + height2) * 0.5f;
+        float flyingHeight = position.y - referenceHeight;
+        drone.NoticeFlyingHeight(referenceHeight, flyingHeight);
 
-        //Debug.Log(height);
+        //Debug.Log((referenceHeight, distance));
     }
 
     float GetTerrainHeight(float x, float z)

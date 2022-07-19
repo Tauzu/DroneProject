@@ -201,7 +201,7 @@ public class DronePhysics : MonoBehaviour
 
             power = Kp * (targetHeight - height) - decay * this.rbody.velocity.y;
 
-            Debug.Log((targetHeight, height));
+            //Debug.Log((targetHeight, height));
         }
         else    //ホバリングOFF時
         {
